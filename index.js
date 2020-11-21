@@ -15,12 +15,11 @@ client.once('ready', () => {
 
 client.on('message', async message => {
         const prefix = "[[";
-        const end = "]]";
-	const args = message.content.slice(prefix.length).trim().split(/ +/).slice(end.length);
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
-	if (command === 'test') {
+	if (command === 'test]]') {
             message.channel.send("uwu");
         }
 });
