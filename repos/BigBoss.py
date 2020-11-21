@@ -10,7 +10,7 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
-url = "http://apt.thebigboss.org/repofiles/cydia/dists/stable/main/binary-iphoneos-arm"
+url = "https://repo.packix.com"
 print(f"Downloading repo for {url}!")
 try:
     shutil.rmtree(f"{os.getcwd()}/data")
@@ -97,7 +97,7 @@ json_string = json.dumps(final_data)
 
 os.chdir("../")
 
-with open('BigBoss.json', 'w') as f:
+with open('Packix.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
