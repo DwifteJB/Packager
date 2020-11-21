@@ -4,6 +4,7 @@ import csv
 import json
 import shutil
 import time
+import bz2
 import sys
 import smtplib
 from subprocess import Popen
