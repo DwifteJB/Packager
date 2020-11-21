@@ -10,7 +10,7 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
-url = "https://repo.packix.com"
+url = "BigBoss"
 print(f"Downloading repo for {url}!")
 try:
     shutil.rmtree(f"{os.getcwd()}/data")
