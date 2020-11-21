@@ -1,0 +1,26 @@
+{
+  "name": "packagefinderjs",
+  "version": "1.0.0",
+  "description": "Package finder bot for discord",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo uwu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DwifteJB/PackageFinderJS.git"
+  },
+  "keywords": [
+    "uwu"
+  ],
+  "author": "DwifteJB and Thunder7Yoshi",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/DwifteJB/PackageFinderJS/issues"
+  },
+  "homepage": "https://github.com/DwifteJB/PackageFinderJS#readme"
+}
