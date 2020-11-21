@@ -10,7 +10,7 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
-url = "http://apt.thebigboss.org/repofiles/cydia/dists/stable"
+url = "http://apt.thebigboss.org/repofiles/cydia/dists/stable/main/binary-iphoneos-arm"
 print(f"Downloading repo for {url}!")
 try:
     shutil.rmtree(f"{os.getcwd()}/data")
