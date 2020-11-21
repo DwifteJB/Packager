@@ -1,5 +1,4 @@
 
-import random
 import os
 import csv
 import json
@@ -98,7 +97,7 @@ json_string = json.dumps(final_data)
 
 os.chdir("../")
 
-with open('./repos/BigBoss.json', 'w') as f:
+with open('BigBoss.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
