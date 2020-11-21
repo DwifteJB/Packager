@@ -7,6 +7,7 @@ import time
 import sys
 import smtplib
 from subprocess import Popen
+import bz2
 import re
 import requests
 url = "https://repo.packix.com"
