@@ -9,7 +9,7 @@ client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`);
 });
 
-bot.on("guildCreate", guild => {
+client.on("guildCreate", guild => {
     let channelID;
     let channels = guild.channels.cache;
 
