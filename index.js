@@ -1,9 +1,18 @@
 // Modules
 const Discord = require('discord.js');
+const fs = require('fs');
+const shell = require('shelljs')
 
 const client = new Discord.Client();
 
 const { token } = require('./config.json');
+
+console.log('Updating repos...')
+
+fs.readdirSync('./repo_updaters).forEach(file => {
+  shell.exec(`python3 ./repo_updaters/${file}`)
+
+});
 
 client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`);
