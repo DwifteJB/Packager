@@ -112,9 +112,12 @@ client.on("message", async message => {
               inline: true
             },
             {
+              name: "Bundle ID",
+              value: repo.app[index].Package
+            },
+            {
               name: "More info",
-              value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`,
-              inline: true
+              value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
             }
           );
 
