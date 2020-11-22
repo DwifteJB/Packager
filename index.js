@@ -69,7 +69,7 @@ client.on('message', async message => {
         if (!matches) return;
         const package = matches[1];
         for (index in BigBoss.app) {
-          if(package === BigBoss.app[index].Name) {
+          if(package.toLowerCase() === BigBoss.app[index].Name.toLowerCase()) {
 
              const lmao = new Discord.MessageEmbed()
 	             .setColor('#17bcb8')
@@ -100,7 +100,7 @@ client.on('message', async message => {
         }
 
        for (index in Packix.app) {
-          if(package === Packix.app[index].Name) {
+          if(package.toLowerCase() === Packix.app[index].Name.toLowerCase()) {
 
              const lmao = new Discord.MessageEmbed()
 	             .setColor('#17bcb8')
@@ -127,7 +127,7 @@ client.on('message', async message => {
           }
         }
        for (index in Procursus.app) {
-          if(package === Procursus.app[index].Name) {
+          if(package.toLowerCase() === Procursus.app[index].Name.toLowerCase()) {
 
              const lmao = new Discord.MessageEmbed()
 	             .setDescription(Procursus.app[index].Description)
@@ -156,7 +156,7 @@ client.on('message', async message => {
         }
 
        for (index in Twickd.app) {
-          if(package === Twickd.app[index].Name) {
+          if(package.toLowerCase() === Twickd.app[index].Name.toLowerCase()) {
 
              const lmao = new Discord.MessageEmbed()
 	             .setDescription(Twickd.app[index].Description)
