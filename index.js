@@ -61,11 +61,16 @@ client.on('message', async message => {
 
              const lmao = new Discord.MessageEmbed()
 	             .setColor('#17bcb8')
+	             .setDescription(BigBoss.app[index].Description)
+	             try {
+                       .setThumbnail(BigBoss.app[index].Icon)
+		     } catch (error) {
+                       console.log(error)
+	             }
 	             .setTitle(`${BigBoss.app[index].Name.trim()}`)
    	             .setTimestamp()
 
  	             .addFields(
-	        	{ name: 'Description', value: BigBoss.app[index].Description},
 	        	{ name: 'Version', value: BigBoss.app[index].Version, inline: true },
 	        	{ name: 'Author', value: BigBoss.app[index].Author, inline: true },
 	        	{ name: 'Open in Sileo:', value: `[Click Here](http://dwifte.eu.org/open.php?package=${BigBoss.app[index].Package})`, inline: true },
