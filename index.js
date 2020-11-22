@@ -156,7 +156,7 @@ client.on('message', async message => {
 	             .setFooter('Twick', 'https://repo.twickd.com/CydiaIcon.png')
  	             .addFields(
 
-	        	{ name: 'Author', value: "${Twickd.app[index].Author()}", inline: true },
+	        	{ name: 'Author', value: `${Twickd.app[index].Author()}`, inline: true },
 	        	{ name: 'Version', value: Twickd.app[index].Version, inline: true },
                         { name: 'Repo', value: `[Twickd](http://dwifte.eu.org/repo.php?repo=https://repo.twickd.com)`, inline: true },
 	        	{ name: 'More info', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Twickd.app[index].Package})`, inline: true },
