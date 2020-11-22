@@ -173,7 +173,7 @@ with open('/root/PackageFinderJS/repos/${args[0]}.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
-    print("Done!")\' > repo_updaters/${args[0]}`, (error, stdout, stderr) => {
+    print("Done!")\' > repo_updaters/${args[0]}`, async (error, stdout, stderr) => {
           stdout = stdout.replace(/deb /g, '').replace(/ \.\//g,'')
         if (error) {
         const errorMsg = await haste(error, { extension: "txt", url: "https://hasteb.in" })
