@@ -14,12 +14,9 @@ fs.readdirSync('./repo_updaters').forEach(file => {
 
 });
 console.log('Reading jsons...');
+const BigBoss = JSON.parse(fs.readFileSync(`./repos/BigBoss.json`, 'utf8'));
 
-fs.readdirSync('./repos').forEach(file => {
-  const fil = file.replace(/\.[^/.]+$/, "")
-  console.log(`Reading ${fil}`);
-  const ${fil} = JSON.parse(fs.readFileSync(`./repos/${file}`, 'utf8'));
-});
+const packix = JSON.parse(fs.readFileSync(`./repos/Packix.json`, 'utf8'));
 
 client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`);
@@ -54,6 +51,9 @@ client.on('message', async message => {
 	const command = args.shift().toLowerCase();
 
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
+        for (index in BigBoss.app) {
+          console.log(BigBoss.app[index].app_name)
+        }
 	if (command === 'test]]') {
             message.channel.send("uwu");
         }
