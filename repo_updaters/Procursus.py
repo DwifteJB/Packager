@@ -27,7 +27,7 @@ except Exception as e:
     sys.exit(1)
 with open(f'{os.getcwd()}/data/Packages', 'wb') as f:
     f.write(r.content)
-data = open(f'{os.getcwd()}/data/Packages', 'wb').read()
+data = open(f'{os.getcwd()}/data/Packages', 'r').read()
 
 filepath = f"{os.getcwd()}//data/repo.csv"
 open(filepath, 'wb').write(data)
