@@ -68,7 +68,7 @@ client.on('message', async message => {
 	             .setFooter('BigBoss', 'https://pbs.twimg.com/profile_images/756727140779831297/-qWaC-UR_400x400.jpg')
  	             .addFields(
 
-	        	{ name: 'Author', value: BigBoss.app[index].Author, inline: true },
+	        	{ name: 'Author', value: BigBoss.app[index].Author.replace(/ <(.*?)>/g, ''), inline: true },
 	        	{ name: 'Version', value: BigBoss.app[index].Version, inline: true },
 
                         { name: 'Repo', value: `[BigBoss](http://dwifte.eu.org/repo.php?repo=http://apt.thebigboss.org/repofiles/cydia/dists/stable)`, inline: true },
