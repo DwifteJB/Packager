@@ -24,7 +24,7 @@ console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} ser
     client.user.setPresence({
         game: {
             name: 'with Packages',
-            type: "Playing"
+            type: "PLAYING"
         }
     });
 });
