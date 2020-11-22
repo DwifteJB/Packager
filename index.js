@@ -98,7 +98,7 @@ client.on('message', async message => {
    	             .setTimestamp()
 	             .setFooter('Packix', 'https://pbs.twimg.com/profile_images/1046836237192040449/54RYzohk_400x400.jpg')
  	             .addFields(
-	        	{ name: 'Author', value: Packix.app[index].Author, inline: true },
+	        	{ name: 'Author', value: Packix.app[index].Author.replace(/ <(.*?)>/g, ''), inline: true },
 	        	{ name: 'Version', value: Packix.app[index].Version, inline: true },
                         { name: 'Repo', value: `[Packix](http://dwifte.eu.org/repo.php?repo=https://repo.packix.com)`, inline: true },
 	        	{ name: 'More info', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Packix.app[index].Package})`, inline: true },
@@ -156,7 +156,7 @@ client.on('message', async message => {
 	             .setFooter('Twickd', 'https://repo.twickd.com/CydiaIcon.png')
  	             .addFields(
 
-	        	{ name: 'Author', value: `${Twickd.app[index].Author}`, inline: true },
+	        	{ name: 'Author', value: `${Twickd.app[index].Author.replace(/ <(.*?)>/g, '')}`, inline: true },
 	        	{ name: 'Version', value: Twickd.app[index].Version, inline: true },
                         { name: 'Repo', value: `[Twickd](http://dwifte.eu.org/repo.php?repo=https://repo.twickd.com)`, inline: true },
 	        	{ name: 'More info', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Twickd.app[index].Package})`, inline: true },
