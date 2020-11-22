@@ -72,8 +72,11 @@ client.on('message', async message => {
                         { name: 'Add the Repo:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=http://apt.thebigboss.org/repofiles/cydia/dists/stable)`, inline: true },
 
                 	);
-
-              message.channel.send(lmao);
+              try {
+                message.channel.send(lmao.setThumbnail(BigBoss.app[index].Icon));
+              } catch (error) {
+                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss'));
+              }
               return;
           }
         }
@@ -95,7 +98,11 @@ client.on('message', async message => {
 
                 	);
 
-              message.channel.send(lmao);
+               try {
+                message.channel.send(lmao.setThumbnail(Packix.app[index].Icon));
+              } catch (error) {
+                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss'));
+              }
               return;
           }
         }
@@ -116,7 +123,12 @@ client.on('message', async message => {
 
                 	);
 
-              message.channel.send(lmao);
+              try {
+                message.channel.send(lmao.setThumbnail(Procursus.app[index].Icon));
+              } catch (error) {
+                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss'));
+              }
+
               return;
           }
         }
