@@ -19,7 +19,6 @@ for (const file of fs.readdirSync("./repos")) {
   const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
   json.name = file.replace('.json','')
   client.jsons.set(file, json);
-  console.log(json.name)
 }
 
 client.on("ready", () => {
@@ -84,7 +83,7 @@ client.on("message", async message => {
           .setTitle(`${repo.app[index].Name.trim()}`)
           .setTimestamp()
           .setFooter(
-            `${repo}`,
+            repo.name,
             "https://pbs.twimg.com/profile_images/756727140779831297/-qWaC-UR_400x400.jpg"
         )
         if (repo.app[index].Maintainer.includes('Hayden Seay')) {
@@ -108,7 +107,7 @@ client.on("message", async message => {
             { name: "Version", value: repo.app[index].Version, inline: true },
 
             {
-              name: "Repo",
+              name: repo.name,
               value: `[repo](http://dwifte.eu.org/repo.php?repo=http://apt.therepo.org/repofiles/cydia/dists/stable)`,
               inline: true
             },
