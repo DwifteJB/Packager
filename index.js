@@ -23,8 +23,8 @@ client.once('ready', () => {
 	client.user.setPresence({
           status: "online",  
           game: {
-              name: "Grabbing packages!",
-              type: "CUSTOM_STATUS"
+              name: "with Packages!",
+              type: "PLAYING"
           }
 	});
        
