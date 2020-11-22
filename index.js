@@ -65,7 +65,7 @@ client.on("message", async message => {
     .slice(prefix.length)
     .trim()
     .split(/ +/);
-  if (message.content.toLowerCase() == prefix + "addrepo") {
+  if (message.content.toLowerCase() == "!addrepo") {
     if (!args[0]) {
       return message.channel.send(`Please use the following format:\n\n\`\`\`${prefix}addrepo <Name> <URL>\`\`\``)
     }
