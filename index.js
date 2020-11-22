@@ -56,7 +56,7 @@ client.on('message', async message => {
         const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
         if (!matches) return;
         const package = matches[1];
-	const DEF = "https://i.imgur.com/p9NJCoU.png";
+	const DEF = "https://i.imgur.com/wSTFkRM.png";
         for (index in BigBoss.app) {
           if(package === BigBoss.app[index].Name) {
 
