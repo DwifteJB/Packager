@@ -58,6 +58,7 @@ with open(filepath, 'r+', errors='ignore') as lol:
 
 final_data = {
 'url': f'{url}',
+'icon': f'{url}/CydiaIcon.png',
 'app': [],
 }
 app = {}
