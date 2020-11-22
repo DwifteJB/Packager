@@ -74,7 +74,6 @@ client.on('message', async message => {
 
                 	);
 
-                	);
               try {
                 message.channel.send(lmao.setThumbnail(BigBoss.app[index].Icon));
               } catch (error) {
