@@ -77,6 +77,7 @@ client.on("message", async message => {
     for (const file of fs.readdirSync("./repos")) {
       const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
       json.name = file.replace(".json", "");
+      console.log(`Reloaded ${json.name}`);
       client.jsons.set(file, json);
     }
     message.channel.send(`Added ${args[0]} repo!`);
