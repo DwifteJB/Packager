@@ -116,9 +116,8 @@ client.on("message", async message => {
         return;
       }
     }
-
-    message.channel.send("Sorry, we couldn't find that package.");
   });
+  message.channel.send("Sorry, we couldn't find that package.");
 });
 
 client.login(token);

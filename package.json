@@ -4,7 +4,8 @@
   "description": "Package finder bot for discord",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^12.4.1"
+    "discord.js": "^12.4.1",
+    "shelljs": "^0.8.4"
   },
   "devDependencies": {},
   "scripts": {
