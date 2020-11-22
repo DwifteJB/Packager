@@ -48,18 +48,32 @@ client.on("guildCreate", guild => {
 client.on('message', async message => {
         const prefix = "[[";
         const suffix = "]]";
-
         const args = message.content.slice(message.content.indexOf(prefix)+prefix.length, message.content.indexOf(suffix)).trim().split(/ +/g);
-
 	// const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift();
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
         const text = command + " " + args.join(" ");
-        console.log(`${text}a`);
-        message.channel.send(`Info:\nCommand: ${command}\nArgs: ${args}\n${text}`);
         for (index in BigBoss.app) {
           if(text.trim() === BigBoss.app[index].Name.trim()) {
+
+             const lmao = new Discord.MessageEmbed()
+	             .setColor('#17bcb8')
+	             .setTitle(`${BigBoss.app[index].Name.trim()}`)
+   	             .setTimestamp();
+
+ 	             .addFields(
+	        	{ name: 'Description', value: BigBoss.app[index].Description},
+	        	{ name: 'Version', value: BigBoss.app[index].Version, inline: true },
+	        	{ name: 'Author', value: BigBoss.app[index].Author, inline: true },
+	        	{ name: 'Open in Sileo:', value: `[Click Here](sileo://package/${BigBoss.app[index].Package})`, inline: true },
+                        { name: 'Add source:', value: `[Click Here](sileo://source/http://apt.thebigboss.org/repofiles/cydia/dists/stable)`, inline: true },
+
+                	)
+
+              channel.send(lmao);
+
               message.channel.send(`Found!`);
+              return;
           }
         }
 });
