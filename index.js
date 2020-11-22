@@ -83,11 +83,11 @@ client.on('message', async message => {
 
              const lmao = new Discord.MessageEmbed()
 	             .setColor('#17bcb8')
+	             .setDescription(Packix.app[index].Description)
 	             .setTitle(`${Packix.app[index].Name.trim()}`)
    	             .setTimestamp()
 
  	             .addFields(
-	        	{ name: 'Description', value: Packix.app[index].Description},
 	        	{ name: 'Version', value: Packix.app[index].Version, inline: true },
 	        	{ name: 'Author', value: Packix.app[index].Author, inline: true },
 	        	{ name: 'Open in Sileo:', value: `[Click Here](http://dwifte.eu.org/open.php?package=${Packix.app[index].Package})`, inline: true },
@@ -103,12 +103,12 @@ client.on('message', async message => {
           if(package === Procursus.app[index].Name) {
 
              const lmao = new Discord.MessageEmbed()
+	             .setDescription(Procursus.app[index].Description)
 	             .setColor('#17bcb8')
 	             .setTitle(`${Procursus.app[index].Name.trim()}`)
    	             .setTimestamp()
 
  	             .addFields(
-	        	{ name: 'Description', value: Procursus.app[index].Description},
 	        	{ name: 'Version', value: Procursus.app[index].Version, inline: true },
 	        	{ name: 'Author', value: Procursus.app[index].Author, inline: true },
 	        	{ name: 'Open in Sileo:', value: `[Click Here](http://dwifte.eu.org/open.php?package=${Procursus.app[index].Package})`, inline: true },
