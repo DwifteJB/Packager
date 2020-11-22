@@ -1,6 +1,6 @@
 echo "ooga booha update"
 rm -r ./*
-git clone https://github.com/DwifteJB/PackageFinderJS update
+git clone -b test https://github.com/DwifteJB/PackageFinderJS update
 mv update/* ./
 rm -r update
 npm i discord.js shelljs
