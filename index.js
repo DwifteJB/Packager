@@ -21,9 +21,10 @@ const Procursus = JSON.parse(fs.readFileSync(`./repos/Procursus.json`, 'utf8'));
 client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`);
 	client.user.setPresence({
-          status: "online",  // You can show online, idle... Do not disturb is dnd
+          status: "online",  
           game: {
-              name: "Grabbing packages!",  // The message shown
+              name: "Grabbing packages!",
+              type: "CUSTOM_STATUS"
           }
 	});
        
