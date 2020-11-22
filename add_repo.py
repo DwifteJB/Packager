@@ -1,3 +1,4 @@
+
 import random
 import os
 import csv
@@ -10,7 +11,7 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
-url = "http://apt.thebigboss.org/repofiles/cydia/dists/stable/main/binary-iphoneos-arm"
+url = sys.argv[2]
 print(f"Downloading repo for {url}!")
 try:
     os.mkdir(f"{os.getcwd()}/repos")
@@ -70,7 +71,7 @@ with open(filepath, 'r+', errors='ignore') as lol:
 
 final_data = {
 'url': f'{url}',
-'icon': f'https://pbs.twimg.com/profile_images/756727140779831297/-qWaC-UR_400x400.jpg',
+'icon': f'{url}/CydiaIcon.png',
 'app': [],
 }
 app = {}
@@ -95,7 +96,7 @@ with open(f'{filepath}') as csvfile:
       
 json_string = json.dumps(final_data)
 
-with open('/root/PackageFinderJS/repos/BigBoss.json', 'w') as f:
+with open(f'/root/PackageFinderJS/repos/{sys.argv[1]}.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()

@@ -1,191 +1,172 @@
 
 // Modules
-const Discord = require('discord.js');
-const fs = require('fs');
-const shell = require('shelljs')
+const Discord = require("discord.js");
+const fs = require("fs");
+const shell = require("shelljs");
+const prefix = "!";
+const { exec, spawn } = require("child_process")
+const haste = require('hastebin-gen')
 
 const client = new Discord.Client();
 
-const { token } = require('./config.json');
+client.jsons = new Discord.Collection();
 
-console.log('Updating repos...')
+const { token, owners } = require("./config.json");
 
-fs.readdirSync('./repo_updaters').forEach(file => {
-  shell.exec(`python3 ./repo_updaters/${file}`)
+console.log("Updating repos...");
 
+fs.readdirSync("./repo_updaters").forEach(file => {
+  shell.exec(`python3 ./repo_updaters/${file}`);
 });
-console.log('Reading jsons...');
-const BigBoss = JSON.parse(fs.readFileSync(`./repos/BigBoss.json`, 'utf8'));
-const Packix = JSON.parse(fs.readFileSync(`./repos/Packix.json`, 'utf8'));
-const Procursus = JSON.parse(fs.readFileSync(`./repos/Procursus.json`, 'utf8'));
-const Twickd = JSON.parse(fs.readFileSync(`./repos/Twickd.json`, 'utf8'));
+console.log("Reading jsons...");
+for (const file of fs.readdirSync("./repos")) {
+  const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
+  json.name = file.replace(".json", "");
+  client.jsons.set(file, json);
+}
 
-client.on('ready', () => {
-console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`);
-    client.user.setStatus('online')
-    client.user.setPresence({
-        game: {
-            name: 'with Packages',
-            type: "PLAYING"
-        }
-    });
+client.on("ready", () => {
+  console.log(
+    `Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`
+  );
+  client.user.setStatus("online");
+  client.user.setPresence({
+    game: {
+      name: "with Packages",
+      type: "PLAYING"
+    }
+  });
 });
 
 client.on("guildCreate", guild => {
-    let channelID;
-    let channels = guild.channels.cache;
+  let channelID;
+  let channels = guild.channels.cache;
 
-    channelLoop:
-    for (let key in channels) {
-        let c = channels[key];
-        if (c[1].type === "text") {
-            channelID = c[0];
-            break channelLoop;
-        }
+  channelLoop: for (let key in channels) {
+    let c = channels[key];
+    if (c[1].type === "text") {
+      channelID = c[0];
+      break channelLoop;
     }
+  }
 
-    let channel = guild.channels.cache.get(guild.systemChannelID || channelID);
+  let channel = guild.channels.cache.get(guild.systemChannelID || channelID);
 
-    const lmao = new Discord.MessageEmbed()
-	    .setColor('#17bcb8')
-	    .setTitle('Packager is here!')
-	    .setDescription('Thanks for inviting packager! The bot may not respond instantly as it might be updating the repos stored locally!\nYou can find packages by typing: [[TWEAK]]!')
-   	    .setTimestamp();
-    channel.send(lmao);
+  const lmao = new Discord.MessageEmbed()
+    .setColor("#17bcb8")
+    .setTitle("Packager is here!")
+    .setDescription(
+      "Thanks for inviting packager! The bot may not respond instantly as it might be updating the repos stored locally!\nYou can find packages by typing: [[TWEAK]]!"
+    )
+    .setTimestamp();
+  channel.send(lmao);
 });
 
-client.on('message', async message => {
-	if (message.content == '!update') {
-		exec('git pull', (error, stdout, stderr) => {
-		  if (error) {
-		    message.channel.send(`Error: ${error}`);
-		    return;
-		  } else {
-		    message.channel.send(`${stdout}`);
-		    process.exit()
-		  }
-		});
-	}
-        const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
-        if (!matches) return;
-        const package = matches[1];
-        for (index in BigBoss.app) {
-          if(package === BigBoss.app[index].Name) {
+client.on("message", async message => {
+  const args = message.content
+    .slice(prefix.length)
+    .trim()
+    .split(/ +/);
+  const commandName = args.shift().toLowerCase();
+  if (commandName == "shell") {
+    if(!owners.includes(message.author.id)) return message.channel.send('Only the bot owners can use this command.')
+    if (!args[0]) return message.channel.send('Please provide a command.');
+    message.channel.send(`Running \`${args.join(" ")}\``);
+    const cp = spawn(`${args[0]}`, args.slice(1), {
+      detached: true
+    });
+    let output = ''
+    cp.on('error', (err) => {
+      return message.channel.send(`Failed to execute command. Error: \`\`\`${err}\`\`\``);
+    });
+    cp.stdout.on('data', (data) => {
+      output += `${data}\n`
+    })
+    cp.on('close', (code) => {
+      if (output.length < 1) return message.channel.send('Finished with no output.')
+      if (output.length > 1994) {
+        haste(output).then(haste => message.channel.send("Output was too big: " + haste))
+      }
+      else message.channel.send(`\`\`\`${output}\`\`\``);
+    });
+  }
+  if (commandName == "addrepo") {
+    if(!owners.includes(message.author.id)) return message.channel.send('Only the bot owners can use this command.')
+    if (!args[1]) {
+      return message.channel.send(`Please use the following format:\n\n\`\`\`${prefix}addrepo <Name> <URL>\`\`\``)
+    }
+    if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(args[1])) return message.channel.send("Please provide a valid URL.");
+    shell.exec(`python3 add_repo.py ${args[0]} "${args[1]}"`);
 
-             const lmao = new Discord.MessageEmbed()
-	             .setColor('#17bcb8')
-	             .setDescription(BigBoss.app[index].Description)
-	             .setTitle(`${BigBoss.app[index].Name.trim()}`)
-   	             .setTimestamp()
-	             .setFooter('BigBoss', 'https://pbs.twimg.com/profile_images/756727140779831297/-qWaC-UR_400x400.jpg')
- 	             .addFields(
+    for (const file of fs.readdirSync("./repos")) {
+      const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
+      json.name = file.replace(".json", "");
+      console.log(`Reloaded ${json.name}`);
+      client.jsons.set(file, json);
+    }
+    message.channel.send(`Added repo: \`${args[0]}\``);
 
-	        	{ name: 'Author', value: BigBoss.app[index].Author.replace(/ <(.*?)>/g, ''), inline: true },
-	        	{ name: 'Version', value: BigBoss.app[index].Version, inline: true },
-
-                        { name: 'Repo', value: `[BigBoss](http://dwifte.eu.org/repo.php?repo=http://apt.thebigboss.org/repofiles/cydia/dists/stable)`, inline: true },
-	        	{ name: 'More info', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${BigBoss.app[index].Package})`, inline: true },
-
-                	);
-
-              try {
-                message.channel.send(lmao.setThumbnail(BigBoss.app[index].Icon));
-              } catch (error) {
-                message.channel.send(lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`));
-
-                console.log(error);
-
-              }
-              return;
-          }
+  }
+  const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
+  if (!matches) return;
+  const package = matches[1];
+  let sent = false;
+  client.jsons.forEach(repo => {
+    for (index in repo.app) {
+      if (package === repo.app[index].Name) {
+        const lmao = new Discord.MessageEmbed()
+          .setColor("#17bcb8")
+          .setDescription(repo.app[index].Description)
+          .setAuthor(`${repo.app[index].Name.trim()}`)
+          .setTimestamp()
+          .setFooter(repo.name, repo.icon);
+        if (repo.app[index].Maintainer.includes("Hayden Seay")) {
+          lmao.addFields({
+            name: "Author",
+            value: repo.app[index].Maintainer.replace(/ <(.*?)>/g, ""),
+            inline: true
+          });
+        } else {
+          lmao.addFields({
+            name: "Author",
+            value: repo.app[index].Author.replace(/ <(.*?)>/g, ""),
+            inline: true
+          });
         }
+        lmao.addFields(
+          { name: "Version", value: repo.app[index].Version, inline: true },
 
-       for (index in Packix.app) {
-          if(package === Packix.app[index].Name) {
-
-             const lmao = new Discord.MessageEmbed()
-	             .setColor('#17bcb8')
-	             .setDescription(Packix.app[index].Description)
-	             .setTitle(`${Packix.app[index].Name.trim()}`)
-   	             .setTimestamp()
-	             .setFooter('Packix', 'https://pbs.twimg.com/profile_images/1046836237192040449/54RYzohk_400x400.jpg')
- 	             .addFields(
-	        	{ name: 'Author', value: Packix.app[index].Author.replace(/ <(.*?)>/g, ''), inline: true },
-	        	{ name: 'Version', value: Packix.app[index].Version, inline: true },
-                        { name: 'Repo', value: `[Packix](http://dwifte.eu.org/repo.php?repo=https://repo.packix.com)`, inline: true },
-	        	{ name: 'More info', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Packix.app[index].Package})`, inline: true },
-                	);
-
-               try {
-                message.channel.send(lmao.setThumbnail(Packix.app[index].Icon));
-              } catch (error) {
-                message.channel.send(lmao.setThumbnail());
-
-                console.log(error);
-
-              }
-              return;
+          {
+            name: "Repo",
+            value: `[${repo.name}](http://dwifte.eu.org/repo.php?repo=${repo.url})`,
+            inline: true
+          },
+          {
+            name: "Bundle ID",
+            value: repo.app[index].Package
+          },
+          {
+            name: "More info",
+            value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
           }
+        );
+
+        try {
+          message.channel.send(lmao.setThumbnail(repo.app[index].Icon));
+        } catch (error) {
+          message.channel.send(
+            lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`)
+          );
+
+          console.log(error);
         }
-       for (index in Procursus.app) {
-          if(package === Procursus.app[index].Name) {
-
-             const lmao = new Discord.MessageEmbed()
-	             .setDescription(Procursus.app[index].Description)
-	             .setColor('#17bcb8')
-	             .setTitle(`${Procursus.app[index].Name.trim()}`)
-   	             .setTimestamp()
-
-	             .setFooter('Procursus', 'https://apt.procurs.us/CydiaIcon.png')
- 	             .addFields(
-
-	        	{ name: 'Author', value: "Hayden Seay", inline: true },
-	        	{ name: 'Version', value: Procursus.app[index].Version, inline: true },
-                        { name: 'Repo', value: `[Procursus](http://dwifte.eu.org/repo.php?repo=https://apt.procurs.us)`, inline: true },
-	        	{ name: 'More info', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Procursus.app[index].Package})`, inline: true },
-                	);
-
-              try {
-                message.channel.send(lmao.setThumbnail(Procursus.app[index].Icon));
-              } catch (error) {
-                message.channel.send(lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`));
-                console.log(error);
-              }
-
-              return;
-          }
-        }
-
-       for (index in Twickd.app) {
-          if(package === Twickd.app[index].Name) {
-
-             const lmao = new Discord.MessageEmbed()
-	             .setDescription(Twickd.app[index].Description)
-	             .setColor('#17bcb8')
-	             .setTitle(`${Twickd.app[index].Name.trim()}`)
-   	             .setTimestamp()
-
-	             .setFooter('Twickd', 'https://repo.twickd.com/CydiaIcon.png')
- 	             .addFields(
-
-	        	{ name: 'Author', value: `${Twickd.app[index].Author.replace(/ <(.*?)>/g, '')}`, inline: true },
-	        	{ name: 'Version', value: Twickd.app[index].Version, inline: true },
-                        { name: 'Repo', value: `[Twickd](http://dwifte.eu.org/repo.php?repo=https://repo.twickd.com)`, inline: true },
-	        	{ name: 'More info', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Twickd.app[index].Package})`, inline: true },
-                	);
-
-              try {
-                message.channel.send(lmao.setThumbnail(Twickd.app[index].Icon));
-              } catch (error) {
-                message.channel.send(lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`));
-                console.log(error);
-              }
-
-              return;
-          }
-        }
-
-	message.channel.send("Sorry, we couldn't find that package.");
+        sent = true;
+        return;
+      }
+    }
+  });
+  if (!sent) message.channel.send("Sorry, I couldn't find that package.");
 });
 
 client.login(token);
+
