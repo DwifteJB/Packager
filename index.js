@@ -59,7 +59,7 @@ client.on('message', async message => {
              const lmao = new Discord.MessageEmbed()
 	             .setColor('#17bcb8')
 	             .setTitle(`${BigBoss.app[index].Name.trim()}`)
-   	             .setTimestamp();
+   	             .setTimestamp()
 
  	             .addFields(
 	        	{ name: 'Description', value: BigBoss.app[index].Description},
@@ -68,7 +68,7 @@ client.on('message', async message => {
 	        	{ name: 'Open in Sileo:', value: `[Click Here](sileo://package/${BigBoss.app[index].Package})`, inline: true },
                         { name: 'Add source:', value: `[Click Here](sileo://source/http://apt.thebigboss.org/repofiles/cydia/dists/stable)`, inline: true },
 
-                	)
+                	);
 
               message.channel.send(lmao);
               return;
