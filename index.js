@@ -18,16 +18,16 @@ const BigBoss = JSON.parse(fs.readFileSync(`./repos/BigBoss.json`, 'utf8'));
 const Packix = JSON.parse(fs.readFileSync(`./repos/Packix.json`, 'utf8'));
 const Procursus = JSON.parse(fs.readFileSync(`./repos/Procursus.json`, 'utf8'));
 
-client.once('ready', () => {
-	console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`);
-	client.user.setPresence({
-          status: "online",  
-          game: {
-              name: "with Packages!",
-              type: "PLAYING"
-          }
-	});
-       
+client.on('ready', () => {
+console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`);
+    client.user.setStatus('online')
+    client.user.setPresence({
+        game: {
+            name: 'with Packages',
+            type: "Playing",
+            url: "https://discordapp.com/"
+        }
+    });
 });
 
 client.on("guildCreate", guild => {
