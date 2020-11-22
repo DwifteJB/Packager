@@ -57,7 +57,9 @@ client.on('message', async message => {
         console.log(`${text}a`);
         message.channel.send(`Info:\nCommand: ${command}\nArgs: ${args}\n${text}`);
         for (index in BigBoss.app) {
-          message.channel.send(BigBoss.app[index].Name);
+          if(text.trim() === BigBoss.app[index].Name.trim()) {
+              message.channel.send(`Found!`);
+          }
         }
 });
 
