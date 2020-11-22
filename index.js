@@ -24,8 +24,7 @@ console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} ser
     client.user.setPresence({
         game: {
             name: 'with Packages',
-            type: "Playing",
-            url: "https://discordapp.com/"
+            type: "Playing"
         }
     });
 });
@@ -78,7 +77,7 @@ client.on('message', async message => {
               return;
           }
         }
-	message.channel.send("Sorry, we couldnt find that package.");
+	message.channel.send("Sorry, we couldn't find that package.");
 });
 
 client.login(token);
