@@ -84,13 +84,25 @@ client.on("message", async message => {
           .setFooter(
             `${repo}`,
             "https://pbs.twimg.com/profile_images/756727140779831297/-qWaC-UR_400x400.jpg"
+        )
+        if (repo.app[index].Maintainer.includes('Hayden Seay')) {
+          lmao.addFields(
+            {
+              name: "Author",
+              value: repo.app[index].Maintainer.replace(/ <(.*?)>/g, ""),
+              inline: true
+            }
           )
-          .addFields(
+        } else {
+          lmao.addFields(
             {
               name: "Author",
               value: repo.app[index].Author.replace(/ <(.*?)>/g, ""),
               inline: true
-            },
+            }
+          )
+        }
+          lmao.addFields(
             { name: "Version", value: repo.app[index].Version, inline: true },
 
             {
