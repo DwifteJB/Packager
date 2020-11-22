@@ -46,15 +46,13 @@ client.on("guildCreate", guild => {
 });
 
 client.on('message', async message => {
-        const prefix = "[[";
-        const suffix = "]]";
-        const args = message.content.slice(message.content.indexOf(prefix)+prefix.length, message.content.indexOf(suffix)).trim().split(/ +/g);
-	// const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift();
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-        const text = command + " " + args.join(" ");
+        const matches = message.match(/\[\[(\w*)\]\]/);
+        if (!matches) return;
+        const package matches[1];
+
+
         for (index in BigBoss.app) {
-          if(text.trim() === BigBoss.app[index].Name.trim()) {
+          if(package.trim() === BigBoss.app[index].Name.trim()) {
 
              const lmao = new Discord.MessageEmbed()
 	             .setColor('#17bcb8')
