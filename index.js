@@ -80,7 +80,7 @@ client.on("message", async message => {
         const lmao = new Discord.MessageEmbed()
           .setColor("#17bcb8")
           .setDescription(repo.app[index].Description)
-          .setTitle(`${repo.app[index].Name.trim()}`)
+          .setAuthor(`${repo.app[index].Name.trim()}`)
           .setTimestamp()
           .setFooter(
             repo.name,
