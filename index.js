@@ -49,11 +49,11 @@ client.on('message', async message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().slice(']]'.length).toLowerCase();
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
-        message.send(`Info:\nCommand: ${command}\nArgs: {args}`);
+        message.channel.send(`Info:\nCommand: ${command}\nArgs: {args}`);
         for (index in BigBoss.app) {
           console.log(BigBoss.app[index].Name)
         }
-	if (command === 'test]]') {
+	if (command === 'test') {
             message.channel.send("uwu");
         }
 });
