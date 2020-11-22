@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const shell = require("shelljs");
 const prefix = "!";
+const { exec } = require("child_process")
 
 const client = new Discord.Client();
 
