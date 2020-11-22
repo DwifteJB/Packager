@@ -72,6 +72,7 @@ client.on("message", async message => {
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
   const package = matches[1];
+  let sent = false;
   client.jsons.forEach(repo => {
     for (index in repo.app) {
       if (package === repo.app[index].Name) {
@@ -113,11 +114,12 @@ client.on("message", async message => {
 
           console.log(error);
         }
+        sent = true
         return;
       }
     }
   });
-  message.channel.send("Sorry, we couldn't find that package.");
+  if (!sent) message.channel.send("Sorry, we couldn't find that package.");
 });
 
 client.login(token);
