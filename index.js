@@ -65,8 +65,8 @@ client.on('message', async message => {
 	        	{ name: 'Description', value: BigBoss.app[index].Description},
 	        	{ name: 'Version', value: BigBoss.app[index].Version, inline: true },
 	        	{ name: 'Author', value: BigBoss.app[index].Author, inline: true },
-	        	{ name: 'Open in Sileo:', value: `[Click Here](sileo://package/${BigBoss.app[index].Package})`, inline: true },
-                        { name: 'Add source:', value: `[Click Here](sileo://source/http://apt.thebigboss.org/repofiles/cydia/dists/stable)`, inline: true },
+	        	{ name: 'Open in Sileo:', value: `[Click Here](http://dwifte.eu.org/open.php?package=${BigBoss.app[index].Package})`, inline: true },
+                        { name: 'Add source:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=http://apt.thebigboss.org/repofiles/cydia/dists/stable)`, inline: true },
 
                 	);
 
