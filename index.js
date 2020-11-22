@@ -24,7 +24,9 @@ client.once('ready', () => {
           status: "online",  // You can show online, idle... Do not disturb is dnd
           game: {
               name: "Grabbing packages!",  // The message shown
-        });
+          }
+	});
+       
 });
 
 client.on("guildCreate", guild => {
