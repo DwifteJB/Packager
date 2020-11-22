@@ -17,8 +17,9 @@ fs.readdirSync("./repo_updaters").forEach(file => {
 console.log("Reading jsons...");
 for (const file of fs.readdirSync("./repos")) {
   const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
+  json.name = file
   client.jsons.set(file, json);
-  console.log(json)
+  console.log(json.name)
 }
 
 client.on("ready", () => {
