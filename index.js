@@ -18,6 +18,7 @@ console.log("Reading jsons...");
 for (const file of fs.readdirSync("./repos")) {
   const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
   client.jsons.set(file, json);
+  console.log(json)
 }
 
 client.on("ready", () => {
