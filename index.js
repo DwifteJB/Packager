@@ -69,7 +69,7 @@ client.on("message", async message => {
     .split(/ +/);
   const commandName = args.shift().toLowerCase();
   if (commandName == "shell") {
-    if(!owners.includes(message.author.id)) return message.channel.send('Only the bot owners can use this command.')
+    if(!owners.includes(message.author.id)) return;
     if (!args[0]) return message.channel.send('Please provide a command.');
     message.channel.send(`Running \`${args.join(" ")}\``);
     const cp = spawn(`${args[0]}`, args.slice(1), {
