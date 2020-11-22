@@ -51,7 +51,7 @@ client.on('message', async message => {
         const args = message.content.slice(message.content.indexOf(prefix)+prefix.length, message.content.indexOf(suffix)).trim().split(/ +/g);
 
 	// const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+	const command = args.shift();
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
         message.channel.send(`Info:\nCommand: ${command}\nArgs: ${args}`);
         for (index in BigBoss.app) {
