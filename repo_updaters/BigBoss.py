@@ -13,10 +13,9 @@ import requests
 url = "http://apt.thebigboss.org/repofiles/cydia/dists/stable/main/binary-iphoneos-arm"
 print(f"Downloading repo for {url}!")
 try:
-    shutil.rmtree(f"{os.getcwd()}/data")
+    os.mkdir(f"{os.getcwd()}/repos")
     os.mkdir(f"{os.getcwd()}/data")
 except:
-    os.mkdir(f"{os.getcwd()}/data")
     pass
 try:
     headers={
@@ -95,9 +94,7 @@ with open(f'{filepath}') as csvfile:
       
 json_string = json.dumps(final_data)
 
-os.chdir("../")
-
-with open('./repos/BigBoss.json', 'w') as f:
+with open('/root/PackageFinderJS/repos/BigBoss.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
