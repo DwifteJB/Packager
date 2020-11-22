@@ -175,12 +175,12 @@ with open('/root/PackageFinderJS/repos/${args[0]}.json', 'w') as f:
     f.close()
     print("Done!")\' > repo_updaters/${args[0]}`, (error, stdout, stderr) => {
           stdout = stdout.replace(/deb /g, '').replace(/ \.\//g,'')
-          if (error) return message.channel.send(`There was an error: \`\`\`${error}\`\`\``)
-          if (stdout.length < 1) return message.channel.send('No repositories added.')
-          if (stdout.length > 1900) {
+        if (error) {
+        const errorMsg = await haste(error, { extension: "txt", url: "https://hasteb.in" })
+        message.channel.send("Output was too big: " + errorMsg)
+        }
+        if (stdout) {
             haste(stdout, { extension: "txt", url: "https://hasteb.in" }).then(haste => message.channel.send("Output was too big: " + haste))
-          } else {
-            message.channel.send(`\`\`\`\n${stdout}\`\`\``);
           }
         });
   }
