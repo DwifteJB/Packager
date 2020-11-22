@@ -1,7 +1,7 @@
 // Modules
 const Discord = require('discord.js');
 const fs = require('fs');
-const { exec } = require('child_process')
+const shell = require('shelljs')
 
 const client = new Discord.Client();
 
@@ -10,7 +10,7 @@ const { token } = require('./config.json');
 console.log('Updating repos...')
 
 fs.readdirSync('./repo_updaters').forEach(file => {
-  exec(`python3 ./repo_updaters/${file}`)
+  shell.exec(`python3 ./repo_updaters/${file}`)
 
 });
 console.log('Reading jsons...');
