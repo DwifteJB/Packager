@@ -56,7 +56,7 @@ client.on('message', async message => {
         const text = command + " " + args.join(" ");
         message.channel.send(`Info:\nCommand: ${command}\nArgs: ${args}\n${text}`);
         for (index in BigBoss.app) {
-          if (text === BigBoss.app[index].Name) { console.log('found!'); }
+          if (command === BigBoss.app[index].Name) { console.log('found!'); }
         }
 });
 
