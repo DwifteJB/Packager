@@ -48,7 +48,7 @@ client.on('message', async message => {
         const prefix = "[[";
         const suffix = "]]";
 
-        const args = message.content.slice(message.content.indexOf(pref)+pref.length, message.content.indexOf(suff)).trim().split(/ +/g);
+        const args = message.content.slice(message.content.indexOf(prefix)+prefix.length, message.content.indexOf(suffix)).trim().split(/ +/g);
 
 	// const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
