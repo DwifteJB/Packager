@@ -74,6 +74,7 @@ client.on('message', async message => {
               return;
           }
         }
+	message.channel.send("Sorry, we couldnt find that package.");
 });
 
 client.login(token);
