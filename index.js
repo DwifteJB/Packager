@@ -80,7 +80,7 @@ client.on("message", async message => {
       console.log(`Reloaded ${json.name}`);
       client.jsons.set(file, json);
     }
-    message.channel.send(`Added ${args[0]} repo!`);
+    message.channel.send(`Added repo: \`${args[0]}\``);
 
   }
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
