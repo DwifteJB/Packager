@@ -87,56 +87,59 @@ client.on("message", async message => {
   const package = matches[1];
   let sent = false;
   client.jsons.forEach(repo => {
+    let PackageID = ''
     for (index in repo.app) {
-      if (package === repo.app[index].Name) {
-        const lmao = new Discord.MessageEmbed()
-          .setColor("#17bcb8")
-          .setDescription(repo.app[index].Description)
-          .setAuthor(`${repo.app[index].Name.trim()}`)
-          .setTimestamp()
-          .setFooter(repo.name, repo.icon);
-        if (repo.app[index].Maintainer.includes("Hayden Seay")) {
-          lmao.addFields({
-            name: "Author",
-            value: repo.app[index].Maintainer.replace(/ <(.*?)>/g, ""),
-            inline: true
-          });
-        } else {
-          lmao.addFields({
-            name: "Author",
-            value: repo.app[index].Author.replace(/ <(.*?)>/g, ""),
-            inline: true
-          });
-        }
-        lmao.addFields(
-          { name: "Version", value: repo.app[index].Version, inline: true },
-
-          {
-            name: "Repo",
-            value: `[${repo.name}](http://dwifte.eu.org/repo.php?repo=${repo.url})`,
-            inline: true
-          },
-          {
-            name: "Bundle ID",
-            value: repo.app[index].Package
-          },
-          {
-            name: "More info",
-            value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
+      if (package.toLowerCase() === repo.app[index].Name.toLowerCase()) {
+        if (PackageID !== repo.app[index].Package) {
+          const lmao = new Discord.MessageEmbed()
+            .setColor("#17bcb8")
+            .setDescription(repo.app[index].Description)
+            .setAuthor(`${repo.app[index].Name.trim()}`)
+            .setTimestamp()
+            .setFooter(repo.name, repo.icon);
+          if (repo.app[index].Maintainer.includes("Hayden Seay")) {
+            lmao.addFields({
+              name: "Author",
+              value: repo.app[index].Maintainer.replace(/ <(.*?)>/g, ""),
+              inline: true
+            });
+          } else {
+            lmao.addFields({
+              name: "Author",
+              value: repo.app[index].Author.replace(/ <(.*?)>/g, ""),
+              inline: true
+            });
           }
-        );
+          lmao.addFields(
+            { name: "Version", value: repo.app[index].Version, inline: true },
 
-        try {
-          message.channel.send(lmao.setThumbnail(repo.app[index].Icon));
-        } catch (error) {
-          message.channel.send(
-            lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`)
+            {
+              name: "Repo",
+              value: `[${repo.name}](http://dwifte.eu.org/repo.php?repo=${repo.url})`,
+              inline: true
+            },
+            {
+              name: "Bundle ID",
+              value: repo.app[index].Package
+            },
+            {
+              name: "More info",
+              value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
+            }
           );
 
-          console.log(error);
+          try {
+            message.channel.send(lmao.setThumbnail(repo.app[index].Icon));
+          } catch (error) {
+            message.channel.send(
+              lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`)
+            );
+
+            console.log(error);
+          }
+          sent = true;
+          PackageID = repo.app[index].Package
         }
-        sent = true;
-        //return;
       }
     }
   });
