@@ -66,7 +66,9 @@ client.on("message", async message => {
     .trim()
     .split(/ +/);
   if (message.content.toLowerCase() == prefix + "addrepo") {
-    if (!args[0]) return message.channel.send(`Please use the following format:\n\n\`\`\`${prefix}addrepo <Name> <URL>\`\`\``)
+    if (!args[0]) {
+      return message.channel.send(`Please use the following format:\n\n\`\`\`${prefix}addrepo <Name> <URL>\`\`\``)
+    }
     exec(
       `echo \'import random
 import os
@@ -169,16 +171,7 @@ with open('/root/PackageFinderJS/repos/${args[0]}.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
-    print("Done!")\' > repo_updaters/${args[0]}`,
-      (error, stdout, stderr) => {
-        if (error) {
-          message.channel.send(`Error: ${error}`);
-          return;
-        } else {
-          message.channel.send(`${stdout}`);
-          process.exit();
-        }
-      }
+    print("Done!")\' > repo_updaters/${args[0]}`
     );
   }
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
