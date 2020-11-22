@@ -9,8 +9,8 @@ const { token } = require('./config.json');
 
 console.log('Updating repos...')
 
-fs.readdirSync('./repos').forEach(file => {
-  shell.exec(`python3 ./repos/${file}`)
+fs.readdirSync('./repo_updaters').forEach(file => {
+  shell.exec(`python3 ./repo_updaters/${file}`)
 
 });
 
