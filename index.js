@@ -229,7 +229,7 @@ with open('/root/PackageFinderJS/repos/${args[0]}.json', 'w') as f:
           console.log(error);
         }
         sent = true;
-        return;
+        //return;
       }
     }
   });
