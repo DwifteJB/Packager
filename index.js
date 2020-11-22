@@ -47,9 +47,9 @@ client.on("guildCreate", guild => {
 client.on('message', async message => {
         const prefix = "[[";
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().slice(']]'.length).toLowerCase();
+	const command = args.shift().slice(']]'.length, -1).toLowerCase();
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
-        message.channel.send(`Info:\nCommand: ${command}\nArgs: {args}`);
+        message.channel.send(`Info:\nCommand: ${command}\nArgs: ${args}`);
         for (index in BigBoss.app) {
           console.log(BigBoss.app[index].Name)
         }
