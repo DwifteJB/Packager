@@ -62,11 +62,6 @@ client.on('message', async message => {
              const lmao = new Discord.MessageEmbed()
 	             .setColor('#17bcb8')
 	             .setDescription(BigBoss.app[index].Description)
-	             try {
-                       .setThumbnail(BigBoss.app[index].Icon)
-		     } catch (error) {
-                       console.log(error)
-	             }
 	             .setTitle(`${BigBoss.app[index].Name.trim()}`)
    	             .setTimestamp()
 
