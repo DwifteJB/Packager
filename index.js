@@ -64,7 +64,7 @@ client.on('message', async message => {
 	             .setDescription(BigBoss.app[index].Description)
 	             .setTitle(`${BigBoss.app[index].Name.trim()}`)
    	             .setTimestamp()
-	             .setFooter('BigBoss', 'https://pbs.twimg.com/profile_images/756727140779831297/-qWaC-UR_400x400.jpg');
+	             .setFooter('BigBoss', 'https://pbs.twimg.com/profile_images/756727140779831297/-qWaC-UR_400x400.jpg')
  	             .addFields(
 
 	        	{ name: 'Author', value: BigBoss.app[index].Author, inline: true },
