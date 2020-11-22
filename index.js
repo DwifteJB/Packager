@@ -54,6 +54,17 @@ client.on("guildCreate", guild => {
 });
 
 client.on('message', async message => {
+	if (message.content == '!update') {
+		exec('git pull', (error, stdout, stderr) => {
+		  if (error) {
+		    message.channel.send(`Error: ${error}`);
+		    return;
+		  } else {
+		    message.channel.send(`${stdout}`);
+		    process.exit()
+		  }
+		});
+	}
         const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
         if (!matches) return;
         const package = matches[1];
