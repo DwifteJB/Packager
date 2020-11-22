@@ -67,9 +67,10 @@ client.on("message", async message => {
     .split(/ +/);
   const commandName = args.shift().toLowerCase();
   if (commandName == "addrepo") {
-    if (!args[0]) {
+    if (!args[1]) {
       return message.channel.send(`Please use the following format:\n\n\`\`\`${prefix}addrepo <Name> <URL>\`\`\``)
     }
+    if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(args[1])) return message.channel.send("Please provide a valid URL.");
     exec(
       `echo \'import random
 import os
@@ -172,8 +173,16 @@ with open('/root/PackageFinderJS/repos/${args[0]}.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
-    print("Done!")\' > repo_updaters/${args[0]}`
-    );
+    print("Done!")\' > repo_updaters/${args[0]}`, (error, stdout, stderr) => {
+          stdout = stdout.replace(/deb /g, '').replace(/ \.\//g,'')
+          if (error) return message.channel.send(`There was an error: \`\`\`${error}\`\`\``)
+          if (stdout.length < 1) return message.channel.send('No repositories added.')
+          if (stdout.length > 1900) {
+            haste(stdout, { extension: "txt", url: "https://hasteb.in" }).then(haste => message.channel.send("Output was too big: " + haste))
+          } else {
+            message.channel.send(`\`\`\`\n${stdout}\`\`\``);
+          }
+        });
   }
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
