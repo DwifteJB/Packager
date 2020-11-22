@@ -53,8 +53,8 @@ client.on('message', async message => {
 	// const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift();
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
-        const text = args.join(" ");
-        message.channel.send(`Info:\nCommand: ${command}\nArgs: ${args}\n${command + text}`);
+        const text = command + " " + args.join(" ");
+        message.channel.send(`Info:\nCommand: ${command}\nArgs: ${args}\n${text}`);
         for (index in BigBoss.app) {
           if (command + text === BigBoss.app[index].Name) { console.log('found!'); }
         }
