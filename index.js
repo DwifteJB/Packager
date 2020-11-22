@@ -46,7 +46,7 @@ client.on("guildCreate", guild => {
 });
 
 client.on('message', async message => {
-        const matches = message.match(/\[\[(\w*)\]\]/);
+        const matches = message.content.match(/\[\[(\w*)\]\]/);
         if (!matches) return;
         const package = matches[1];
         for (index in BigBoss.app) {
