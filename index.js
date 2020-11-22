@@ -70,9 +70,7 @@ client.on('message', async message => {
 
                 	)
 
-              channel.send(lmao);
-
-              message.channel.send(`Found!`);
+              message.channel.send(lmao);
               return;
           }
         }
