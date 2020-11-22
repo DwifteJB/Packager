@@ -84,7 +84,7 @@ client.on("message", async message => {
           .setTimestamp()
           .setFooter(
             repo.name,
-            "https://pbs.twimg.com/profile_images/756727140779831297/-qWaC-UR_400x400.jpg"
+            `${repo.url}/CydiaIcon.png`
         )
         if (repo.app[index].Maintainer.includes('Hayden Seay')) {
           lmao.addFields(
