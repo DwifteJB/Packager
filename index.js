@@ -72,14 +72,14 @@ client.on("message", async message => {
       return message.channel.send(`Please use the following format:\n\n\`\`\`${prefix}addrepo <Name> <URL>\`\`\``)
     }
     if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(args[1])) return message.channel.send("Please provide a valid URL.");
-    shell.exec(`python3 add_repo.py ${args[1]} "${args[2]}"`);
+    shell.exec(`python3 add_repo.py ${args[0]} "${args[1]}"`);
 
     for (const file of fs.readdirSync("./repos")) {
       const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
       json.name = file.replace(".json", "");
       client.jsons.set(file, json);
     }
-    message.channel.send(`Added ${args[1]} repo!`);
+    message.channel.send(`Added ${args[0]} repo!`);
 
   }
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
