@@ -73,9 +73,9 @@ client.on('message', async message => {
 
                 	);
               try {
-                message.channel.send(lmao.setThumbnail(BigBoss.app[index].Icon).setThumbnail());
+                message.channel.send(lmao.setThumbnail(BigBoss.app[index].Icon));
               } catch (error) {
-                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss').setThumbnail());
+                message.channel.send(lmao.setThumbnail('https://i.ibb.co/HFfRTCP/6-BC378-F9-6-E5-A-4-C9-F-A435-D703-B95-D2451.png'));
               }
               return;
           }
@@ -99,9 +99,9 @@ client.on('message', async message => {
                 	);
 
                try {
-                message.channel.send(lmao.setThumbnail(Packix.app[index].Icon).setThumbnail());
+                message.channel.send(lmao.setThumbnail(Packix.app[index].Icon));
               } catch (error) {
-                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss').setThumbnail());
+                message.channel.send(lmao.setThumbnail('https://i.ibb.co/HFfRTCP/6-BC378-F9-6-E5-A-4-C9-F-A435-D703-B95-D2451.png'));
               }
               return;
           }
@@ -124,9 +124,9 @@ client.on('message', async message => {
                 	);
 
               try {
-                message.channel.send(lmao.setThumbnail(Procursus.app[index].Icon).setThumbnail());
+                message.channel.send(lmao.setThumbnail(Procursus.app[index].Icon));
               } catch (error) {
-                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss').setThumbnail());
+                message.channel.send(lmao.setThumbnail('https://i.ibb.co/HFfRTCP/6-BC378-F9-6-E5-A-4-C9-F-A435-D703-B95-D2451.png'));
               }
 
               return;
