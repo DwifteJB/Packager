@@ -73,9 +73,9 @@ client.on('message', async message => {
 
                 	);
               try {
-                message.channel.send(lmao.setThumbnail(BigBoss.app[index].Icon));
+                message.channel.send(lmao.setThumbnail(BigBoss.app[index].Icon).setThumbnail());
               } catch (error) {
-                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss'));
+                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss').setThumbnail());
               }
               return;
           }
@@ -99,9 +99,9 @@ client.on('message', async message => {
                 	);
 
                try {
-                message.channel.send(lmao.setThumbnail(Packix.app[index].Icon));
+                message.channel.send(lmao.setThumbnail(Packix.app[index].Icon).setThumbnail());
               } catch (error) {
-                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss'));
+                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss').setThumbnail());
               }
               return;
           }
@@ -124,9 +124,9 @@ client.on('message', async message => {
                 	);
 
               try {
-                message.channel.send(lmao.setThumbnail(Procursus.app[index].Icon));
+                message.channel.send(lmao.setThumbnail(Procursus.app[index].Icon).setThumbnail());
               } catch (error) {
-                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss'));
+                message.channel.send(lmao.setThumbnail('https://proxy.prcl.app/package/com.chikuwa.circlebookmark/bigboss').setThumbnail());
               }
 
               return;
