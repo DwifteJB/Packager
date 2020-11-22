@@ -73,6 +73,7 @@ client.on('message', async message => {
               message.channel.send(lmao);
               return;
           }
+          message.channel.send(`Unable to find that package!`);
         }
 });
 
