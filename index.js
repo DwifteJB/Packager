@@ -63,6 +63,7 @@ client.on('message', async message => {
 	             .setColor('#17bcb8')
 	             .setTitle(`${BigBoss.app[index].Name.trim()}`)
    	             .setTimestamp()
+                     .setThumbnail('${BigBoss.app[index].Icon.trim()})
 
  	             .addFields(
 	        	{ name: 'Description', value: BigBoss.app[index].Description},
