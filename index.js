@@ -66,10 +66,13 @@ client.on('message', async message => {
    	             .setTimestamp()
 
  	             .addFields(
-	        	{ name: 'Version', value: BigBoss.app[index].Version, inline: true },
+
 	        	{ name: 'Author', value: BigBoss.app[index].Author, inline: true },
-	        	{ name: 'Open in Sileo:', value: `[Click Here](http://dwifte.eu.org/open.php?package=${BigBoss.app[index].Package})`, inline: true },
+	        	{ name: 'Version', value: BigBoss.app[index].Version, inline: true },
+	        	{ name: 'More info:', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${BigBoss.app[index].Package})`, inline: true },
                         { name: 'Add the Repo:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=http://apt.thebigboss.org/repofiles/cydia/dists/stable)`, inline: true },
+
+                	);
 
                 	);
               try {
@@ -94,11 +97,10 @@ client.on('message', async message => {
    	             .setTimestamp()
 
  	             .addFields(
-	        	{ name: 'Version', value: Packix.app[index].Version, inline: true },
 	        	{ name: 'Author', value: Packix.app[index].Author, inline: true },
-	        	{ name: 'Open in Sileo:', value: `[Click Here](http://dwifte.eu.org/open.php?package=${Packix.app[index].Package})`, inline: true },
+	        	{ name: 'Version', value: Packix.app[index].Version, inline: true },
+	        	{ name: 'More info:', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Packix.app[index].Package})`, inline: true },
                         { name: 'Add the Repo:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=https://repo.packix.com)`, inline: true },
-
                 	);
 
                try {
@@ -122,9 +124,10 @@ client.on('message', async message => {
    	             .setTimestamp()
 
  	             .addFields(
-	        	{ name: 'Version', value: Procursus.app[index].Version, inline: true },
+
 	        	{ name: 'Author', value: Procursus.app[index].Author, inline: true },
-	        	{ name: 'Open in Sileo:', value: `[Click Here](http://dwifte.eu.org/open.php?package=${Procursus.app[index].Package})`, inline: true },
+	        	{ name: 'Version', value: Procursus.app[index].Version, inline: true },
+	        	{ name: 'More info:', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Procursus.app[index].Package})`, inline: true },
                         { name: 'Add the Repo:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=https://apt.procurs.us)`, inline: true },
 
                 	);
