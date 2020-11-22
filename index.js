@@ -57,7 +57,7 @@ client.on('message', async message => {
         if (!matches) return;
         const package = matches[1];
         for (index in BigBoss.app) {
-          if(package === BigBoss.app[index].Name.trim()) {
+          if(package === BigBoss.app[index].Name) {
 
              const lmao = new Discord.MessageEmbed()
 	             .setColor('#17bcb8')
@@ -79,7 +79,7 @@ client.on('message', async message => {
         }
 
        for (index in Packix.app) {
-          if(package === Packix.app[index].Name.trim()) {
+          if(package === Packix.app[index].Name) {
 
              const lmao = new Discord.MessageEmbed()
 	             .setColor('#17bcb8')
@@ -100,7 +100,7 @@ client.on('message', async message => {
           }
         }
        for (index in Procursus.app) {
-          if(package === Procursus.app[index].Name.trim()) {
+          if(package === Procursus.app[index].Name) {
 
              const lmao = new Discord.MessageEmbed()
 	             .setColor('#17bcb8')
