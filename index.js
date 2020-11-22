@@ -15,7 +15,8 @@ fs.readdirSync('./repo_updaters').forEach(file => {
 });
 console.log('Reading jsons...');
 const BigBoss = JSON.parse(fs.readFileSync(`./repos/BigBoss.json`, 'utf8'));
-const packix = JSON.parse(fs.readFileSync(`./repos/Packix.json`, 'utf8'));
+const Packix = JSON.parse(fs.readFileSync(`./repos/Packix.json`, 'utf8'));
+const Procursus = JSON.parse(fs.readFileSync(`./repos/Procursus.json`, 'utf8'));
 
 client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`);
