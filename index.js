@@ -13,6 +13,13 @@ fs.readdirSync('./repo_updaters').forEach(file => {
   shell.exec(`python3 ./repo_updaters/${file}`)
 
 });
+console.log('Reading jsons...');
+
+fs.readdirSync('./repos').forEach(file => {
+  const fil = file.replace(/\.[^/.]+$/, "")
+  console.log(`Reading ${fil}`);
+  const ${fil} = JSON.parse(fs.readFileSync(`./repos/${file}`, 'utf8'));
+});
 
 client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`);
