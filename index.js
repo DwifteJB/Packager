@@ -63,7 +63,6 @@ client.on('message', async message => {
 	             .setColor('#17bcb8')
 	             .setTitle(`${BigBoss.app[index].Name.trim()}`)
    	             .setTimestamp()
-                     .setThumbnail(`${BigBoss.app[index].Icon.trim()}`)
 
  	             .addFields(
 	        	{ name: 'Description', value: BigBoss.app[index].Description},
@@ -78,6 +77,50 @@ client.on('message', async message => {
               return;
           }
         }
+
+       for (index in Packix.app) {
+          if(package === Packix.app[index].Name.trim()) {
+
+             const lmao = new Discord.MessageEmbed()
+	             .setColor('#17bcb8')
+	             .setTitle(`${Packix.app[index].Name.trim()}`)
+   	             .setTimestamp()
+
+ 	             .addFields(
+	        	{ name: 'Description', value: Packix.app[index].Description},
+	        	{ name: 'Version', value: Packix.app[index].Version, inline: true },
+	        	{ name: 'Author', value: Packix.app[index].Author, inline: true },
+	        	{ name: 'Open in Sileo:', value: `[Click Here](http://dwifte.eu.org/open.php?package=${Packix.app[index].Package})`, inline: true },
+                        { name: 'Add source:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=https://repo.packix.com)`, inline: true },
+
+                	);
+
+              message.channel.send(lmao);
+              return;
+          }
+        }
+
+          if(package === Procursus.app[index].Name.trim()) {
+
+             const lmao = new Discord.MessageEmbed()
+	             .setColor('#17bcb8')
+	             .setTitle(`${Procursus.app[index].Name.trim()}`)
+   	             .setTimestamp()
+
+ 	             .addFields(
+	        	{ name: 'Description', value: Procursus.app[index].Description},
+	        	{ name: 'Version', value: Procursus.app[index].Version, inline: true },
+	        	{ name: 'Author', value: Procursus.app[index].Author, inline: true },
+	        	{ name: 'Open in Sileo:', value: `[Click Here](http://dwifte.eu.org/open.php?package=${Procursus.app[index].Package})`, inline: true },
+                        { name: 'Add source:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=https://apt.procurs.us)`, inline: true },
+
+                	);
+
+              message.channel.send(lmao);
+              return;
+          }
+        }
+
 	message.channel.send("Sorry, we couldn't find that package.");
 });
 
