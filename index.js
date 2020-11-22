@@ -75,7 +75,7 @@ client.on('message', async message => {
               try {
                 message.channel.send(lmao.setThumbnail(BigBoss.app[index].Icon));
               } catch (error) {
-                message.channel.send(lmao);
+                message.channel.send(lmao.setThumbnail());
 
                 console.log(error);
 
@@ -104,7 +104,7 @@ client.on('message', async message => {
                try {
                 message.channel.send(lmao.setThumbnail(Packix.app[index].Icon));
               } catch (error) {
-                message.channel.send(lmao);
+                message.channel.send(lmao.setThumbnail());
 
                 console.log(error);
 
@@ -132,7 +132,7 @@ client.on('message', async message => {
               try {
                 message.channel.send(lmao.setThumbnail(Procursus.app[index].Icon));
               } catch (error) {
-                message.channel.send(lmao);
+                message.channel.send(lmao.setThumbnail());
                 console.log(error);
               }
 
