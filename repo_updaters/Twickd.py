@@ -10,7 +10,7 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
-url = "https://repo.dynastic.co/main/"
+url = "https://repo.twickd.com/"
 print(f"Downloading repo for {url}!")
 try:
     os.mkdir(f"{os.getcwd()}/repos")
@@ -94,7 +94,7 @@ with open(f'{filepath}') as csvfile:
       
 json_string = json.dumps(final_data)
 
-with open('/root/PackageFinderJS/repos/Dynastic.json', 'w') as f:
+with open('/root/PackageFinderJS/repos/Twickd.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
