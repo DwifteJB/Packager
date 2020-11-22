@@ -53,6 +53,7 @@ client.on('message', async message => {
 	// const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift();
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
+        message.channel.startTyping()
         message.channel.send(`Info:\nCommand: ${command}\nArgs: ${args}`);
         for (index in BigBoss.app) {
           console.log(BigBoss.app[index].Name)
@@ -60,6 +61,7 @@ client.on('message', async message => {
 	if (command === 'test') {
             message.channel.send("uwu");
         }
+        message.channel.stopTyping()
 });
 
 client.login(token);
