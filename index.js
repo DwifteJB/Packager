@@ -64,7 +64,8 @@ client.on("message", async message => {
     .slice(prefix.length)
     .trim()
     .split(/ +/);
-  if (message.content == prefix + "addrepo") {
+  if (message.content.toLowerCase() == prefix + "addrepo") {
+    if (!args[0]) return message.channel.send(`Please use the following format:\n\n\`\`\`${prefix}addrepo <Name> <URL>\`\`\``)
     exec(
       `echo \'import random
 import os
