@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const shell = require("shelljs");
 const prefix = "!";
-const { exec } = require("child_process")
+const { exec, spawn } = require("child_process")
 const haste = require('hastebin-gen')
 
 const client = new Discord.Client();
 
 client.jsons = new Discord.Collection();
 
-const { token } = require("./config.json");
+const { token, owners } = require("./config.json");
 
 console.log("Updating repos...");
 
@@ -67,7 +67,30 @@ client.on("message", async message => {
     .trim()
     .split(/ +/);
   const commandName = args.shift().toLowerCase();
+  if (commandName == "shell") {
+    if(!owners.includes(message.author.id)) return message.channel.send('Only the bot owners can use this command.')
+    if (!args[0]) return message.channel.send('Please provide a command.');
+    message.channel.send(`Running \`${args.join(" ")}\``);
+    const cp = spawn(`${args[0]}`, args.slice(1), {
+      detached: true
+    });
+    let output = ''
+    cp.on('error', (err) => {
+      return message.channel.send(`Failed to execute command. Error: \`\`\`${err}\`\`\``);
+    });
+    cp.stdout.on('data', (data) => {
+      output += `${data}\n`
+    })
+    cp.on('close', (code) => {
+      if (output.length < 1) return message.channel.send('Finished with no output.')
+      if (output.length > 1994) {
+        haste(output).then(haste => message.channel.send("Output was too big: " + haste))
+      }
+      else message.channel.send(`\`\`\`${output}\`\`\``);
+    });
+  }
   if (commandName == "addrepo") {
+    if(!owners.includes(message.author.id)) return message.channel.send('Only the bot owners can use this command.')
     if (!args[1]) {
       return message.channel.send(`Please use the following format:\n\n\`\`\`${prefix}addrepo <Name> <URL>\`\`\``)
     }
