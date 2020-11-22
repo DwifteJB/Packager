@@ -2,6 +2,7 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const shell = require("shelljs");
+const prefix = "!";
 
 const client = new Discord.Client();
 
@@ -17,7 +18,7 @@ fs.readdirSync("./repo_updaters").forEach(file => {
 console.log("Reading jsons...");
 for (const file of fs.readdirSync("./repos")) {
   const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
-  json.name = file.replace('.json','')
+  json.name = file.replace(".json", "");
   client.jsons.set(file, json);
 }
 
@@ -59,16 +60,124 @@ client.on("guildCreate", guild => {
 });
 
 client.on("message", async message => {
-  if (message.content == "!update") {
-    exec("git pull", (error, stdout, stderr) => {
-      if (error) {
-        message.channel.send(`Error: ${error}`);
-        return;
-      } else {
-        message.channel.send(`${stdout}`);
-        process.exit();
+  const args = message.content
+    .slice(prefix.length)
+    .trim()
+    .split(/ +/);
+  if (message.content == prefix + "addrepo") {
+    exec(
+      `echo \'import random
+import os
+import csv
+import json
+import shutil
+import time
+import bz2
+import sys
+import smtplib
+from subprocess import Popen
+import re
+import requests
+url = "${args[1]}"
+print(f"Downloading repo for {url}!")
+try:
+    os.mkdir(f"{os.getcwd()}/repos")
+    os.mkdir(f"{os.getcwd()}/data")
+except:
+    pass
+try:
+    headers={
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+    }
+    r = requests.get(f"{url}/Packages.bz2", headers=headers)
+except Exception as e:
+    print("Is this a repo?")
+    sys.exit(1)
+with open(f'{os.getcwd()}/data/Packages.bz2', 'wb') as f:
+    f.write(r.content)
+try:
+    zipfile = bz2.BZ2File("./data/Packages.bz2")
+    data = zipfile.read()
+except:
+    a = Popen(f"bzip2 -d ./data/Packages.bz2", shell=True)
+    while a is not None:
+            retcode = a.poll()
+            if retcode is not None:
+                print("Unzipped!")
+                data = open(f"{os.getcwd()}/data/Packages").read()
+                break
+    else:
+            time.sleep(1)
+
+filepath = f"{os.getcwd()}//data/repo.csv"
+open(filepath, 'wb').write(data)
+with open(filepath, 'r+', errors='ignore') as lol:
+    try:
+        text = lol.read()
+    except Exception as e:
+        print(f"Error {e} occurred")
+    if re.search('/\ ', url):
+        text = re.sub('Filename: ./debs', f'Filename: {url}debs', text)
+        text = re.sub('Filename: ./deb', f'Filename: {url}deb', text)
+        text = re.sub('Filename: deb', f'Filename: {url}deb', text)
+        text = re.sub('Filename: debs', f'Filename: {url}debs', text)
+        text = re.sub('Filename: api', f'Filename: {url}api', text)
+        text = re.sub('Filename: pool', f'Filename: {url}pool', text)
+        text = re.sub('Filename: files', f'Filename: {url}files', text)
+    else:
+        text = re.sub('Filename: ./debs', f'Filename: {url}/debs', text)
+        text = re.sub('Filename: ./deb', f'Filename: {url}/deb', text)
+        text = re.sub('Filename: deb', f'Filename: {url}/deb', text)
+        text = re.sub('Filename: debs', f'Filename: {url}/debs', text)
+        text = re.sub('Filename: api', f'Filename: {url}/api', text)
+        text = re.sub('Filename: pool', f'Filename: {url}/pool', text)
+        text = re.sub('Filename: files', f'Filename: {url}/files', text)
+    lol.seek(0)
+    lol.write(text.replace('\0', ' '))
+    lol.truncate()
+
+final_data = {
+'url': f'{url}',
+'icon': f'{url}/CydiaIcon.png',
+'app': [],
+}
+app = {}
+
+with open(f'{filepath}') as csvfile:
+    data = csv.reader(csvfile, delimiter=':')
+    for line in data:
+        if len(line) == 0:
+            final_data['app'].append(app)
+            app = {}
+            continue
+        try:
+            if line[1].strip() in ['http', 'https']:
+                line[1] = line[1] + ':' + line[2]
+        except:
+            pass
+        try:
+             app[line[0]] = line[1].strip()
+        except:
+             app[line[0]] = line[0].strip()
+
+      
+json_string = json.dumps(final_data)
+
+with open('/root/PackageFinderJS/repos/${args[0]}.json', 'w') as f:
+    dat = json.dumps(final_data, indent=4)
+    f.write(dat)
+    f.close()
+    print("Done!")\' > repo_updaters/${args[0]}`,
+      (error, stdout, stderr) => {
+        if (error) {
+          message.channel.send(`Error: ${error}`);
+          return;
+        } else {
+          message.channel.send(`${stdout}`);
+          process.exit();
+        }
       }
-    });
+    );
   }
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
@@ -82,44 +191,37 @@ client.on("message", async message => {
           .setDescription(repo.app[index].Description)
           .setAuthor(`${repo.app[index].Name.trim()}`)
           .setTimestamp()
-          .setFooter(
-            repo.name,
-            repo.icon
-        )
-        if (repo.app[index].Maintainer.includes('Hayden Seay')) {
-          lmao.addFields(
-            {
-              name: "Author",
-              value: repo.app[index].Maintainer.replace(/ <(.*?)>/g, ""),
-              inline: true
-            }
-          )
+          .setFooter(repo.name, repo.icon);
+        if (repo.app[index].Maintainer.includes("Hayden Seay")) {
+          lmao.addFields({
+            name: "Author",
+            value: repo.app[index].Maintainer.replace(/ <(.*?)>/g, ""),
+            inline: true
+          });
         } else {
-          lmao.addFields(
-            {
-              name: "Author",
-              value: repo.app[index].Author.replace(/ <(.*?)>/g, ""),
-              inline: true
-            }
-          )
+          lmao.addFields({
+            name: "Author",
+            value: repo.app[index].Author.replace(/ <(.*?)>/g, ""),
+            inline: true
+          });
         }
-          lmao.addFields(
-            { name: "Version", value: repo.app[index].Version, inline: true },
+        lmao.addFields(
+          { name: "Version", value: repo.app[index].Version, inline: true },
 
-            {
-              name: "Repo",
-              value: `[${repo.name}](http://dwifte.eu.org/repo.php?repo=${repo.url})`,
-              inline: true
-            },
-            {
-              name: "Bundle ID",
-              value: repo.app[index].Package
-            },
-            {
-              name: "More info",
-              value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
-            }
-          );
+          {
+            name: "Repo",
+            value: `[${repo.name}](http://dwifte.eu.org/repo.php?repo=${repo.url})`,
+            inline: true
+          },
+          {
+            name: "Bundle ID",
+            value: repo.app[index].Package
+          },
+          {
+            name: "More info",
+            value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
+          }
+        );
 
         try {
           message.channel.send(lmao.setThumbnail(repo.app[index].Icon));
@@ -130,7 +232,7 @@ client.on("message", async message => {
 
           console.log(error);
         }
-        sent = true
+        sent = true;
         return;
       }
     }
