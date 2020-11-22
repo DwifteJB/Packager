@@ -91,7 +91,7 @@ client.on('message', async message => {
 	        	{ name: 'Version', value: Packix.app[index].Version, inline: true },
 	        	{ name: 'Author', value: Packix.app[index].Author, inline: true },
 	        	{ name: 'Open in Sileo:', value: `[Click Here](http://dwifte.eu.org/open.php?package=${Packix.app[index].Package})`, inline: true },
-                        { name: 'Add source:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=https://repo.packix.com)`, inline: true },
+                        { name: 'Add the Repo:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=https://repo.packix.com)`, inline: true },
 
                 	);
 
