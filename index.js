@@ -124,7 +124,7 @@ client.on('message', async message => {
 
  	             .addFields(
 
-	        	{ name: 'Author', value: Procursus.app[index].Author, inline: true },
+	        	{ name: 'Author', value: "Hayden Seay", inline: true },
 	        	{ name: 'Version', value: Procursus.app[index].Version, inline: true },
 	        	{ name: 'More info:', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Procursus.app[index].Package})`, inline: true },
                         { name: 'Add the Repo:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=https://apt.procurs.us)`, inline: true },
