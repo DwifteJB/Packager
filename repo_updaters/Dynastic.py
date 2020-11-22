@@ -10,7 +10,7 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
-url = "https://repo.dynastic.co/"
+url = "https://repo.dynastic.co/main/"
 print(f"Downloading repo for {url}!")
 try:
     os.mkdir(f"{os.getcwd()}/repos")
