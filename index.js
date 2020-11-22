@@ -56,7 +56,6 @@ client.on('message', async message => {
         const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
         if (!matches) return;
         const package = matches[1];
-	const DEF = "https://i.imgur.com/wSTFkRM.png";
         for (index in BigBoss.app) {
           if(package === BigBoss.app[index].Name) {
 
@@ -76,7 +75,7 @@ client.on('message', async message => {
               try {
                 message.channel.send(lmao.setThumbnail(BigBoss.app[index].Icon));
               } catch (error) {
-                message.channel.send(lmao.setThumbnail(DEF));
+                message.channel.send(lmao);
 
                 console.log(error);
 
@@ -105,7 +104,7 @@ client.on('message', async message => {
                try {
                 message.channel.send(lmao.setThumbnail(Packix.app[index].Icon));
               } catch (error) {
-                message.channel.send(lmao.setThumbnail(DEF));
+                message.channel.send(lmao);
 
                 console.log(error);
 
@@ -133,7 +132,7 @@ client.on('message', async message => {
               try {
                 message.channel.send(lmao.setThumbnail(Procursus.app[index].Icon));
               } catch (error) {
-                message.channel.send(lmao.setThumbnail(DEF));
+                message.channel.send(lmao);
                 console.log(error);
               }
 
