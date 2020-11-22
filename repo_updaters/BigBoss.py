@@ -70,7 +70,7 @@ with open(filepath, 'r+', errors='ignore') as lol:
 
 final_data = {
 'url': f'{url}',
-'icon': f'{url}/CydiaIcon.png',
+'icon': f'https://pbs.twimg.com/profile_images/756727140779831297/-qWaC-UR_400x400.jpg',
 'app': [],
 }
 app = {}
