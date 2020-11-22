@@ -145,7 +145,7 @@ client.on('message', async message => {
         }
 
        for (index in Twickd.app) {
-          if(package === Twickid.app[index].Name) {
+          if(package === Twickd.app[index].Name) {
 
              const lmao = new Discord.MessageEmbed()
 	             .setDescription(Twickd.app[index].Description)
