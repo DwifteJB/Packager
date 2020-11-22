@@ -132,7 +132,7 @@ client.on("message", async message => {
       }
     }
   });
-  if (!sent) message.channel.send("Sorry, we couldn't find that package.");
+  if (!sent) message.channel.send("Sorry, I couldn't find that package.");
 });
 
 client.login(token);
