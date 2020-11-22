@@ -53,15 +53,11 @@ client.on('message', async message => {
 	// const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift();
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
-        message.channel.send(`Info:\nCommand: ${command}\nArgs: ${args}`);
+        message.channel.send(`Info:\nCommand: ${command}\nArgs: ${args}\n ${command + args}`);
         for (index in BigBoss.app) {
-          message.channel.startTyping()
           console.log(BigBoss.app[index].Name)
+          if (command + args === !BigBoss.app[index].Name) { console.log('Not found'); }
         }
-	if (command === 'test') {
-            message.channel.send("uwu");
-        }
-        message.channel.stopTyping()
 });
 
 client.login(token);
