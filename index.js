@@ -108,7 +108,7 @@ client.on("message", async message => {
 
             {
               name: "Repo",
-              value: `[${repo.name}](http://dwifte.eu.org/repo.php?repo=http://apt.therepo.org/repofiles/cydia/dists/stable)`,
+              value: `[${repo.name}](http://dwifte.eu.org/repo.php?repo=${repo.url})`,
               inline: true
             },
             {
