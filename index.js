@@ -99,7 +99,7 @@ client.on('message', async message => {
               return;
           }
         }
-
+       for (index in Procursus.app) {
           if(package === Procursus.app[index].Name.trim()) {
 
              const lmao = new Discord.MessageEmbed()
