@@ -84,7 +84,7 @@ client.on("message", async message => {
           .setTimestamp()
           .setFooter(
             repo.name,
-            `${repo.url}/CydiaIcon.png`
+            repo.icon
         )
         if (repo.app[index].Maintainer.includes('Hayden Seay')) {
           lmao.addFields(
