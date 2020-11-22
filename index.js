@@ -76,6 +76,9 @@ client.on('message', async message => {
                 message.channel.send(lmao.setThumbnail(BigBoss.app[index].Icon));
               } catch (error) {
                 message.channel.send(lmao.setThumbnail('https://i.ibb.co/HFfRTCP/6-BC378-F9-6-E5-A-4-C9-F-A435-D703-B95-D2451.png'));
+
+                console.log(error);
+
               }
               return;
           }
@@ -102,6 +105,9 @@ client.on('message', async message => {
                 message.channel.send(lmao.setThumbnail(Packix.app[index].Icon));
               } catch (error) {
                 message.channel.send(lmao.setThumbnail('https://i.ibb.co/HFfRTCP/6-BC378-F9-6-E5-A-4-C9-F-A435-D703-B95-D2451.png'));
+
+                console.log(error);
+
               }
               return;
           }
@@ -127,6 +133,7 @@ client.on('message', async message => {
                 message.channel.send(lmao.setThumbnail(Procursus.app[index].Icon));
               } catch (error) {
                 message.channel.send(lmao.setThumbnail('https://i.ibb.co/HFfRTCP/6-BC378-F9-6-E5-A-4-C9-F-A435-D703-B95-D2451.png'));
+                console.log(error);
               }
 
               return;
