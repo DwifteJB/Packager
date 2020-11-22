@@ -4,6 +4,7 @@ const fs = require("fs");
 const shell = require("shelljs");
 const prefix = "!";
 const { exec } = require("child_process")
+const haste = require('hastebin-gen')
 
 const client = new Discord.Client();
 
