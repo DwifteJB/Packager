@@ -17,6 +17,7 @@ console.log('Reading jsons...');
 const BigBoss = JSON.parse(fs.readFileSync(`./repos/BigBoss.json`, 'utf8'));
 const Packix = JSON.parse(fs.readFileSync(`./repos/Packix.json`, 'utf8'));
 const Procursus = JSON.parse(fs.readFileSync(`./repos/Procursus.json`, 'utf8'));
+const Dynastic = JSON.parse(fs.readFileSync(`./repos/Dynastic.json`, 'utf8'));
 
 client.on('ready', () => {
 console.log(`Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`);
@@ -134,6 +135,35 @@ client.on('message', async message => {
 
               try {
                 message.channel.send(lmao.setThumbnail(Procursus.app[index].Icon));
+              } catch (error) {
+                message.channel.send(lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`));
+                console.log(error);
+              }
+
+              return;
+          }
+        }
+
+       for (index in Procursus.app) {
+          if(package === Dysnastic.app[index].Name) {
+
+             const lmao = new Discord.MessageEmbed()
+	             .setDescription(Dynastic.app[index].Description)
+	             .setColor('#17bcb8')
+	             .setTitle(`${Dynastic.app[index].Name.trim()}`)
+   	             .setTimestamp()
+
+	             .setFooter('Dynastic', 'https://repo.dynastic.co/CydiaIcon.png')
+ 	             .addFields(
+
+	        	{ name: 'Author', value: "${Dynastic.app[index].Author()}", inline: true },
+	        	{ name: 'Version', value: Dynastic.app[index].Version, inline: true },
+                        { name: 'Repo', value: `[Procursus](http://dwifte.eu.org/repo.php?repo=https://repo.dynastic.co)`, inline: true },
+	        	{ name: 'More info', value: `[Dynastic](http://dwifte.eu.org/open.php?package=${Dynastic.app[index].Package})`, inline: true },
+                	);
+
+              try {
+                message.channel.send(lmao.setThumbnail(Dynastic.app[index].Icon));
               } catch (error) {
                 message.channel.send(lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`));
                 console.log(error);
