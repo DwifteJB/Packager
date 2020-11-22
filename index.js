@@ -134,7 +134,7 @@ client.on('message', async message => {
               try {
                 message.channel.send(lmao.setThumbnail(Procursus.app[index].Icon));
               } catch (error) {
-                message.channel.send(lmao.setThumbnail());
+                message.channel.send(lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`));
                 console.log(error);
               }
 
