@@ -69,8 +69,9 @@ client.on('message', async message => {
 
 	        	{ name: 'Author', value: BigBoss.app[index].Author, inline: true },
 	        	{ name: 'Version', value: BigBoss.app[index].Version, inline: true },
-	        	{ name: 'More info:', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${BigBoss.app[index].Package})`, inline: true },
-                        { name: 'Add the Repo:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=http://apt.thebigboss.org/repofiles/cydia/dists/stable)`, inline: true },
+
+                        { name: 'Repo', value: `[BigBoss](http://dwifte.eu.org/repo.php?repo=http://apt.thebigboss.org/repofiles/cydia/dists/stable)`, inline: true },
+	        	{ name: 'More info', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${BigBoss.app[index].Package})`, inline: true },
 
                 	);
 
@@ -94,12 +95,12 @@ client.on('message', async message => {
 	             .setDescription(Packix.app[index].Description)
 	             .setTitle(`${Packix.app[index].Name.trim()}`)
    	             .setTimestamp()
-
+	             .setFooter('Packix', 'https://pbs.twimg.com/profile_images/1046836237192040449/54RYzohk_400x400.jpg')
  	             .addFields(
 	        	{ name: 'Author', value: Packix.app[index].Author, inline: true },
 	        	{ name: 'Version', value: Packix.app[index].Version, inline: true },
-	        	{ name: 'More info:', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Packix.app[index].Package})`, inline: true },
-                        { name: 'Add the Repo:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=https://repo.packix.com)`, inline: true },
+                        { name: 'Repo', value: `[Packix](http://dwifte.eu.org/repo.php?repo=https://repo.packix.com)`, inline: true },
+	        	{ name: 'More info', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Packix.app[index].Package})`, inline: true },
                 	);
 
                try {
@@ -122,13 +123,13 @@ client.on('message', async message => {
 	             .setTitle(`${Procursus.app[index].Name.trim()}`)
    	             .setTimestamp()
 
+	             .setFooter('Procursus', 'https://apt.procurs.us/CydiaIcon.png')
  	             .addFields(
 
 	        	{ name: 'Author', value: "Hayden Seay", inline: true },
 	        	{ name: 'Version', value: Procursus.app[index].Version, inline: true },
-	        	{ name: 'More info:', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Procursus.app[index].Package})`, inline: true },
-                        { name: 'Add the Repo:', value: `[Click Here](http://dwifte.eu.org/repo.php?repo=https://apt.procurs.us)`, inline: true },
-
+                        { name: 'Repo', value: `[Procursus](http://dwifte.eu.org/repo.php?repo=https://apt.procurs.us)`, inline: true },
+	        	{ name: 'More info', value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Procursus.app[index].Package})`, inline: true },
                 	);
 
               try {
