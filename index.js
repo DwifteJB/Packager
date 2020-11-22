@@ -54,11 +54,11 @@ client.on("guildCreate", guild => {
 });
 
 client.on('message', async message => {
-        const matches = message.content.match(/\[\[(\w*)\]\]/);
+        const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
         if (!matches) return;
         const package = matches[1];
         for (index in BigBoss.app) {
-        if(package.trim() === BigBoss.app[index].Name.trim()) {
+          if(package === BigBoss.app[index].Name.trim()) {
 
              const lmao = new Discord.MessageEmbed()
 	             .setColor('#17bcb8')
