@@ -9,7 +9,7 @@ module.exports = {
   type: "private",
   async execute(client, message, args) {
     if (!owners.includes(message.author.id)) return;
-    if (!args[0]) {
+    // if (!args[0]) {
       const filter = m => m.author.id == message.author.id;
       message.channel.send('What is the name of this repo? Type `cancel` to cancel the process.');
       message.channel.awaitMessages(filter, { max: 1, time: 60000 }).then(async collected => {
@@ -37,6 +37,7 @@ module.exports = {
           }
         })
       })
+    /*
     } else {
       if (!args[1]) {
         return message.channel.send(`Please use the following syntax:\n\n\`\`\`${client.prefix}addrepo <Name> <URL>\`\`\``)
@@ -56,6 +57,7 @@ module.exports = {
       }
       message.channel.send(`Added repo: \`${args[0]}\``);
     }
+    */
   }
 }
 
