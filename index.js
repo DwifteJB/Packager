@@ -10,6 +10,7 @@ const shell = require('shelljs')
 client.login(token);
 client.commands = new Collection();
 client.prefix = '!'
+client.jsons = new Collection();
 
 console.log("Updating repos...");
 
