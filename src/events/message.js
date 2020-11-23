@@ -87,6 +87,7 @@ module.exports = async (client, message) => {
             }
             if (sent) return;
         }
+        if (sent) return;
     });
     if (!sent) message.reply("Sorry, I couldn't find that package.", { allowedMentions: { replied_user: false } });
 }
