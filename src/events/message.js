@@ -41,7 +41,7 @@ module.exports = async (client, message) => {
     let sent = false;
     client.jsons.forEach(repo => {
         for (index in repo.app) {
-            if (package.toLowerCase() === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
+            if ((repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '').includes(package.toLowerCase()) ||
                 package.toLowerCase() === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
                 const lmao = new Discord.MessageEmbed()
                     .setColor("#17bcb8")
@@ -88,5 +88,5 @@ module.exports = async (client, message) => {
             if (sent) return;
         }
     });
-    if (!sent) message.reply("Sorry, I couldn't find that package.");
+    if (!sent) message.reply("Sorry, I couldn't find that package.", { allowedMentions: { replied_user: false } });
 }
