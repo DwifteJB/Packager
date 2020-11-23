@@ -80,8 +80,8 @@ module.exports = async (client, message) => {
                     }
                 );
 
-                message.channel.send(lmao.setThumbnail(repo.app[index].Icon)).catch(error => {
-                    message.channel.send(
+                message.reply(lmao.setThumbnail(repo.app[index].Icon)).catch(error => {
+                    message.reply(
                         lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`)
                     );
                 })
@@ -91,5 +91,5 @@ module.exports = async (client, message) => {
             if (sent) return;
         }
     });
-    if (!sent) message.channel.send("Sorry, I couldn't find that package.");
+    if (!sent) message.reply("Sorry, I couldn't find that package.");
 }
