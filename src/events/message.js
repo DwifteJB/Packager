@@ -41,6 +41,7 @@ module.exports = async (client, message) => {
     let sent = false;
     client.jsons.forEach(repo => {
         for (index in repo.app) {
+            if (!repo.app[index].Name) console.log(repo.app[index])
             if (package === repo.app[index].Name ||
                 package === repo.app[index].Package) {
                 const lmao = new Discord.MessageEmbed()
