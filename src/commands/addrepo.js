@@ -2,6 +2,7 @@ const { owners } = require("../config.json");
 const haste = require("hastebin-gen");
 const { exec } = require('child_process');
 const shell = require("shelljs");
+const fs = require('fs');
 
 module.exports = {
   name: "addrepo",
