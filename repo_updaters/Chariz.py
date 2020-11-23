@@ -10,11 +10,12 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
-url = "https://repo.chariz.com"
+url = "https://repo.chariz.io/"
 try:
-    os.mkdir(f'{os.getcwd()}/repos')
-    os.mkdir(f'{os.getcwd()}/data')
+    shutil.rmtree(f"./data")
+    os.mkdir(f'./data')
 except:
+    os.mkdir(f'./data')
     pass
 try:
     headers={
@@ -24,7 +25,7 @@ try:
 except Exception as e:
     print('Is this a repo?')
     sys.exit(1)
-with open(f'{os.getcwd()}/data/Packages.bz2', 'wb') as f:
+with open(f'./data/Packages.bz2', 'wb') as f:
     f.write(r.content)
 try:
     zipfile = bz2.BZ2File('./data/Packages.bz2')
@@ -39,7 +40,7 @@ except:
                 break
     else:
             time.sleep(1)
-filepath = f'{os.getcwd()}//data/repo.csv'
+filepath = f'./data/repo.csv'
 open(filepath, 'wb').write(data)
 with open(filepath, 'r+', errors='ignore') as lol:
     try:
@@ -63,7 +64,7 @@ with open(filepath, 'r+', errors='ignore') as lol:
         text = re.sub('Filename: pool', f'Filename: {url}/pool', text)
         text = re.sub('Filename: files', f'Filename: {url}/files', text)
     lol.seek(0)
-    lol.write(text.replace('\0', ' '))
+    lol.write(text.replace('�', ' '))
     lol.truncate()
 final_data = {
 'url': f'{url}',
@@ -93,4 +94,3 @@ with open(f'/root/PackageFinderJS/repos/Chariz.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
-    
