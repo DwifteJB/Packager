@@ -90,7 +90,7 @@ with open(f'{filepath}', errors='ignore') as csvfile:
              app[line[0]] = line[0].strip()
       
 json_string = json.dumps(final_data)
-with open(f'/root/PackageFinderJS/repos/Tateu’s Repo.json', 'w', errors='ignore') as f:
+with open(f'/root/PackageFinderJS/repos/Tateu’s Repo.json', 'w', encoding='utf-8', errors='ignore') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
