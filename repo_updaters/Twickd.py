@@ -11,7 +11,7 @@ from subprocess import Popen
 import re
 import requests
 url = "https://repo.twickd.com/"
-print(f"Downloading repo for {url}!")
+
 try:
     os.mkdir(f"{os.getcwd()}/repos")
     os.mkdir(f"{os.getcwd()}/data")
@@ -99,4 +99,4 @@ with open('/root/PackageFinderJS/repos/Twickd.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
-    print("Done!")
+    

@@ -11,7 +11,7 @@ from subprocess import Popen
 import re
 import requests
 url = "https://apt.procurs.us/dists/iphoneos-arm64/1700/main/binary-iphoneos-arm/"
-print(f"Downloading repo for {url}!")
+
 try:
     os.mkdir(f"{os.getcwd()}/repos")
     os.mkdir(f"{os.getcwd()}/data")
@@ -87,4 +87,4 @@ with open('/root/PackageFinderJS/repos/Procursus.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
-    print("Done!")
+    
