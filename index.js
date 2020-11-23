@@ -1,7 +1,5 @@
 const { Client, Collection, Intents } = require("discord.js");
-const client = new Client({ 
-  presence: { activity: { name: 'repo updates', type: 'WATCHING' }, status: 'online' }
-});
+const client = new Client();
 const { owners, token } = require("./src/config.json");
 const fs = require("fs");
 const path = require("path");
@@ -20,18 +18,28 @@ fs.readdirSync("./repo_updaters").forEach(file => {
 
 console.log("Reading jsons...");
 for (const file of fs.readdirSync("./repos")) {
-  try {
-    const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
-    json.name = file.replace(".json", "").replace(/-/g, ' ');;
-    client.jsons.set(file, json);
-  } catch (err) {}
+  const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
+  json.name = file.replace(".json", "").replace(/-/g, ' ');;
+  client.jsons.set(file, json);
 }
 
 client.packageCount = 0
 client.jsons.forEach(repo => {  
   client.packageCount += repo.app.length
 })
-console.log(client.packageCount)
+
+setInterval(() => {
+  for (const file of fs.readdirSync("./repos")) {
+    const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
+    json.name = file.replace(".json", "").replace(/-/g, ' ');;
+    client.jsons.set(file, json);
+  }
+
+  client.packageCount = 0
+  client.jsons.forEach(repo => {
+    client.packageCount += repo.app.length
+  })
+}, 60000 * 60)
 
 // Command file setup
 const folder = fs
