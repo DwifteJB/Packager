@@ -1,36 +1,38 @@
 const Discord = require("discord.js");
 
 module.exports = async (client, message) => {
-    const args = message.content
-        .slice(client.prefix.length)
-        .trim()
-        .split(/ +/);
-    const commandName = args.shift().toLowerCase();
-    const command =
-    client.commands.get(commandName) ||
-    client.commands.find(
-      cmd => cmd.aliases && cmd.aliases.includes(commandName)
-        );
-    if (command) {
+    if (message.content.startsWith(client.prefix)) {
+        const args = message.content
+            .slice(client.prefix.length)
+            .trim()
+            .split(/ +/);
+        const commandName = args.shift().toLowerCase();
+        const command =
+            client.commands.get(commandName) ||
+            client.commands.find(
+                cmd => cmd.aliases && cmd.aliases.includes(commandName)
+            );
+        if (command) {
 
-        if (command.disabled == true) return;
-        if (!message.guild.me.hasPermission(command.botPermissions)) {
-            message.channel.send(`I require the \`${command.botPermissions.join('`, `')}\` permission(s) to execute this command.`).then(m => m.delete({
-                timeout: 10000
-            }));
-            return;
+            if (command.disabled == true) return;
+            if (!message.guild.me.hasPermission(command.botPermissions)) {
+                message.channel.send(`I require the \`${command.botPermissions.join('`, `')}\` permission(s) to execute this command.`).then(m => m.delete({
+                    timeout: 10000
+                }));
+                return;
+            }
+
+            try {
+                command
+                    .execute(client, message, args)
+                    .then(
+                        console.log(
+                            `[${command.name.charAt(0).toUpperCase() +
+                            command.name.slice(1)}] Command has been run in ${message.guild.name}`
+                        )
+                    );
+            } catch { }
         }
-
-        try {
-            command
-                .execute(client, message, args)
-                .then(
-                    console.log(
-                        `[${command.name.charAt(0).toUpperCase() +
-                        command.name.slice(1)}] Command has been run in ${message.guild.name}`
-                    )
-                );
-        } catch { }
     }
     
     const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
