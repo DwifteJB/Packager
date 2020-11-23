@@ -88,6 +88,7 @@ module.exports = async (client, message) => {
                 sent = true;
                 return;
             }
+            if (sent) return;
         }
     });
     if (!sent) message.channel.send("Sorry, I couldn't find that package.");
