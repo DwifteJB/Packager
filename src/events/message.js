@@ -79,10 +79,8 @@ module.exports = async (client, message) => {
                         value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
                     }
                 );
-                lmao.setThumbnail(repo.app[index].Icon)
-                message.reply("", { embed: lmao, allowedMentions: { replied_user: false } }).catch(error => {
-                    lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`)
-                    message.reply("", { embed: lmao, allowedMentions: { replied_user: false } });
+                message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).catch(error => {
+                    message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } });
                 })
                 sent = true;
                 return;
