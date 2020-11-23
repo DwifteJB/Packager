@@ -7,10 +7,6 @@ const fs = require("fs");
 const path = require("path");
 const shell = require('shelljs')
 
-client.packageCount = 0
-client.jsons.forEach(repo => {  
-  client.packageCount += repo.app.legnth
-})
 console.log(client.packageCount)
 console.log(packageCount)
 client.login(token);
@@ -32,6 +28,11 @@ for (const file of fs.readdirSync("./repos")) {
     client.jsons.set(file, json);
   } catch (err) {}
 }
+
+client.packageCount = 0
+client.jsons.forEach(repo => {  
+  client.packageCount += repo.app.legnth
+})
 
 // Command file setup
 const folder = fs
