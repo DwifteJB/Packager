@@ -15,7 +15,7 @@ client.jsons = new Collection();
 console.log("Updating repos...");
 
 fs.readdirSync("./repo_updaters").forEach(file => {
-  shell.exec(`python3 ./repo_updaters/${file}`);
+  shell.exec(`python3 "./repo_updaters/${file}"`);
 });
 
 console.log("Reading jsons...");
