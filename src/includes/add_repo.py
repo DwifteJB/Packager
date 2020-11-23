@@ -13,12 +13,10 @@ import re
 import requests
 url = sys.argv[2]
 try:
-    shutil.rmtree(f"{os.getcwd()}/data")
-    os.mkdir(f"{os.getcwd()}/data")
+    shutil.rmtree(f"/root/PackageFinderJS/data/")
+    os.mkdir(f"/root/PackageFinderJS/data/")
 except:
-
-    os.mkdir(f"{os.getcwd()}/data")
-
+    os.mkdir(f"/root/PackageFinderJS/data/")
     pass
 try:
     headers={
