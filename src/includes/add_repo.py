@@ -31,10 +31,10 @@ except Exception as e:
 with open(f'{os.getcwd()}/data/Packages.bz2', 'wb') as f:
     f.write(r.content)
 try:
-    zipfile = bz2.BZ2File("./data/Packages.bz2")
+    zipfile = bz2.BZ2File("/root/PackageFinderJS/data/Packages.bz2")
     data = zipfile.read()
 except:
-    a = Popen(f"bzip2 -d ./data/Packages.bz2", shell=True)
+    a = Popen(f"bzip2 -d /root/PackageFinderJS/data/Packages.bz2", shell=True)
     while a is not None:
             retcode = a.poll()
             if retcode is not None:
@@ -44,7 +44,7 @@ except:
     else:
             time.sleep(1)
 
-filepath = f"{os.getcwd()}//data/repo.csv"
+filepath = f"/root/PackageFinderJS/data/repo.csv"
 open(filepath, 'wb').write(data)
 with open(filepath, 'r+', errors='ignore') as lol:
     try:
