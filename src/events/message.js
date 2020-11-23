@@ -80,9 +80,9 @@ module.exports = async (client, message) => {
                     }
                 );
                 lmao.setThumbnail(repo.app[index].Icon)
-                message.reply(lmao, { allowedMentions: { replied_user: false } }).catch(error => {
+                message.reply("", { embed: lmao, allowedMentions: { replied_user: false } }).catch(error => {
                     lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`)
-                    message.reply(lmao, { allowedMentions: { replied_user: false } });
+                    message.reply("", { embed: lmao, allowedMentions: { replied_user: false } });
                 })
                 sent = true;
                 return;
