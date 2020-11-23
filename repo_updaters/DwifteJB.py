@@ -11,7 +11,6 @@ from subprocess import Popen
 import re
 import requests
 url = "https://DwifteJB.github.io/repo"
-print(f'Downloading repo for {url}!')
 try:
     shutil.rmtree(f"./data")
     os.mkdir(f'./data')
@@ -95,4 +94,3 @@ with open(f'/root/PackageFinderJS/repos/DwifteJB.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
-    print('Done!')
