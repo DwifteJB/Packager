@@ -41,13 +41,13 @@ module.exports = async (client, message) => {
     let sent = false;
     client.jsons.forEach(repo => {
         for (index in repo.app) {
-            if (package === repo.app[index].Name || package === repo.app[index].Package) {
+            if (package === repo.app[index].Name) {
                 const lmao = new Discord.MessageEmbed()
                     .setColor("#17bcb8")
                     .setDescription(repo.app[index].Description)
                     .setTimestamp()
-                    .setFooter(repo.name, repo.icon);
-                if (repo.app[index].Name) lmao.setAuthor(repo.app[index].Name.trim())
+                    .setFooter(repo.name, repo.icon)
+                    .setAuthor(repo.app[index].Name ? repo.app[index].Name.trim() : package);
                 if (repo.app[index].Maintainer.includes("Hayden Seay")) {
                     lmao.addFields({
                         name: "Author",
