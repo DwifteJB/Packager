@@ -29,7 +29,7 @@ for (const file of fs.readdirSync("./repos")) {
 
 client.packageCount = 0
 client.jsons.forEach(repo => {  
-  client.packageCount += repo.app.legnth
+  client.packageCount += repo.app.length
 })
 console.log(client.packageCount)
 
