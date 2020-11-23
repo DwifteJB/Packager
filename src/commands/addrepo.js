@@ -15,12 +15,12 @@ module.exports = {
     if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(args[1])) return message.channel.send("Please provide a valid URL.");
     shell.exec(`python3 src/includes/add_repo.py ${args[0]} "${args[1]}"`);
 
-    for (const file of fs.readdirSync("repos")) {
-      const json = JSON.parse(fs.readFileSync(`repos/${file}`, "utf8"));
-      json.name = file.replace(".json", "");
-      console.log(`Reloaded ${json.name}`);
-      client.jsons.set(file, json);
-    }
+    // Load in new repo
+    const json = JSON.parse(fs.readFileSync(`repos/${args[0]}`, "utf8"));
+    json.name = args[0]
+    console.log(`Reloaded ${json.name}`);
+    client.jsons.set(args[0], json);
+    
     message.channel.send(`Added repo: \`${args[0]}\``);
 
   }
