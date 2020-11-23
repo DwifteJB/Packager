@@ -20,7 +20,7 @@ module.exports = {
           else if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(collected2.first().content))
             return message.channel.send("Please provide a valid URL.");
           else {
-            shell.exec(`python3 src/includes/add_repo.py ${collected.first().content.replace(/'/g, "\'")} "${collected2.first().content}"`);
+            shell.exec(`python3 src/includes/add_repo.py ${collected.first().content.replace(/'/g, "\\'")} "${collected2.first().content}"`);
             message.channel.send(`Added repo: \`${collected.first().content}\``);
           }
         })
