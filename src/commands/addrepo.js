@@ -9,7 +9,7 @@ module.exports = {
   type: "private",
   async execute(client, message, args) {
     if (!owners.includes(message.author.id)) return;
-      if (!args[0]) {
+    if (!args[0]) {
       const filter = m => m.author.id == message.author.id;
       message.channel.send('What is the name of this repo? Type `cancel` to cancel the process.');
       message.channel.awaitMessages(filter, { max: 1, time: 60000 }).then(async collected => {
@@ -32,6 +32,12 @@ module.exports = {
               console.log(`Reloaded ${json.name}`);
               client.jsons.set(file, json);
             }
+
+            client.packageCount = 0
+            client.jsons.forEach(repo => {
+              client.packageCount += repo.app.length
+            })
+            client.user.setActivity(`${client.packageCount} packages`, { type: 'WATCHING' })
             message.channel.send(`Added repo: \`${collected.first().content}\``);
           }
         })
@@ -53,6 +59,11 @@ module.exports = {
         console.log(`Reloaded ${json.name}`);
         client.jsons.set(file, json);
       }
+      client.packageCount = 0
+      client.jsons.forEach(repo => {
+        client.packageCount += repo.app.length
+      })
+      client.user.setActivity(`${client.packageCount} packages`, { type: 'WATCHING' })
       message.channel.send(`Added repo: \`${args[0]}\``);
     }
   }
