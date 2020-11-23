@@ -80,9 +80,9 @@ module.exports = async (client, message) => {
                     }
                 );
 
-                message.reply(lmao.setThumbnail(repo.app[index].Icon)).catch(error => {
+                message.reply(lmao.setThumbnail(repo.app[index].Icon), { allowedMentions: { replied_user: false } }).catch(error => {
                     message.reply(
-                        lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`)
+                        lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`, { allowedMentions: { replied_user: false } })
                     );
                 })
                 sent = true;
@@ -90,7 +90,6 @@ module.exports = async (client, message) => {
             }
             if (sent) return;
         }
-        if (sent) return;
     });
     if (!sent) message.reply("Sorry, I couldn't find that package.");
 }
