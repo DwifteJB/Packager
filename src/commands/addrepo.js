@@ -12,10 +12,10 @@ module.exports = {
     if (!args[0]) {
       const filter = m => m.author.id == message.author.id;
       message.channel.send('What is the name of this repo? Type `cancel` to cancel the process.');
-      message.channel.awaitMessages(filter, { max: 1, time: 60000 }).then(collected => {
+      message.channel.awaitMessages(filter, { max: 1, time: 60000 }).then(async collected => {
         if (collected.first().content.toLowerCase() == 'cancel') return message.channel.send('Cancelled!')
         message.channel.send('What is the URL of this repo? Type `cancel` to cancel the process.');
-        message.channel.awaitMessages(filter, { max: 1, time: 60000 }).then(collected2 => {
+        message.channel.awaitMessages(filter, { max: 1, time: 60000 }).then(async collected2 => {
         if (collected.first().content.toLowerCase() == 'cancel') return message.channel.send('Cancelled!') 
           else if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(collected2.first().content))
             return message.channel.send("Please provide a valid URL.");
