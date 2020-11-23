@@ -41,7 +41,7 @@ except:
     else:
             time.sleep(1)
 filepath = f'./data/repo.csv'
-open(filepath, 'wb').write(data)
+open(filepath, 'wb', errors='ignore').write(data)
 with open(filepath, 'r+', errors='ignore') as lol:
     try:
         text = lol.read()
