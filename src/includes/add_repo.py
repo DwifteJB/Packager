@@ -12,7 +12,6 @@ from subprocess import Popen
 import re
 import requests
 url = sys.argv[2]
-print(f"Downloading repo for {url}!")
 try:
     os.mkdir(f"{os.getcwd()}/repos")
     os.mkdir(f"{os.getcwd()}/data")
@@ -100,4 +99,3 @@ with open(f'/root/PackageFinderJS/repos/{sys.argv[1]}.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
-    print("Done!")
