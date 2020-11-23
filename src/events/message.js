@@ -39,7 +39,7 @@ module.exports = async (client, message) => {
     let sent = false;
     client.jsons.forEach(repo => {
         for (index in repo.app) {
-            if (package === repo.app[index].Name) {
+            if (package === repo.app[index].Name || package === repo.app[index].Package) {
                 const lmao = new Discord.MessageEmbed()
                     .setColor("#17bcb8")
                     .setDescription(repo.app[index].Description)
@@ -77,15 +77,11 @@ module.exports = async (client, message) => {
                     }
                 );
 
-                try {
-                    message.channel.send(lmao.setThumbnail(repo.app[index].Icon));
-                } catch (error) {
+                message.channel.send(lmao.setThumbnail(repo.app[index].Icon)).catch(error => {
                     message.channel.send(
                         lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`)
                     );
-
-                    console.log(error);
-                }
+                })
                 sent = true;
                 return;
             }
