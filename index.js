@@ -39,6 +39,7 @@ setInterval(() => {
   client.jsons.forEach(repo => {
     client.packageCount += repo.app.length
   })
+  client.user.setActivity(`${client.packageCount} packages`, { type: 'WATCHING' })
 }, 60000 * 60)
 
 // Command file setup
