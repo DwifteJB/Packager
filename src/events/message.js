@@ -80,16 +80,13 @@ module.exports = async (client, message) => {
                     }
                 );
                 sent = true;
-               try {
-                 return message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } });
-               } catch (err) {
-                 return message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } });
-                }
-                return;
-            };
-         if (sent) return;
+                return message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).catch(() => {
+                    message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } });
+                })
+            }
+            if (sent) return;
         }
-    if (sent) return;
+        if (sent) return;
     });
     if (!sent) message.reply("Sorry, I couldn't find that package.", { allowedMentions: { replied_user: false } });
 }
