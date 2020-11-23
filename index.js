@@ -20,9 +20,11 @@ fs.readdirSync("./repo_updaters").forEach(file => {
 
 console.log("Reading jsons...");
 for (const file of fs.readdirSync("./repos")) {
-  const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
-  json.name = file.replace(".json", "").replace(/-/g, ' ');;
-  client.jsons.set(file, json);
+  try {
+    const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
+    json.name = file.replace(".json", "").replace(/-/g, ' ');;
+    client.jsons.set(file, json);
+  } catch (err) {}
 }
 
 // Command file setup
