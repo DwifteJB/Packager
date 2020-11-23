@@ -41,7 +41,7 @@ module.exports = async (client, message) => {
     let sent = false;
     client.jsons.forEach(repo => {
         for (index in repo.app) {
-            if (package.toLowerCase() === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
+            if ((repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '').includes(package.toLowerCase()) ||
                 package.toLowerCase() === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
                 const lmao = new Discord.MessageEmbed()
                     .setColor("#17bcb8")
@@ -79,15 +79,15 @@ module.exports = async (client, message) => {
                         value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
                     }
                 );
-                message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).catch(error => {
-                    message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } });
-                })
+               try {
+                 return message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } });
+               } catch (err) {
+                 return message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } });
+                }
                 sent = true;
                 return;
-            }
-            if (sent) return;
+            };
         }
-        if (sent) return;
     });
     if (!sent) message.reply("Sorry, I couldn't find that package.", { allowedMentions: { replied_user: false } });
 }
