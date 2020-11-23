@@ -1,6 +1,6 @@
 const { Client, Collection, Intents } = require("discord.js");
 const client = new Client({ 
-  presence: { activity: { name: 'with packages', type: 'PLAYING' }, status: 'online' }
+  presence: { activity: { name: 'repo updates', type: 'WATCHING' }, status: 'online' }
 });
 const { owners, token } = require("./src/config.json");
 const fs = require("fs");
