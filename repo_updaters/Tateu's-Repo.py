@@ -41,7 +41,7 @@ except:
     else:
             time.sleep(1)
 filepath = f'./data/repo.csv'
-open(filepath, 'wb').write(data)
+open(filepath, 'wb', errors='ignore').write(data)
 with open(filepath, 'r+', errors='ignore') as lol:
     try:
         text = lol.read()
@@ -72,7 +72,7 @@ final_data = {
 'app': [],
 }
 app = {}
-with open(f'{filepath}') as csvfile:
+with open(f'{filepath}', errors='ignore') as csvfile:
     data = csv.reader(csvfile, delimiter=':')
     for line in data:
         if len(line) == 0:
@@ -90,7 +90,7 @@ with open(f'{filepath}') as csvfile:
              app[line[0]] = line[0].strip()
       
 json_string = json.dumps(final_data)
-with open(f'/root/PackageFinderJS/repos/Tateu’s Repo.json', 'w') as f:
+with open(f'/root/PackageFinderJS/repos/Tateu’s Repo.json', 'w', errors='ignore') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
