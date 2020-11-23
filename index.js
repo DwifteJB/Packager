@@ -7,8 +7,6 @@ const fs = require("fs");
 const path = require("path");
 const shell = require('shelljs')
 
-console.log(client.packageCount)
-console.log(packageCount)
 client.login(token);
 client.commands = new Collection();
 client.prefix = '!'
@@ -33,6 +31,7 @@ client.packageCount = 0
 client.jsons.forEach(repo => {  
   client.packageCount += repo.app.legnth
 })
+console.log(client.packageCount)
 
 // Command file setup
 const folder = fs
