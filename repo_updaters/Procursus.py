@@ -58,7 +58,7 @@ with open(filepath, 'r+', errors='ignore') as lol:
 
 final_data = {
 'url': f'{url}',
-'icon': f'{url}/CydiaIcon.png',
+'icon': f'https://apt.procurs.us/CydiaIcon.png',
 'app': [],
 }
 app = {}
