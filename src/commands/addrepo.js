@@ -16,11 +16,12 @@ module.exports = {
     shell.exec(`python3 src/includes/add_repo.py ${args[0]} "${args[1]}"`);
 
     // Load in new repo
-    const json = JSON.parse(fs.readFileSync(`repos/${args[0]}.json`, "utf8"));
-    json.name = args[0]
-    console.log(`Reloaded ${json.name}`);
-    client.jsons.set(args[0], json);
-    
+    for (const file of fs.readdirSync("repos")) {
+      const json = JSON.parse(fs.readFileSync(`repos/${file}`, "utf8"));
+      json.name = file.replace(".json", "");
+      console.log(`Reloaded ${json.name}`);
+      client.jsons.set(file, json);
+    }
     message.channel.send(`Added repo: \`${args[0]}\``);
 
   }
