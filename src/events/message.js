@@ -47,7 +47,7 @@ module.exports = async (client, message) => {
                     .setDescription(repo.app[index].Description)
                     .setTimestamp()
                     .setFooter(repo.name, repo.icon)
-                    .setAuthor(repo.app[index].Name);
+                    .setAuthor(repo.app[index].Name ? repo.app[index].Name.trim() : package);
                 if (repo.app[index].Maintainer.includes("Hayden Seay")) {
                     lmao.addFields({
                         name: "Author",
