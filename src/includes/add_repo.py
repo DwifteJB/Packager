@@ -13,9 +13,12 @@ import re
 import requests
 url = sys.argv[2]
 try:
-    os.mkdir(f"{os.getcwd()}/repos")
+    shutil.rmtree(f"{os.getcwd()}/data")
     os.mkdir(f"{os.getcwd()}/data")
 except:
+
+    os.mkdir(f"{os.getcwd()}/data")
+
     pass
 try:
     headers={
