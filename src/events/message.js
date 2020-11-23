@@ -45,7 +45,7 @@ module.exports = async (client, message) => {
                 const lmao = new Discord.MessageEmbed()
                     .setColor("#17bcb8")
                     .setDescription(repo.app[index].Description)
-                    .setAuthor(`${repo.app[index].Name.trim()}`)
+                    .setAuthor(`${repo.app[index].Name}`)
                     .setTimestamp()
                     .setFooter(repo.name, repo.icon);
                 if (repo.app[index].Maintainer.includes("Hayden Seay")) {
