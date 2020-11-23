@@ -17,6 +17,7 @@ console.log("Updating repos...");
 fs.readdirSync("./repo_updaters").forEach(file => {
   shell.exec(`python3 ./repo_updaters/${file}`);
 });
+
 console.log("Reading jsons...");
 for (const file of fs.readdirSync("./repos")) {
   const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
