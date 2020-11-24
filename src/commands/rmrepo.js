@@ -13,7 +13,7 @@ module.exports = {
             return message.channel.send(`Please use the following syntax:\n\n\`\`\`${client.prefix}rmrepo <Name>\`\`\``)
         }
     
-        exec(`rm -rf repo_updaters/${args[0]}`)
+        exec(`rm -rf repo_updaters/${args[0]}.json`)
         shell.exec(`git add repo_updaters && git commit -m "Added ${args[0]}" && git push --force`);
 
         // Load in new repo
