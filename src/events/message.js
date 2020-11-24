@@ -49,9 +49,10 @@ module.exports = async (client, message) => {
             if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
                 package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
                 if(bundle === repo.app[index].Package) { return; }
+                bundle = repo.app[index].Package;
                 prev = number;
 	        number = prev+1;
-                console.log(`Found ${number} packages!`);
+                console.log(`Found ${number} packages! (bundle id ${bundle})`);
             }
 	}
         for (index in repo.app) {
