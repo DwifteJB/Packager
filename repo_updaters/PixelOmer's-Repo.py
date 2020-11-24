@@ -10,8 +10,7 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
-url = "https://DwifteJB.github.io/repo"
-print(f'Downloading repo for {url}!')
+url = "https://repo.pixelomer.com/"
 try:
     shutil.rmtree(f"./data")
     os.mkdir(f'./data')
@@ -91,8 +90,7 @@ with open(f'{filepath}') as csvfile:
              app[line[0]] = line[0].strip()
       
 json_string = json.dumps(final_data)
-with open(f'/root/PackageFinderJS/repos/DwifteJB.json', 'w') as f:
+with open(f'/root/PackageFinderJS/repos/PixelOmer's-Repo.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
-    print('Done!')

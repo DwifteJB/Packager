@@ -44,7 +44,7 @@ module.exports = async (client, message) => {
             if (package.toLowerCase() === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
                 package.toLowerCase() === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
                 const lmao = new Discord.MessageEmbed()
-                    .setColor("#17bcb8")
+                    .setColor("#78c9df")
                     .setDescription(repo.app[index].Description)
                     .setTimestamp()
                     .setFooter(repo.name, repo.icon)
