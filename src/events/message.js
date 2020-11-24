@@ -55,10 +55,12 @@ module.exports = async (client, message) => {
                 console.log(`Found ${number} packages! (bundle id ${bundle})`);
             }
 	}
+    });
+
+    client.jsons.forEach(repo => {
         for (index in repo.app) {
             if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
                 package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
-                await new Promise(r => setTimeout(r, 250));
                 const lmao = new Discord.MessageEmbed()
                     .setColor("#61b6f2")
                     .setDescription(repo.app[index].Description)
