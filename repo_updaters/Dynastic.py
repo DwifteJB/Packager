@@ -68,7 +68,7 @@ with open(filepath, 'r+', errors='ignore') as lol:
     lol.truncate()
 final_data = {
 'url': f'{url}',
-'icon': f'{url}/CydiaIcon.png',
+'icon': f'https://assets.dynastic.co/brand/img/icons/apple-touch-icon.png',
 'app': [],
 }
 app = {}
