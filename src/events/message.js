@@ -44,9 +44,12 @@ module.exports = async (client, message) => {
     client.jsons.forEach(repo => {
         let number = 0;
         for (index in repo.app) {
-			const number = number+1;
-            message.channel.send(number);
-		}
+            if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
+                package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
+
+	        const number = number+1;
+                message.channel.send(number);
+	}
         for (index in repo.app) {
             if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
                 package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
