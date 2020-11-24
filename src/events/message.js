@@ -42,14 +42,16 @@ module.exports = async (client, message) => {
     let sent = false;
     let number = 0;
     let prev = 0;
+    let bundle = "None";
     if (shitTweaks.includes(package)) return message.reply("Sorry, but I don't provide info for shit tweaks!", { allowedMentions: { replied_user: false } });
     client.jsons.forEach(repo => {
         for (index in repo.app) {
             if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
                 package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
+                if(bundle === repo.app[index].Package) { return; }
                 prev = number;
 	        number = prev+1;
-                message.channel.send(number);
+                console.log(`Found ${number} packages!`);
             }
 	}
         for (index in repo.app) {
