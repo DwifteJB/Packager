@@ -98,10 +98,9 @@ module.exports = async (client, message) => {
                     }
                 );
                 sent = true;
-                uwu = message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).catch(() => {
-                    uwu = message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } });
+                return uwu = message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).react('➡️').catch(() => {
+                    return uwu = message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } }).react('➡️');
                 })
-                return uwu.react('➡️')
                
             }
             if (sent) return;
