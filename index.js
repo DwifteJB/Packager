@@ -21,7 +21,7 @@ fs.readdirSync("./repo_updaters").forEach(file => {
 console.log("Reading jsons...");
 for (const file of fs.readdirSync("./repos")) {
   const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
-  json.name = file.replace(".json", "").replace(/-/g, ' ');;
+  json.name = file.replace(".json", "").replace(/-/g, ' ').replace(/\'/g, "'");
   client.jsons.set(file, json);
 }
 
@@ -33,7 +33,7 @@ client.jsons.forEach(repo => {
 setInterval(() => {
   for (const file of fs.readdirSync("./repos")) {
     const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
-    json.name = file.replace(".json", "").replace(/-/g, ' ');;
+    json.name = file.replace(".json", "").replace(/-/g, ' ').replace(/\'/g, "'");
     client.jsons.set(file, json);
   }
 

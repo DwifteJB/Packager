@@ -13,15 +13,15 @@ module.exports = {
             return message.channel.send(`Please use the following syntax:\n\n\`\`\`${client.prefix}rmrepo <Name>\`\`\``)
         }
     
-        exec(`rm -rf repo_updaters/${args[0]}.py`)
+        exec(`rm -rf repo_updaters/${args[0].replace(/'/g, "\'")}.py`)
         shell.exec(`git add repo_updaters && git commit -m "Removed ${args[0]}" && git push --force`);
 
         // Load in new repo
-        delete require.cache[require.resolve(`../../repo_updaters/${args[0]}.json`)];
-        exec(`rm -rf repos/${args[0]}.json`)
+        delete require.cache[require.resolve(`repo_updaters/${args[0].replace(/'/g, "\'")}.json`)];
+        exec(`rm -rf repos/${args[0].replace(/'/g, "\'")}.json`)
         for (const file of fs.readdirSync("repos")) {
             const json = JSON.parse(fs.readFileSync(`repos/${file}`, "utf8"));
-            json.name = file.replace(".json", "").replace(/-/g, ' ');
+            json.name = file.replace(".json", "").replace(/-/g, ' ').replace(/\'/g, "'");
             console.log(`Reloaded ${json.name}`);
             client.jsons.set(file, json);
         }

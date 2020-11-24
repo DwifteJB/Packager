@@ -28,7 +28,7 @@ module.exports = {
             // Load in new repo
             for (const file of fs.readdirSync("repos")) {
               const json = JSON.parse(fs.readFileSync(`repos/${file}`, "utf8"));
-              json.name = file.replace(".json", "").replace(/-/g, ' ');
+              json.name = file.replace(".json", "").replace(/-/g, ' ').replace(/\'/g, "'");
               console.log(`Reloaded ${json.name}`);
               client.jsons.set(file, json);
             }
@@ -55,7 +55,7 @@ module.exports = {
       // Load in new repo
       for (const file of fs.readdirSync("repos")) {
         const json = JSON.parse(fs.readFileSync(`repos/${file}`, "utf8"));
-        json.name = file.replace(".json", "").replace(/-/g, ' ');
+        json.name = file.replace(".json", "").replace(/-/g, ' ').replace(/\'/g, "'");
         console.log(`Reloaded ${json.name}`);
         client.jsons.set(file, json);
       }
