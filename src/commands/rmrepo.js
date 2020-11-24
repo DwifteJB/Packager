@@ -9,6 +9,9 @@ module.exports = {
     type: "private",
     async execute(client, message, args) {
         if (!owners.includes(message.author.id)) return;
+        if (!args[0]) {
+            return message.channel.send(`Please use the following syntax:\n\n\`\`\`${client.prefix}rmrepo <Name>\`\`\``)
+        }
     
         exec(`rm -rf repo_updaters/${args[0]}`)
         shell.exec(`git add repo_updaters && git commit -m "Added ${args[0]}" && git push --force`);
