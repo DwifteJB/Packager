@@ -42,6 +42,11 @@ module.exports = async (client, message) => {
     let sent = false;
     if (shitTweaks.includes(package)) return message.reply("Sorry, but I don't provide info for shit tweaks!", { allowedMentions: { replied_user: false } });
     client.jsons.forEach(repo => {
+        let number = 0;
+        for (index in repo.app) {
+			const number = number+1;
+            message.channel.send(number);
+		}
         for (index in repo.app) {
             if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
                 package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
