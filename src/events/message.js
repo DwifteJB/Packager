@@ -62,7 +62,7 @@ module.exports = async (client, message) => {
                     .setColor("#61b6f2")
                     .setDescription(repo.app[index].Description)
                     .setTimestamp()
-                    .setFooter(repo.name, repo.icon)
+                    .setFooter(`${repo.name} | Found ${number} packages!`, repo.icon)
                     .setAuthor(repo.app[index].Name ? repo.app[index].Name.trim() : repo.app[index].Package.trim());
                 if (repo.app[index].Maintainer.includes("Hayden Seay")) {
                     lmao.addFields({
@@ -95,9 +95,10 @@ module.exports = async (client, message) => {
                     }
                 );
                 sent = true;
-                return message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).catch(() => {
-                    message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } });
+                return message = message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).catch(() => {
+                    message = message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } });
                 })
+                message.react('➡️')
             }
             if (sent) return;
         }
