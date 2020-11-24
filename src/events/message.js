@@ -49,7 +49,7 @@ module.exports = async (client, message) => {
 
 	        const number = number+1;
                 message.channel.send(number);
-            })
+            });
 	}
         for (index in repo.app) {
             if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
