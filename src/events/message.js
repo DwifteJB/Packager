@@ -39,6 +39,7 @@ module.exports = async (client, message) => {
     if (!matches) return;
     const package = matches[1];
     let sent = false;
+    if (package.toLowerCase() === 'noclutter') return message.reply("Sorry, but I don't provide info for shit tweaks!", { allowedMentions: { replied_user: false } });
     client.jsons.forEach(repo => {
         for (index in repo.app) {
             if (package.toLowerCase() === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
