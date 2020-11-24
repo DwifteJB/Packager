@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const shitTweaks = ["noclutter","batchomatic"]
 
 module.exports = async (client, message) => {
     if (message.content.startsWith(client.prefix)) {
@@ -37,13 +38,13 @@ module.exports = async (client, message) => {
     
     const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
     if (!matches) return;
-    const package = matches[1];
+    const package = matches[1].toLowerCase();
     let sent = false;
-    if (package.toLowerCase() === 'noclutter') return message.reply("Sorry, but I don't provide info for shit tweaks!", { allowedMentions: { replied_user: false } });
+    if (shitTweaks.includes(package)) return message.reply("Sorry, but I don't provide info for shit tweaks!", { allowedMentions: { replied_user: false } });
     client.jsons.forEach(repo => {
         for (index in repo.app) {
-            if (package.toLowerCase() === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
-                package.toLowerCase() === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
+            if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
+                package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
                 const lmao = new Discord.MessageEmbed()
                     .setColor("#61b6f2")
                     .setDescription(repo.app[index].Description)
