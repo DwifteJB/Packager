@@ -17,7 +17,7 @@ module.exports = {
         shell.exec(`git add repo_updaters && git commit -m "Removed ${args[0]}" && git push --force`);
 
         // Load in new repo
-        delete require.cache[require.resolve(`repo_updaters/${args[0].replace(/'/g, "\'")}.json`)];
+        delete require.cache[require.resolve(`repos/${args[0].replace(/'/g, "\'")}.json`)];
         exec(`rm -rf repos/${args[0].replace(/'/g, "\'")}.json`)
         for (const file of fs.readdirSync("repos")) {
             const json = JSON.parse(fs.readFileSync(`repos/${file}`, "utf8"));
