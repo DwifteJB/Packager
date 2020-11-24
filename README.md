@@ -1,6 +1,6 @@
 # PackageFinderJS
 
-PackageFinderJS is allows for quick jailbreak tweak searches within Discord!
+PackageFinderJS allows for quick jailbreak tweak searches within Discord!
 
 ## Invite
 
