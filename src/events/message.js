@@ -58,6 +58,7 @@ module.exports = async (client, message) => {
         for (index in repo.app) {
             if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
                 package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
+                await new Promise(r => setTimeout(r, 250));
                 const lmao = new Discord.MessageEmbed()
                     .setColor("#61b6f2")
                     .setDescription(repo.app[index].Description)
@@ -95,10 +96,11 @@ module.exports = async (client, message) => {
                     }
                 );
                 sent = true;
-                return message = message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).catch(() => {
+                message = message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).catch(() => {
                     message = message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } });
                 })
-                message.react('➡️')
+                return message.react('➡️')
+               
             }
             if (sent) return;
         }
