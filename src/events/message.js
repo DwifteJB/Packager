@@ -48,15 +48,16 @@ module.exports = async (client, message) => {
         for (index in repo.app) {
             if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
                 package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
-                if(bundle === repo.app[index].Package) return;
+                if (bundle === repo.app[index].Package) return;
                 bundle = repo.app[index].Package;
                 prev = number;
-	        number = prev+1;
+                number = prev + 1;
             }
-	}
+        }
     });
 
     const foundPackages = [];
+    const finalEmbeds = [];
 
     client.jsons.forEach(repo => {
         for (index in repo.app) {
@@ -66,6 +67,7 @@ module.exports = async (client, message) => {
                     .setColor("#61b6f2")
                     .setDescription(repo.app[index].Description)
                     .setTimestamp()
+                    .setThumbnail(repo.app[index].Icon)
                     .setFooter(`${repo.name}`, repo.icon)
                     .setAuthor(repo.app[index].Name ? repo.app[index].Name.trim() : repo.app[index].Package.trim());
                 if (repo.app[index].Maintainer.includes("Hayden Seay")) {
@@ -100,13 +102,14 @@ module.exports = async (client, message) => {
                 );
                 sent = true;
                 if (!foundPackages.includes(repo.app[index].Package)) {
-                    message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(() => m.react('➡️'))).catch(() => {
-                        message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(() => m.react('➡️')));
-                    })
+                    finalEmbeds.push(lmao)
                 }
-               foundPackages.push(repo.app[index].Package)
+                foundPackages.push(repo.app[index].Package)
             }
         }
     });
+    message.reply("", { embed: finalEmbeds[0], allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(() => m.react('➡️'))).catch(() => {
+        message.reply("", { embed: finalEmbeds[0].setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(() => m.react('➡️')));
+    })
     if (!sent) message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
 }
