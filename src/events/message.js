@@ -56,6 +56,8 @@ module.exports = async (client, message) => {
 	}
     });
 
+    const foundPackages = [];
+
     client.jsons.forEach(repo => {
         for (index in repo.app) {
             if ((repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '').includes(package) ||
@@ -97,10 +99,12 @@ module.exports = async (client, message) => {
                     }
                 );
                 sent = true;
-                message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(()=>m.react('➡️'))).catch(() => {
-                    message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } }).then(m=>m.react('⬅️').then(()=>m.react('➡️')));
-                })
-               
+                if (!foundPackages.includes(repo.app[index].Package)) {
+                    message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(() => m.react('➡️'))).catch(() => {
+                        message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(() => m.react('➡️')));
+                    })
+                }
+               foundPackages.push(repo.app[index].Package)
             }
         }
     });
