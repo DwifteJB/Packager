@@ -1,8 +1,6 @@
 const Discord = require("discord.js");
 const shitTweaks = ["noclutter", "batchomatic"]
 const rm = require('discord.js-reaction-menu')
-rm.reactions.back = '⬅️';
-rm.reactions.next = '➡️';
 delete rm.reactions.first;
 delete rm.reactions.last;
 delete rm.reactions.stop;
@@ -73,7 +71,7 @@ module.exports = async (client, message) => {
                     .setColor("#61b6f2")
                     .setDescription(repo.app[index].Description)
                     .setTimestamp()
-                    .setThumbnail(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/.test(repo.app[index].Icon) ? repo.app[index].Icon : 'https://i.imgur.com/p9NJCoU.png')
+                    .setThumbnail(repo.app[index].Icon ? repo.app[index].Icon : 'https://i.imgur.com/p9NJCoU.png')
                     .setFooter(`${repo.name}`, repo.icon)
                     .setAuthor(repo.app[index].Name ? repo.app[index].Name.trim() : repo.app[index].Package.trim());
                 if (repo.app[index].Maintainer.includes("Hayden Seay")) {
@@ -118,6 +116,7 @@ module.exports = async (client, message) => {
     console.log(finalEmbeds)
     new rm.menu({
         channel: message.channel,
+        message: message,
         userID: message.author.id,
         pages: finalEmbeds
     })
