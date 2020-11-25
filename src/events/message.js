@@ -48,7 +48,7 @@ module.exports = async (client, message) => {
         for (index in repo.app) {
             if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
                 package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
-                if(bundle === repo.app[index].Package) { return; }
+                if(bundle === repo.app[index].Package) return;
                 bundle = repo.app[index].Package;
                 prev = number;
 	        number = prev+1;
@@ -58,8 +58,8 @@ module.exports = async (client, message) => {
 
     client.jsons.forEach(repo => {
         for (index in repo.app) {
-            if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
-                package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
+            if ((repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '').includes(package) ||
+                (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '').includes(package)) {
                 const lmao = new Discord.MessageEmbed()
                     .setColor("#61b6f2")
                     .setDescription(repo.app[index].Description)
@@ -104,7 +104,6 @@ module.exports = async (client, message) => {
             }
             if (sent) return;
         }
-        if (sent) return;
     });
     if (!sent) message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
 }
