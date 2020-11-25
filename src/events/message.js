@@ -102,7 +102,6 @@ module.exports = async (client, message) => {
                 })
                
             }
-            if (sent) return;
         }
     });
     if (!sent) message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
