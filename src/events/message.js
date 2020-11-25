@@ -112,6 +112,9 @@ module.exports = async (client, message) => {
             }
         }
     });
+    finalEmbeds.forEach(embed => {
+      embed.footer += ` | ${foundPackages.length}`
+    })
     if (!sent) return message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
     console.log(finalEmbeds)
     new rm.menu({
