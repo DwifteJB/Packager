@@ -63,55 +63,59 @@ module.exports = async (client, message) => {
     const foundPackages = [];
     const finalEmbeds = [];
 
-    client.jsons.forEach(repo => {
-        for (index in repo.app) {
-            if ((repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '').includes(package) ||
-                package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
-                const lmao = new Discord.MessageEmbed()
-                    .setColor("#61b6f2")
-                    .setDescription(repo.app[index].Description)
-                    .setTimestamp()
-                    .setThumbnail(repo.app[index].Icon ? repo.app[index].Icon : '')
-                    .setFooter(`${repo.name}`, repo.icon)
-                    .setAuthor(repo.app[index].Name ? repo.app[index].Name.trim() : repo.app[index].Package.trim());
-                if (repo.app[index].Maintainer.includes("Hayden Seay")) {
-                    lmao.addFields({
-                        name: "Author",
-                        value: repo.app[index].Maintainer.replace(/ <(.*?)>/g, ""),
-                        inline: true
-                    });
-                } else {
-                    lmao.addFields({
-                        name: "Author",
-                        value: (repo.app[index].Author ? repo.app[index].Author.replace(/ <(.*?)>/g, "") : repo.app[index].Author),
-                        inline: true
-                    });
-                }
-                lmao.addFields(
-                    { name: "Version", value: repo.app[index].Version, inline: true },
-
-                    {
-                        name: "Repo",
-                        value: `[${repo.name}](http://dwifte.eu.org/repo.php?repo=${repo.url})`,
-                        inline: true
-                    },
-                    {
-                        name: "Bundle ID",
-                        value: repo.app[index].Package
-                    },
-                    {
-                        name: "More info",
-                        value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
+    try {
+        client.jsons.forEach(repo => {
+            for (index in repo.app) {
+                if ((repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '').includes(package) ||
+                    package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
+                    const lmao = new Discord.MessageEmbed()
+                        .setColor("#61b6f2")
+                        .setDescription(repo.app[index].Description)
+                        .setTimestamp()
+                        .setThumbnail(repo.app[index].Icon ? repo.app[index].Icon : '')
+                        .setFooter(`${repo.name}`, repo.icon)
+                        .setAuthor(repo.app[index].Name ? repo.app[index].Name.trim() : repo.app[index].Package.trim());
+                    if (repo.app[index].Maintainer.includes("Hayden Seay")) {
+                        lmao.addFields({
+                            name: "Author",
+                            value: repo.app[index].Maintainer.replace(/ <(.*?)>/g, ""),
+                            inline: true
+                        });
+                    } else {
+                        lmao.addFields({
+                            name: "Author",
+                            value: (repo.app[index].Author ? repo.app[index].Author.replace(/ <(.*?)>/g, "") : repo.app[index].Author),
+                            inline: true
+                        });
                     }
-                );
-                sent = true;
-                if (!foundPackages.includes(repo.app[index].Package)) {
-                    finalEmbeds.push(lmao)
+                    lmao.addFields(
+                        { name: "Version", value: repo.app[index].Version, inline: true },
+
+                        {
+                            name: "Repo",
+                            value: `[${repo.name}](http://dwifte.eu.org/repo.php?repo=${repo.url})`,
+                            inline: true
+                        },
+                        {
+                            name: "Bundle ID",
+                            value: repo.app[index].Package
+                        },
+                        {
+                            name: "More info",
+                            value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
+                        }
+                    );
+                    sent = true;
+                    if (!foundPackages.includes(repo.app[index].Package)) {
+                        finalEmbeds.push(lmao)
+                    }
+                    foundPackages.push(repo.app[index].Package)
                 }
-                foundPackages.push(repo.app[index].Package)
             }
-        }
-    });
+        });
+    } catch (err) {
+        return message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
+    }
     if (finalEmbeds.length > 1) {
       finalEmbeds.forEach(embed => {
         embed.footer.text += ` | ${finalEmbeds.length} Results`
