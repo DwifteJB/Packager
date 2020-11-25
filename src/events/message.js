@@ -1,8 +1,5 @@
 const Discord = require("discord.js");
 const rm = require('discord.js-reaction-menu')
-delete rm.reactions.first;
-delete rm.reactions.last;
-delete rm.reactions.stop;
 
 module.exports = async (client, message) => {
     if (message.content.startsWith(client.prefix)) {
