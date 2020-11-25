@@ -71,7 +71,7 @@ module.exports = async (client, message) => {
                     .setColor("#61b6f2")
                     .setDescription(repo.app[index].Description)
                     .setTimestamp()
-                    .setThumbnail(repo.app[index].Icon ? repo.app[index].Icon : 'https://i.imgur.com/p9NJCoU.png')
+                    .setThumbnail(repo.app[index].Icon ? repo.app[index].Icon : '')
                     .setFooter(`${repo.name}`, repo.icon)
                     .setAuthor(repo.app[index].Name ? repo.app[index].Name.trim() : repo.app[index].Package.trim());
                 if (repo.app[index].Maintainer.includes("Hayden Seay")) {
