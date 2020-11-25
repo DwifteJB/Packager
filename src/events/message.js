@@ -113,10 +113,9 @@ module.exports = async (client, message) => {
         }
     });
     finalEmbeds.forEach(embed => {
-      embed.footer += ` | ${foundPackages.length}`
+      embed.footer.text += ` | ${foundPackages.length} Results`
     })
     if (!sent) return message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
-    console.log(finalEmbeds)
     new rm.menu({
         channel: message.channel,
         message: message,
