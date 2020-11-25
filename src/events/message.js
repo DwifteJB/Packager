@@ -52,7 +52,6 @@ module.exports = async (client, message) => {
                 bundle = repo.app[index].Package;
                 prev = number;
 	        number = prev+1;
-                console.log(`Found ${number} packages! (bundle id ${bundle})`);
             }
 	}
     });
@@ -65,7 +64,7 @@ module.exports = async (client, message) => {
                     .setColor("#61b6f2")
                     .setDescription(repo.app[index].Description)
                     .setTimestamp()
-                    .setFooter(`${repo.name} | Found ${number} packages!`, repo.icon)
+                    .setFooter(`${repo.name}`, repo.icon)
                     .setAuthor(repo.app[index].Name ? repo.app[index].Name.trim() : repo.app[index].Package.trim());
                 if (repo.app[index].Maintainer.includes("Hayden Seay")) {
                     lmao.addFields({
