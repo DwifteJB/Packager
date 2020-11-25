@@ -112,7 +112,7 @@ module.exports = async (client, message) => {
             }
         }
     });
-    if (foundPackages.length > 1) }
+    if (foundPackages.length > 1) {
       finalEmbeds.forEach(embed => {
         embed.footer.text += ` | ${foundPackages.length} Results`
       })
