@@ -112,9 +112,11 @@ module.exports = async (client, message) => {
             }
         }
     });
-    finalEmbeds.forEach(embed => {
-      embed.footer.text += ` | ${foundPackages.length} Results`
-    })
+    if (foundPackages.length > 1) }
+      finalEmbeds.forEach(embed => {
+        embed.footer.text += ` | ${foundPackages.length} Results`
+      })
+    }
     if (!sent) return message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
     new rm.menu({
         channel: message.channel,
