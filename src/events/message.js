@@ -70,7 +70,7 @@ module.exports = async (client, message) => {
                     .setColor("#61b6f2")
                     .setDescription(repo.app[index].Description)
                     .setTimestamp()
-                    .setThumbnail(repo.app[index].Icon)
+                    .setThumbnail(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/.test(repo.app[index].Icon) ? repo.app[index].Icon : 'https://i.imgur.com/p9NJCoU.png')
                     .setFooter(`${repo.name}`, repo.icon)
                     .setAuthor(repo.app[index].Name ? repo.app[index].Name.trim() : repo.app[index].Package.trim());
                 if (repo.app[index].Maintainer.includes("Hayden Seay")) {
@@ -113,10 +113,7 @@ module.exports = async (client, message) => {
     });
     if (!sent) return message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
     console.log(finalEmbeds)
-    /*
-    message.reply("", { embed: finalEmbeds[0], allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(() => m.react('➡️'))).catch(() => {
-        message.reply("", { embed: finalEmbeds[0].setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(() => m.react('➡️')));
-    }) */
+    console.log(rm.reactions)
     new rm.menu({
         channel: message.channel,
         userID: message.author.id,

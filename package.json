@@ -5,7 +5,6 @@
   "main": "index.js",
   "dependencies": {
     "discord.js": "github:monbrey/discord.js#inline-replies",
-    "discord.js-reaction-menu": "^1.1.1",
     "hastebin-gen": "^2.0.5",
     "shelljs": "^0.8.4"
   },
