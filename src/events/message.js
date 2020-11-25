@@ -98,8 +98,8 @@ module.exports = async (client, message) => {
                     }
                 );
                 sent = true;
-                message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).then(m=>m.react('➡️')).catch(() => {
-                    message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } }).then(m=>m.react('➡️'));
+                message.reply("", { embed: lmao.setThumbnail(repo.app[index].Icon), allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(()=>m.react('➡️'))).catch(() => {
+                    message.reply("", { embed: lmao.setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } }).then(m=>m.react('⬅️').then(()=>m.react('➡️')));
                 })
                
             }
