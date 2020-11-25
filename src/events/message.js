@@ -1,5 +1,8 @@
 const Discord = require("discord.js");
-const shitTweaks = ["noclutter","batchomatic"]
+const shitTweaks = ["noclutter", "batchomatic"]
+const rm = require('discord.js-reaction-menu')
+rm.reactions.back = '⬅️'
+rm.reactions.next = '➡️'
 
 module.exports = async (client, message) => {
     if (message.content.startsWith(client.prefix)) {
@@ -110,7 +113,13 @@ module.exports = async (client, message) => {
     });
     if (!sent) return message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
     console.log(finalEmbeds)
+    /*
     message.reply("", { embed: finalEmbeds[0], allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(() => m.react('➡️'))).catch(() => {
         message.reply("", { embed: finalEmbeds[0].setThumbnail(`https://i.imgur.com/p9NJCoU.png`), allowedMentions: { replied_user: false } }).then(m => m.react('⬅️').then(() => m.react('➡️')));
+    }) */
+    new rm.menu({
+        channel: message.channel,
+        userID: message.author.id,
+        pages: finalEmbeds
     })
 }
