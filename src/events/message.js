@@ -83,7 +83,7 @@ module.exports = async (client, message) => {
                 } else {
                     lmao.addFields({
                         name: "Author",
-                        value: repo.app[index].Author.replace(/ <(.*?)>/g, ""),
+                        value: (repo.app[index].Author ? repo.app[index].Author.replace(/ <(.*?)>/g, "") : repo.app[index].Author),
                         inline: true
                     });
                 }
@@ -112,9 +112,9 @@ module.exports = async (client, message) => {
             }
         }
     });
-    if (foundPackages.length > 1) {
+    if (finalEmbeds.length > 1) {
       finalEmbeds.forEach(embed => {
-        embed.footer.text += ` | ${foundPackages.length} Results`
+        embed.footer.text += ` | ${finalEmbeds.length} Results`
       })
     }
     if (!sent) return message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
