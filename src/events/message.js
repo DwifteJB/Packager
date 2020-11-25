@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const shitTweaks = ["noclutter", "batchomatic"]
 const rm = require('discord.js-reaction-menu')
 delete rm.reactions.first;
 delete rm.reactions.last;
@@ -47,7 +46,6 @@ module.exports = async (client, message) => {
     let number = 0;
     let prev = 0;
     let bundle = "None";
-    if (shitTweaks.includes(package)) return message.reply("Sorry, but I don't provide info for shit tweaks!", { allowedMentions: { replied_user: false } });
     client.jsons.forEach(repo => {
         for (index in repo.app) {
             if (package === (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '') ||
