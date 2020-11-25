@@ -116,6 +116,11 @@ module.exports = async (client, message) => {
     } catch (err) {
         return message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
     }
+    if (finalEmbeds.length > 1) {
+      finalEmbeds.forEach(embed => {
+        embed.footer.text += ` | ${finalEmbeds.length} Results`
+      })
+    }
     if (!sent) return message.reply("I couldn't find anything matching that search query!", { allowedMentions: { replied_user: false } });
     new rm.menu({
         channel: message.channel,
