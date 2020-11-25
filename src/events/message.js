@@ -66,7 +66,7 @@ module.exports = async (client, message) => {
     client.jsons.forEach(repo => {
         for (index in repo.app) {
             if ((repo.app[index].Name ? repo.app[index].Name.toLowerCase() : '').includes(package) ||
-                (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '').includes(package)) {
+                package === (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : '')) {
                 const lmao = new Discord.MessageEmbed()
                     .setColor("#61b6f2")
                     .setDescription(repo.app[index].Description)
