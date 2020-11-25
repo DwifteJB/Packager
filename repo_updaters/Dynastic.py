@@ -19,9 +19,9 @@ except:
     pass
 try:
     headers={
-        'User-Agent': 'Telesphoreo APT-HTTP/1.0.592'
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
     }
-    r = requests.get(f'{url}/Packages.bz2', headers=headers)
+    r = requests.get(f'https://cdn.discordapp.com/attachments/780252868401561621/780883532255199252/Packages.bz2', headers=headers)
 except Exception as e:
     print('Is this a repo?')
     sys.exit(1)
