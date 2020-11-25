@@ -4,7 +4,7 @@ PackageFinderJS allows for quick jailbreak tweak searches within Discord!
 
 ## Invite
 
-The invite link to the bot can be found [here](https://discord.com/oauth2/authorize?client_id=779761768447737886&scope=bot&permissions=19456) to add it to your server.
+The invite link to the bot can be found [here](https://discord.com/oauth2/authorize?client_id=779761768447737886&scope=bot&permissions=27712) to add it to your server.
 
 ## Usages
 
