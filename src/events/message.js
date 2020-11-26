@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const rm = require("discord.js-reaction-menu");
-const talkedRecently = new Set();
+const cooldowns = new Collection();
+const ms = require('ms')
 
 module.exports = async (client, message) => {
   if (message.content.startsWith(client.prefix)) {
@@ -37,23 +38,26 @@ module.exports = async (client, message) => {
           .then(
             console.log(
               `[${command.name.charAt(0).toUpperCase() +
-                command.name.slice(1)}] Command has been run in ${
-                message.guild.name
+              command.name.slice(1)}] Command has been run in ${message.guild.name
               }`
             )
           );
-      } catch {}
+      } catch { }
     }
   }
-
-  if (talkedRecently.has(message.author.id)) {
-          message.reply(
-           "Please wait 20s before doing this again!",
-           { allowedMentions: { replied_user: false } }
-          );
-  } else {
-          console.log(`[INFO] ${message.author.username} has executed message.js`);
+  
+  const now = Date.now();
+  const expiration = cooldowns.get(message.author.id)
+  if (expiration) {
+    if (expiration > now) return message.reply(
+      `Please wait ${ms(expiration - now)} before searching again.`,
+      { allowedMentions: { replied_user: false } }
+    )
+      .then(msg => {
+        msg.delete({ timeout: 5000 })
+      });
   }
+
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
   const package = matches[1].toLowerCase();
@@ -65,9 +69,9 @@ module.exports = async (client, message) => {
     for (index in repo.app) {
       if (
         package ===
-          (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : "") ||
+        (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : "") ||
         package ===
-          (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : "")
+        (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : "")
       ) {
         if (bundle === repo.app[index].Package) return;
         bundle = repo.app[index].Package;
@@ -89,9 +93,9 @@ module.exports = async (client, message) => {
             : ""
           ).includes(package) ||
           package ===
-            (repo.app[index].Package
-              ? repo.app[index].Package.toLowerCase()
-              : "")
+          (repo.app[index].Package
+            ? repo.app[index].Package.toLowerCase()
+            : "")
         ) {
           const lmao = new Discord.MessageEmbed()
             .setColor("#61b6f2")
@@ -148,17 +152,23 @@ module.exports = async (client, message) => {
     return message.reply(
       "I couldn't find anything matching that search query!",
       { allowedMentions: { replied_user: false } }
-    );
+    )
+      .then(msg => {
+        msg.delete({ timeout: 5000 })
+      });
+    
   }
   if (!sent)
     return message.reply(
       "I couldn't find anything matching that search query!",
       { allowedMentions: { replied_user: false } }
-    );
-  talkedRecently.add(message.author.id);
-  setTimeout(() => {
-    talkedRecently.delete(message.author.id);
-    }, 2000);
+    )
+      .then(msg => {
+        msg.delete({ timeout: 5000 })
+      });
+  
+  cooldowns.set(message.author.id, now + 5000)
+  
   new rm.menu({
     channel: message.channel,
     message: message,
@@ -166,5 +176,5 @@ module.exports = async (client, message) => {
     pages: finalEmbeds
   });
 
-};
+}
 

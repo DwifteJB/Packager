@@ -7,6 +7,7 @@
     "discord.js": "github:monbrey/discord.js#inline-replies",
     "discord.js-reaction-menu": "git+https://github.com/ToastOnAStik/discord.js-reaction-menu.git",
     "hastebin-gen": "^2.0.5",
+    "ms": "^2.1.2",
     "shelljs": "^0.8.4"
   },
   "devDependencies": {},
