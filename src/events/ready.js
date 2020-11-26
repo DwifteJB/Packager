@@ -1,4 +1,5 @@
 const { spawn } = require('child_process')
+const { Collection } = require('discord.js')
 
 module.exports = async client => {
   console.log(
@@ -8,5 +9,6 @@ module.exports = async client => {
     type: "WATCHING"
   });
   (await client.users.fetch("320546614857170945")).send("I am ready");
+  client.cooldowns = new Collection();
 };
 

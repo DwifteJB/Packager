@@ -2,7 +2,8 @@ const Discord = require("discord.js");
 const rm = require("discord.js-reaction-menu");
 const ms = require('ms')
 
-module.exports = async (client, message) => {
+module.exports = async (client, oldMessage, newMessage) => {
+  const message = newMessage
   if (message.content.startsWith(client.prefix)) {
     const args = message.content
       .slice(client.prefix.length)
