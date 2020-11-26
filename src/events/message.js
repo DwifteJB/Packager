@@ -47,6 +47,7 @@ module.exports = async (client, message) => {
   }
   
   const now = Date.now();
+  /*
   const expiration = cooldowns.get(message.author.id)
   if (expiration) {
     if (expiration > now) return message.reply(
@@ -57,6 +58,7 @@ module.exports = async (client, message) => {
         msg.delete({ timeout: 5000 })
       });
   }
+  */
 
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
