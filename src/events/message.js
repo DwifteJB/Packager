@@ -52,7 +52,7 @@ module.exports = async (client, message) => {
            { allowedMentions: { replied_user: false } }
           );
   } else {
-          console.log(`[INFO] ${message.author.nickname} has executed message.js`);
+          console.log(`[INFO] ${message.author.username} has executed message.js`);
   }
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
