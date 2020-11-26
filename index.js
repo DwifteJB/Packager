@@ -42,7 +42,7 @@ setInterval(() => {
     client.packageCount += repo.app.length
   })
   client.user.setActivity(`${client.packageCount} packages`, { type: 'WATCHING' })
-}, 60000 * 60)
+}, 60000 * 30)
 
 // Command file setup
 const folder = fs
