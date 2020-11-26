@@ -46,8 +46,11 @@ module.exports = async (client, message) => {
     }
   }
 
-  if (talkedRecently.has(msg.author.id)) {
-          msg.channel.send("Wait 10s before getting typing this again. - " + msg.author);
+  if (talkedRecently.has(message.author.id)) {
+          message.reply(
+           "Please wait 20s before doing this again!",
+           { allowedMentions: { replied_user: false } }
+          );
   } else {
           return;
   }
@@ -159,10 +162,10 @@ module.exports = async (client, message) => {
     pages: finalEmbeds
   });
 
-  talkedRecently.add(msg.author.id);
+  talkedRecently.add(message.author.id);
 
   setTimeout(() => {
-    talkedRecently.delete(msg.author.id);
+    talkedRecently.delete(message.author.id);
     }, 2000);
 };
 
