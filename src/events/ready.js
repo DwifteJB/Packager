@@ -8,7 +8,7 @@ module.exports = async client => {
     type: "WATCHING"
   });
   (await client.users.fetch("320546614857170945")).send("I am ready");
-  const cp = spawn(`pm2`, 'logs');
+  const cp = spawn(`pm2`, ['logs']);
   cp.stdout.on('data', (data) => {
     client.channels.cache.get('781602869497167952')
     .send(data)
