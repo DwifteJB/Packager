@@ -13,6 +13,7 @@ client.prefix = '!'
 client.jsons = new Collection();
 
 console.log("Updating repos...");
+shell.exec('mkdir ./repos');
 
 fs.readdirSync("./repo_updaters").forEach(file => {
   shell.exec(`python3 "./repo_updaters/${file}"`);
