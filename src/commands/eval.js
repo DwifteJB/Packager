@@ -4,7 +4,7 @@ const { exec, spawn } = require("child_process");
 
 module.exports = {
   name: "eval",
-  aliases: ['evaluate'],
+  aliases: ["evaluate"],
   description: "Evaluates JS code",
   type: "private",
   async execute(client, message, args) {
@@ -19,28 +19,29 @@ module.exports = {
 
     if (!owners.includes(message.author.id)) return;
 
-    
-
     let start = new Date();
     argss = args.slice(0).join(" ");
-    if(!argss) return message.channel.send('Please provide some code.')
+    if (!argss) return message.channel.send("Please provide some code.");
     col = "GREEN";
 
     try {
-           result = inspect(await eval(`( async () => {
+      result = inspect(
+        await eval(`( async () => {
       return (${argss})
-        })()`), { depth: 0 });
-      } catch (err) {
-        result = err;
-      }
-    
+        })()`),
+        { depth: 0 }
+      );
+    } catch (err) {
+      result = err;
+    }
+
     timeTook = new Date() - start;
     embede = new Discord.MessageEmbed()
-      .setTitle('Evaluation')
+      .setTitle("Evaluation")
       .addField("Input:", `\`\`\`js\n${argss}\`\`\``)
       .addField("Output:", `\`\`\`js\n${result}\`\`\``)
       .setColor("BLUE")
-      .setTimestamp()
+      .setTimestamp();
     if (
       args
         .join(" ")
@@ -66,3 +67,4 @@ module.exports = {
     }
   }
 };
+
