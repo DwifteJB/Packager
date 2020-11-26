@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const rm = require("discord.js-reaction-menu");
+const talkedRecently = new Set();
 
 module.exports = async (client, message) => {
   if (message.content.startsWith(client.prefix)) {
@@ -45,6 +46,11 @@ module.exports = async (client, message) => {
     }
   }
 
+  if (talkedRecently.has(msg.author.id)) {
+          msg.channel.send("Wait 10s before getting typing this again. - " + msg.author);
+  } else {
+          return;
+  }
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
   const package = matches[1].toLowerCase();
@@ -152,5 +158,11 @@ module.exports = async (client, message) => {
     userID: message.author.id,
     pages: finalEmbeds
   });
+
+  talkedRecently.add(msg.author.id);
+
+  setTimeout(() => {
+    talkedRecently.delete(msg.author.id);
+    }, 2000);
 };
 
