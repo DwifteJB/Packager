@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
 const rm = require("discord.js-reaction-menu");
-const cooldowns = new Discord.Collection();
 const ms = require('ms')
 
 module.exports = async (client, message) => {
+  client.cooldowns = new Discord.Collection();
   if (message.content.startsWith(client.prefix)) {
     const args = message.content
       .slice(client.prefix.length)
@@ -47,7 +47,7 @@ module.exports = async (client, message) => {
   }
   
   const now = Date.now();
-  const expiration = cooldowns.get(message.author.id)
+  const expiration = client.cooldowns.get(message.author.id)
   if (expiration) {
     if (expiration > now) return message.reply(
       `Please wait ${ms(expiration - now)} before searching again.`,
@@ -167,7 +167,7 @@ module.exports = async (client, message) => {
         msg.delete({ timeout: 5000 })
       });
   
-  cooldowns.set(message.author.id, now + 2500)
+  client.cooldowns.set(message.author.id, now + 2500)
   
   new rm.menu({
     channel: message.channel,
