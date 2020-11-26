@@ -155,6 +155,10 @@ module.exports = async (client, message) => {
       "I couldn't find anything matching that search query!",
       { allowedMentions: { replied_user: false } }
     );
+  talkedRecently.add(message.author.id);
+  setTimeout(() => {
+    talkedRecently.delete(message.author.id);
+    }, 2000);
   new rm.menu({
     channel: message.channel,
     message: message,
@@ -162,10 +166,5 @@ module.exports = async (client, message) => {
     pages: finalEmbeds
   });
 
-  talkedRecently.add(message.author.id);
-
-  setTimeout(() => {
-    talkedRecently.delete(message.author.id);
-    }, 2000);
 };
 
