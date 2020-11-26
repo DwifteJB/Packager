@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const rm = require("discord.js-reaction-menu");
-const cooldowns = new Collection();
+const cooldowns = new Discord.Collection();
 const ms = require('ms')
 
 module.exports = async (client, message) => {
