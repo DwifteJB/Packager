@@ -62,24 +62,6 @@ module.exports = async (client, message) => {
   const package = matches[1].toLowerCase();
   if (package == 'cydown') return message.channel.send("Sorry, I don't provide info for pirate tweaks.")
   let sent = false;
-  let number = 0;
-  let prev = 0;
-  let bundle = "None";
-  client.jsons.forEach(repo => {
-    for (index in repo.app) {
-      if (
-        package ===
-        (repo.app[index].Name ? repo.app[index].Name.toLowerCase() : "") ||
-        package ===
-        (repo.app[index].Package ? repo.app[index].Package.toLowerCase() : "")
-      ) {
-        if (bundle === repo.app[index].Package) return;
-        bundle = repo.app[index].Package;
-        prev = number;
-        number = prev + 1;
-      }
-    }
-  });
 
   const foundPackages = [];
   const finalEmbeds = [];
@@ -91,7 +73,7 @@ module.exports = async (client, message) => {
           (repo.app[index].Name
             ? repo.app[index].Name.toLowerCase()
             : ""
-          ).includes(package) ||
+          ).startsWith(package) ||
           package ===
           (repo.app[index].Package
             ? repo.app[index].Package.toLowerCase()
