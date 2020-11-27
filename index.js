@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const shell = require('shelljs')
 const { exec } = require('child_process')
-exec('rm -rf repos/*')
+exec('rm -rf repos')
 
 client.login(token);
 client.commands = new Collection();
