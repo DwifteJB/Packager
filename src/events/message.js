@@ -60,6 +60,7 @@ module.exports = async (client, message) => {
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
   const package = matches[1].toLowerCase();
+  if (package == 'cydown') return message.channel.send("Sorry, I don't provide info for pirate tweaks.")
   let sent = false;
   let number = 0;
   let prev = 0;
