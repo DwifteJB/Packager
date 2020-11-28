@@ -1,5 +1,5 @@
 const { Client, Collection, Intents } = require("discord.js");
-const client = new Client();
+const client = new Client({ restTimeOffset: 250 });
 const { owners, token } = require("./src/config.json");
 const fs = require("fs");
 const path = require("path");
@@ -76,5 +76,5 @@ fs.readdir("./src/events/", (err, files) => {
     client.on(evtName, evt.bind(null, client));
   };
   console.log(`Loaded ${files.length} events`)
-});
+})
 
