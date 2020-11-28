@@ -22,7 +22,7 @@ fs.readdirSync("./repo_updaters").forEach(file => {
 console.log("Reading jsons...");
 for (const file of fs.readdirSync("./repos")) {
   const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
-  json.name = file.replace(".json", "").replace(/-/g, ' ').replace(/\'/g, "'");
+  json.name = file.replace(".json", "").replace(/-/g, ' ').replace(/:/g, '/').replace(/\'/g, "'");
   client.jsons.set(file, json);
 }
 
@@ -32,17 +32,7 @@ client.jsons.forEach(repo => {
 })
 
 setInterval(() => {
-  for (const file of fs.readdirSync("./repos")) {
-    const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
-    json.name = file.replace(".json", "").replace(/-/g, ' ').replace(/\'/g, "'");
-    client.jsons.set(file, json);
-  }
-
-  client.packageCount = 0
-  client.jsons.forEach(repo => {
-    client.packageCount += repo.app.length
-  })
-  client.user.setActivity(`${client.packageCount} packages`, { type: 'WATCHING' })
+  client.emit('addRepo', '')
 }, 60000 * 30)
 
 // Command file setup

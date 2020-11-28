@@ -57,25 +57,8 @@ module.exports = {
                 );
 
                 // Load in new repo
-                for (const file of fs.readdirSync("repos")) {
-                  const json = JSON.parse(
-                    fs.readFileSync(`repos/${file}`, "utf8")
-                  );
-                  json.name = file
-                    .replace(".json", "")
-                    .replace(/-/g, " ")
-                    .replace(/\'/g, "'");
-                  console.log(`Reloaded ${json.name}`);
-                  client.jsons.set(file, json);
-                }
+                client.emit('addRepo', '')
 
-                client.packageCount = 0;
-                client.jsons.forEach(repo => {
-                  client.packageCount += repo.app.length;
-                });
-                client.user.setActivity(`${client.packageCount} packages`, {
-                  type: "WATCHING"
-                });
                 message.channel.send(
                   `Added repo: \`${collected.first().content}\``
                 );
@@ -117,22 +100,8 @@ module.exports = {
       );
 
       // Load in new repo
-      for (const file of fs.readdirSync("repos")) {
-        const json = JSON.parse(fs.readFileSync(`repos/${file}`, "utf8"));
-        json.name = file
-          .replace(".json", "")
-          .replace(/-/g, " ")
-          .replace(/\'/g, "'");
-        console.log(`Reloaded ${json.name}`);
-        client.jsons.set(file, json);
-      }
-      client.packageCount = 0;
-      client.jsons.forEach(repo => {
-        client.packageCount += repo.app.length;
-      });
-      client.user.setActivity(`${client.packageCount} packages`, {
-        type: "WATCHING"
-      });
+      client.emit('addRepo', '')
+      
       message.channel.send(`Added repo: \`${args[0]}\``);
     }
   }
