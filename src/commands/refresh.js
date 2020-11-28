@@ -3,8 +3,8 @@ const { owners } = require("../config.json");
 const shell = require('shelljs')
 
 module.exports = {
-    name: "update",
-    description: "Update Siri using git.",
+    name: "refresh",
+    description: "Refreshes packages/repos",
     type: "private",
     async execute(client, message, args) {
         if (!owners.includes(message.author.id)) return;
