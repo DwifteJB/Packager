@@ -10,7 +10,7 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
-url = "https://repo.saunderstech.co/"
+url = "https://apt.bingner.com/"
 try:
     shutil.rmtree(f"./data")
     os.mkdir(f'./data')
@@ -21,7 +21,7 @@ try:
     headers={
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
     }
-    r = requests.get(f'{url}/Packages.bz2', headers=headers)
+    r = requests.get(f'https://apt.bingner.com/ios/1443.00/main/binary-iphoneos-arm/Packages.bz2', headers=headers)
 except Exception as e:
     print('Is this a repo?')
     sys.exit(1)
@@ -90,7 +90,7 @@ with open(f'{filepath}') as csvfile:
              app[line[0]] = line[0].strip()
       
 json_string = json.dumps(final_data)
-with open(f'/root/PackageFinderJS/repos/Saunders-Tech.json', 'w') as f:
+with open(f'/root/PackageFinderJS/repos/Elucubratus.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
