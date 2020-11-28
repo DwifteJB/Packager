@@ -8,11 +8,12 @@ module.exports = {
     type: "private",
     async execute(client, message, args) {
         if (!owners.includes(message.author.id)) return;
+        const msg = await message.channel.send('**Refreshing Packages & Repos...**')
         fs.readdirSync("repo_updaters").forEach(file => {
             shell.exec(`python3 "./repo_updaters/${file}"`);
         });
         client.emit('addRepo', '')
-        message.channel.send("**Packages Refreshed!**")
+        msg.edit("**Packages Refreshed!**")
     }
 }
 

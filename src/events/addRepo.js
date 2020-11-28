@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 module.exports = async (client, repos) => {
     for (const file of fs.readdirSync("repos")) {
         const json = JSON.parse(fs.readFileSync(`repos/${file}`, "utf8"));
