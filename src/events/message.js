@@ -44,7 +44,10 @@ module.exports = async (client, message) => {
       } catch { }
     }
   }
-  
+
+  const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
+  if (!matches) return;
+
   const now = Date.now();
   const expiration = client.cooldowns.get(message.author.id)
   if (expiration) {
@@ -56,9 +59,7 @@ module.exports = async (client, message) => {
         msg.delete({ timeout: 5000 })
       });
   }
-
-  const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
-  if (!matches) return;
+  
   const package = matches[1].toLowerCase();
   if (package == 'cydown') return message.channel.send("Sorry, I don't provide info for pirate tweaks.")
   let sent = false;
