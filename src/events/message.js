@@ -50,7 +50,7 @@ module.exports = async (client, message) => {
   if (expiration) {
     if (expiration > now) return message.reply(
       `Please wait ${ms(expiration - now)} before searching again.`,
-      { allowedMentions: { replied_user: false } }
+      { allowedMentions: { parse: [] } }
     )
       .then(msg => {
         msg.delete({ timeout: 5000 })
@@ -133,7 +133,7 @@ module.exports = async (client, message) => {
   } catch (err) {
     return message.reply(
       "I couldn't find anything matching that search query!",
-      { allowedMentions: { replied_user: false } }
+      { allowedMentions: { parse: [] } }
     )
       .then(msg => {
         msg.delete({ timeout: 5000 })
@@ -143,7 +143,7 @@ module.exports = async (client, message) => {
   if (!sent)
     return message.reply(
       "I couldn't find anything matching that search query!",
-      { allowedMentions: { replied_user: false } }
+      { allowedMentions: { parse: [] } }
     )
       .then(msg => {
         msg.delete({ timeout: 5000 })

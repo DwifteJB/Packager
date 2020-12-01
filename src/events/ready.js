@@ -9,6 +9,5 @@ module.exports = async client => {
     type: "WATCHING"
   });
   (await client.users.fetch("320546614857170945")).send("I am ready");
-  client.cooldowns = new Collection();
 };
 
