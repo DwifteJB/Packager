@@ -90,7 +90,7 @@ with open(f'{filepath}') as csvfile:
              app[line[0]] = line[0].strip()
       
 json_string = json.dumps(final_data)
-with open(f'/root/PackageFinderJS/repos/MERONA-Repo.json', 'w') as f:
+with open(f'./repos/MERONA-Repo.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()

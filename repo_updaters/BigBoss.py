@@ -95,7 +95,7 @@ with open(f'{filepath}') as csvfile:
       
 json_string = json.dumps(final_data)
 
-with open('/root/PackageFinderJS/repos/BigBoss.json', 'w') as f:
+with open('./repos/BigBoss.json', 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()

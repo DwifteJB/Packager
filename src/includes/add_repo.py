@@ -13,10 +13,10 @@ import re
 import requests
 url = sys.argv[2]
 try:
-    shutil.rmtree(f"/root/PackageFinderJS/data/")
-    os.mkdir(f"/root/PackageFinderJS/data/")
+    shutil.rmtree(f"./data/")
+    os.mkdir(f"./data/")
 except:
-    os.mkdir(f"/root/PackageFinderJS/data/")
+    os.mkdir(f"./data/")
     pass
 try:
     headers={
@@ -29,10 +29,10 @@ except Exception as e:
 with open(f'{os.getcwd()}/data/Packages.bz2', 'wb') as f:
     f.write(r.content)
 try:
-    zipfile = bz2.BZ2File("/root/PackageFinderJS/data/Packages.bz2")
+    zipfile = bz2.BZ2File("./data/Packages.bz2")
     data = zipfile.read()
 except:
-    a = Popen(f"bzip2 -d /root/PackageFinderJS/data/Packages.bz2", shell=True)
+    a = Popen(f"bzip2 -d ./data/Packages.bz2", shell=True)
     while a is not None:
             retcode = a.poll()
             if retcode is not None:
@@ -42,7 +42,7 @@ except:
     else:
             time.sleep(1)
 
-filepath = f"/root/PackageFinderJS/data/repo.csv"
+filepath = f"./data/repo.csv"
 open(filepath, 'wb').write(data)
 with open(filepath, 'r+', errors='ignore') as lol:
     try:
@@ -96,7 +96,7 @@ with open(f'{filepath}') as csvfile:
       
 json_string = json.dumps(final_data)
 
-with open(f"/root/PackageFinderJS/repos/{sys.argv[1]}.json", 'w') as f:
+with open(f"./repos/{sys.argv[1]}.json", 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
