@@ -11,7 +11,7 @@ module.exports = async (client, repos) => {
     client.jsons.forEach(repo => {
         client.packageCount += repo.app.length
     })
-    client.user.setActivity(`${client.packageCount} packages`, {
+    client.user.setActivity(`${client.packageCount.toLocaleString()} packages`, {
         type: "WATCHING"
     });
 }
