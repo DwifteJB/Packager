@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const rm = require("discord.js-reaction-menu");
 const ms = require('ms')
+const { blacklist } = require("../config.json")
 
 module.exports = async (client, message) => {
   if (message.content.startsWith(client.prefix)) {
@@ -45,9 +46,11 @@ module.exports = async (client, message) => {
     }
   }
 
+ 
+
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
-
+  if (blacklist.includes(message.author.id)) return message.channel.send("<a:flushSpin:783892030924783616> You are blacklisted <a:flushSpin:783892030924783616>")
   const now = Date.now();
   const expiration = client.cooldowns.get(message.author.id)
   if (expiration) {
