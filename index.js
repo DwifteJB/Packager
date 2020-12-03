@@ -12,6 +12,7 @@ client.commands = new Collection();
 client.prefix = '!'
 client.jsons = new Collection();
 client.cooldowns = new Collection();
+client.saves = new Collection()
 
 console.log("Updating repos...");
 shell.exec('mkdir ./repos');
