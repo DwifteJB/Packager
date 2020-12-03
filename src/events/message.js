@@ -46,11 +46,11 @@ module.exports = async (client, message) => {
     }
   }
 
- if (blacklist.includes(message.author.id)) return message.channel.send("<a:flushSpin:783892030924783616> You are blacklisted <a:flushSpin:783892030924783616>")
+ 
 
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
-
+  if (blacklist.includes(message.author.id)) return message.channel.send("<a:flushSpin:783892030924783616> You are blacklisted <a:flushSpin:783892030924783616>")
   const now = Date.now();
   const expiration = client.cooldowns.get(message.author.id)
   if (expiration) {
