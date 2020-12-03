@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const rm = require("discord.js-reaction-menu");
 const ms = require('ms')
-const { blacklist } = require("../../config.json")
+const { blacklist } = require("../config.json")
 
 module.exports = async (client, message) => {
   if (message.content.startsWith(client.prefix)) {
