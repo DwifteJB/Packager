@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const rm = require("discord.js-reaction-menu");
 const ms = require('ms')
+const { blacklist } = require("../../config.json")
 
 module.exports = async (client, message) => {
   if (message.content.startsWith(client.prefix)) {
@@ -44,6 +45,8 @@ module.exports = async (client, message) => {
       } catch { }
     }
   }
+
+ if (blacklist.includes(message.author.id)) return message.channel.send("<a:flushSpin:783892030924783616> You are blacklisted <a:flushSpin:783892030924783616>")
 
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
