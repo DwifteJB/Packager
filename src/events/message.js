@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const rm = require("discord.js-reaction-menu");
 const ms = require('ms')
+const shitTweaks = ['batchomatic', 'noclutter'];
 const { blacklist } = require("../config.json")
 
 module.exports = async (client, message) => {
@@ -64,6 +65,7 @@ module.exports = async (client, message) => {
   }
   
   const package = matches[1].toLowerCase();
+  if (shitTweaks.includes(package)) return message.channel.send("I would rather you not try to break your device.")
   if (package == 'cydown') return message.channel.send("Sorry, I don't provide info for pirate tweaks.")
   let sent = false;
 
