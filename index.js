@@ -35,7 +35,7 @@ client.jsons.forEach(repo => {
 
 setInterval(() => {
   client.emit('addRepo', '')
-}, 60000 * 30)
+}, 60000 * 60)
 
 // Command file setup
 const folder = fs
