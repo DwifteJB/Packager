@@ -87,7 +87,7 @@ module.exports = async (client, message) => {
         ) {
           const lmao = new Discord.MessageEmbed()
             .setColor("#61b6f2")
-            .setDescription(repo.app[index].Description)
+            .setDescription(repo.app[index].Description.replace(/\|\|/g, ''))
             .setTimestamp()
             .setThumbnail(repo.app[index].Icon ? repo.app[index].Icon : "")
             .setFooter(`${repo.name}`, repo.icon)
