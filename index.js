@@ -5,7 +5,7 @@ const client = new Client({
     properties: { $browser: 'Discord iOS' }
   }
 });
-const { owners, token } = require("./src/config.json");
+const { token } = require("./src/config.json");
 const fs = require("fs");
 const path = require("path");
 const shell = require('shelljs')
