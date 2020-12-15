@@ -1,5 +1,10 @@
 const { Client, Collection, Intents } = require("discord.js");
-const client = new Client({ restTimeOffset: 250 });
+const client = new Client({
+  restTimeOffset: 250,
+  ws: {
+    properties: { $browser: 'Discord iOS' }
+  }
+});
 const { owners, token } = require("./src/config.json");
 const fs = require("fs");
 const path = require("path");
