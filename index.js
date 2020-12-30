@@ -21,23 +21,29 @@ client.saves = new Collection()
 
 console.log("Updating repos...");
 shell.exec('mkdir ./repos');
+async function loadJSON() {
 
-fs.readdirSync("./repo_updaters").forEach(file => {
-  shell.exec(`python3 "./repo_updaters/${file}"`);
-});
+  fs.readdirSync("./repo_updaters").forEach(file => {
+    shell.exec(`python3 "./repo_updaters/${file}"`);
+  });
 
-console.log("Reading jsons...");
-for (const file of fs.readdirSync("./repos")) {
-  const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
-  json.name = file.replace(".json", "").replace(/-/g, ' ').replace(/:/g, '/').replace(/\'/g, "'");
-  client.jsons.set(file, json);
+  console.log("Reading jsons...");
+  for (const file of fs.readdirSync("./repos")) {
+    const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
+    json.name = file.replace(".json", "").replace(/-/g, ' ').replace(/:/g, '/').replace(/\'/g, "'");
+    client.jsons.set(file, json);
+  }
+
+  client.packageCount = 0
+  client.jsons.forEach(repo => {  
+    client.packageCount += repo.app.length
+  })
+
+  return new Promise(resolve => {
+      resolve('resolved');
+  });
 }
-
-client.packageCount = 0
-client.jsons.forEach(repo => {  
-  client.packageCount += repo.app.length
-})
-
+loadJSON();
 setInterval(() => {
   client.emit('addRepo', '')
 }, 60000 * 60)
