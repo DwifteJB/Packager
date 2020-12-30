@@ -85,7 +85,7 @@ module.exports = async (client, message) => {
             ? repo.app[index].Package.toLowerCase()
             : "")
         ) {
-          if (repo.app[index].Name === 'Batchomatic'.toLowerCase()) return message.channel.send("I prefer you to not break your device...");
+          if (repo.app[index].Name=== 'Batchomatic') return message.channel.send("I prefer you to not break your device...");
           const lmao = new Discord.MessageEmbed()
             .setColor("#61b6f2")
             .setDescription(repo.app[index].Description.replace(/\|\|/g, ''))
