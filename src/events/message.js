@@ -18,7 +18,7 @@ module.exports = async (client, message) => {
       );
     if (command) {
       if (command.disabled == true) return;
-      if (!message.guild.me.hasPermission(command.botPermissions)) {
+      if (!message.guild.me.permissions.has(command.botPermissions)) {
         message.channel
           .send(
             `I require the \`${command.botPermissions.join(
@@ -34,7 +34,7 @@ module.exports = async (client, message) => {
       }
 
       try {
-        command
+        await command
           .execute(client, message, args)
           .then(
             console.log(
@@ -143,7 +143,7 @@ module.exports = async (client, message) => {
       { allowedMentions: { repliedUser: false } }
     )
       .then(msg => {
-        msg.delete({ timeout: 5000 })
+        setTimeout(() => msg.delete(), 5000)
       });
     
   }
@@ -153,7 +153,7 @@ module.exports = async (client, message) => {
       { allowedMentions: { repliedUser: false } }
     )
       .then(msg => {
-        msg.delete({ timeout: 5000 })
+        setTimeout(() => msg.delete(), 5000)
       });
   
   client.cooldowns.set(message.author.id, now + 2500)

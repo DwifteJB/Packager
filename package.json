@@ -11,7 +11,7 @@
     "shelljs": "^0.8.4"
   },
   "scripts": {
-    "test": "echo uwu"
+    "start": "npx node@latest index.js"
   },
   "repository": {
     "type": "git",
