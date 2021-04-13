@@ -10,44 +10,52 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
-url = "https://repo.dynastic.co/"
+#print(os.getcwd())
+url = 'https://repo.dynastic.co'
 try:
-    shutil.rmtree(f"./data")
-    os.mkdir(f'./data')
+    shutil.rmtree(f"./data/")
+    os.mkdir(f"./data/")
 except:
-    os.mkdir(f'./data')
+    os.mkdir(f"./data/")
     pass
 try:
     headers={
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+        "X-Machine": "iPhone13,4",
+        "X-Firmware": "15.0",
+        "Proxy-Connection": "keep-alive",
+        "Cache-Control": "max-age=0",
+        "User-Agent": "Telesphoreo APT-HTTP/1.0.592",
+        "X-Unique-ID": "9a756301-fcbf-43f2-af7c-1eb0dc2c0c2a",
+        "Connection": "keep-alive"
     }
-    r = requests.get(f'https://cdn.discordapp.com/attachments/780252868401561621/780883532255199252/Packages.bz2', headers=headers)
+    r = requests.get(f"{url}/Packages.bz2", headers=headers)
 except Exception as e:
-    print('Is this a repo?')
+    print("Is this a repo?")
     sys.exit(1)
-with open(f'./data/Packages.bz2', 'wb') as f:
+with open(f'{os.getcwd()}/data/Packages.bz2', 'wb') as f:
     f.write(r.content)
 try:
-    zipfile = bz2.BZ2File('./data/Packages.bz2')
+    zipfile = bz2.BZ2File("./data/Packages.bz2")
     data = zipfile.read()
 except:
-    a = Popen(f'bzip2 -d ./data/Packages.bz2', shell=True)
+    a = Popen(f"bzip2 -d ./data/Packages.bz2", shell=True)
     while a is not None:
             retcode = a.poll()
             if retcode is not None:
-                print('Unzipped!')
-                data = open(f'{os.getcwd()}/data/Packages').read()
+                print("Unzipped!")
+                data = open(f"{os.getcwd()}/data/Packages").read()
                 break
     else:
             time.sleep(1)
-filepath = f'./data/repo.csv'
+
+filepath = f"./data/repo.csv"
 open(filepath, 'wb').write(data)
 with open(filepath, 'r+', errors='ignore') as lol:
     try:
         text = lol.read()
     except Exception as e:
-        print(f'Error {e} occurred')
-    if re.search('/ ', url):
+        print(f"Error {e} occurred")
+    if re.search('/\ ', url):
         text = re.sub('Filename: ./debs', f'Filename: {url}debs', text)
         text = re.sub('Filename: ./deb', f'Filename: {url}deb', text)
         text = re.sub('Filename: deb', f'Filename: {url}deb', text)
@@ -55,6 +63,8 @@ with open(filepath, 'r+', errors='ignore') as lol:
         text = re.sub('Filename: api', f'Filename: {url}api', text)
         text = re.sub('Filename: pool', f'Filename: {url}pool', text)
         text = re.sub('Filename: files', f'Filename: {url}files', text)
+        text = re.sub('Filename: apt', f'Filename: {url}apt', text)
+        text = re.sub('Filename: download', f'Filename: {url}download', text)
     else:
         text = re.sub('Filename: ./debs', f'Filename: {url}/debs', text)
         text = re.sub('Filename: ./deb', f'Filename: {url}/deb', text)
@@ -63,15 +73,19 @@ with open(filepath, 'r+', errors='ignore') as lol:
         text = re.sub('Filename: api', f'Filename: {url}/api', text)
         text = re.sub('Filename: pool', f'Filename: {url}/pool', text)
         text = re.sub('Filename: files', f'Filename: {url}/files', text)
+        text = re.sub('Filename: apt', f'Filename: {url}/apt', text)
+        text = re.sub('Filename: download', f'Filename: {url}/download', text)
     lol.seek(0)
-    lol.write(text.replace('�', ' '))
+    lol.write(text.replace('\0', ' '))
     lol.truncate()
+
 final_data = {
 'url': f'{url}',
-'icon': f'https://assets.dynastic.co/brand/img/icons/apple-touch-icon.png',
+'icon': f'{url}/CydiaIcon.png',
 'app': [],
 }
 app = {}
+
 with open(f'{filepath}') as csvfile:
     data = csv.reader(csvfile, delimiter=':')
     for line in data:
@@ -88,9 +102,11 @@ with open(f'{filepath}') as csvfile:
              app[line[0]] = line[1].strip()
         except:
              app[line[0]] = line[0].strip()
+
       
 json_string = json.dumps(final_data)
-with open(f'./repos/Dynastic.json', 'w') as f:
+
+with open(f"./data/{sys.argv[1]}.json", 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()

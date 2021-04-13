@@ -1,4 +1,3 @@
-
 import random
 import os
 import csv
@@ -11,6 +10,7 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
+#print(os.getcwd())
 url = sys.argv[2]
 try:
     shutil.rmtree(f"./data/")
@@ -20,7 +20,13 @@ except:
     pass
 try:
     headers={
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+        "X-Machine": "iPhone13,4",
+        "X-Firmware": "15.0",
+        "Proxy-Connection": "keep-alive",
+        "Cache-Control": "max-age=0",
+        "User-Agent": "Telesphoreo APT-HTTP/1.0.592",
+        "X-Unique-ID": "9a756301-fcbf-43f2-af7c-1eb0dc2c0c2a",
+        "Connection": "keep-alive"
     }
     r = requests.get(f"{url}/Packages.bz2", headers=headers)
 except Exception as e:
@@ -57,6 +63,8 @@ with open(filepath, 'r+', errors='ignore') as lol:
         text = re.sub('Filename: api', f'Filename: {url}api', text)
         text = re.sub('Filename: pool', f'Filename: {url}pool', text)
         text = re.sub('Filename: files', f'Filename: {url}files', text)
+        text = re.sub('Filename: apt', f'Filename: {url}apt', text)
+        text = re.sub('Filename: download', f'Filename: {url}download', text)
     else:
         text = re.sub('Filename: ./debs', f'Filename: {url}/debs', text)
         text = re.sub('Filename: ./deb', f'Filename: {url}/deb', text)
@@ -65,6 +73,8 @@ with open(filepath, 'r+', errors='ignore') as lol:
         text = re.sub('Filename: api', f'Filename: {url}/api', text)
         text = re.sub('Filename: pool', f'Filename: {url}/pool', text)
         text = re.sub('Filename: files', f'Filename: {url}/files', text)
+        text = re.sub('Filename: apt', f'Filename: {url}/apt', text)
+        text = re.sub('Filename: download', f'Filename: {url}/download', text)
     lol.seek(0)
     lol.write(text.replace('\0', ' '))
     lol.truncate()
@@ -96,7 +106,7 @@ with open(f'{filepath}') as csvfile:
       
 json_string = json.dumps(final_data)
 
-with open(f"./repos/{sys.argv[1]}.json", 'w') as f:
+with open(f"./data/{sys.argv[1]}.json", 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
