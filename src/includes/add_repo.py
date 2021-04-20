@@ -106,7 +106,7 @@ with open(f'{filepath}') as csvfile:
       
 json_string = json.dumps(final_data)
 
-with open(f"./data/{sys.argv[1]}.json", 'w') as f:
+with open(f"./repos/{sys.argv[1]}.json", 'w') as f:
     dat = json.dumps(final_data, indent=4)
     f.write(dat)
     f.close()
