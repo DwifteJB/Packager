@@ -23,7 +23,10 @@ client.saves = new Collection()
 console.log("Updating repos...");
 shell.exec('mkdir ./repos');
 async function loadJSON() {
-
+  shell.exec("pip install -r ")
+  shell.exec("pip3 install -r")
+  shell.exec("pip install requests")
+  shell.exec("pip3 install requests")
   fs.readdirSync("./repo_updaters").forEach(file => {
     shell.exec(`python3 "./repo_updaters/${file}"`);
   });
