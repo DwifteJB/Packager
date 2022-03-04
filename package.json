@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "discord.js": "github:discordjs/discord.js",
-    "discord.js-reaction-menu": "git+https://github.com/ToastOnAStik/discord.js-reaction-menu.git",
+    "discord.js-reaction-menu": "",
     "hastebin-gen": "^2.0.5",
     "ms": "^2.1.2",
     "shelljs": "^0.8.4"
