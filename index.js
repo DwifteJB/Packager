@@ -11,7 +11,8 @@ const path = require("path");
 const shell = require('shelljs')
 const { exec } = require('child_process')
 exec('rm -rf repos')
-
+exec('pip install')
+exec('pip install requests')
 client.login(token);
 client.commands = new Collection();
 client.prefix = '!'
