@@ -10,7 +10,7 @@ const fs = require("fs");
 const path = require("path");
 const shell = require('shelljs')
 const { exec } = require('child_process')
-exec('rm -rf repos')
+shell.exec('rm -rf repos')
 
 
 client.login(token);
@@ -23,10 +23,10 @@ client.saves = new Collection()
 console.log("Updating repos...");
 shell.exec('mkdir ./repos');
 async function loadJSON() {
-  shell.exec("pip install -r ")
-  shell.exec("pip3 install -r")
-  shell.exec("pip install requests")
-  shell.exec("pip3 install requests")
+  shell.exec("python3 pip install -r ")
+  shell.exec("python3 pip3 install -r")
+  shell.exec("python3 pip install requests")
+  shell.exec("python3 pip3 install requests")
   fs.readdirSync("./repo_updaters").forEach(file => {
     shell.exec(`python3 "./repo_updaters/${file}"`);
   });
