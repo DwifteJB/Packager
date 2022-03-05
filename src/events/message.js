@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
-const rm = require("discord.js-reaction-menu");
 const ms = require('ms')
+const fs = require("fs")
+const rm = require('discord.js-reaction-menu')
 const shitTweaks = ['batchomatic', 'noclutter'];
 const { blacklist, debug } = require("../config.json") 
 module.exports = async (client, message) => {
@@ -70,12 +71,8 @@ module.exports = async (client, message) => {
 
   const foundPackages = [];
   const finalEmbeds = [];
-  let debug = true;
-  console.log(1)
-  if (debug.includes(message.server.id)) { let debug = true; }
 
   try {
-    console.log(2)
     client.jsons.forEach(repo => {
       for (index in repo.app) {
         if (
@@ -88,8 +85,10 @@ module.exports = async (client, message) => {
             ? repo.app[index].Package.toLowerCase()
             : "")
         ) {
-          console.log(3)
           if (repo.app[index].Name=== 'Batchomatic') return message.channel.send("I prefer you to not break your device...");
+          if (repo.app[index].Icon.toLowerCase() == "file") {
+            repo.app[index].Icon = "https://upload.wikimedia.org/wikipedia/commons/f/fb/Icon_Sileo.png"
+          }
           const lmao = new Discord.MessageEmbed()
             .setColor("#61b6f2")
             .setDescription(repo.app[index].Description.replace(/\|\|/g, ''))
@@ -101,6 +100,7 @@ module.exports = async (client, message) => {
                 ? repo.app[index].Name.trim()
                 : repo.app[index].Package.trim()
             );
+            
           if (repo.app[index].Maintainer.includes("Hayden Seay")) {
             lmao.addFields({
               name: "Author",
@@ -133,16 +133,11 @@ module.exports = async (client, message) => {
               value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
             }
           );
-          message.channel.send({embeds: {lmao}})
           sent = true;
-          console.log(4)
           if (!foundPackages.includes(repo.app[index].Package)) {
             finalEmbeds.push(lmao);
           }
           foundPackages.push(repo.app[index].Package);
-          if (debug == true) {
-            console.log(`DEBUG:\nSent: ${sent}\nList of Embeds: ${finalEmbeds}`)
-          }
         }
       }
     });
@@ -166,29 +161,22 @@ module.exports = async (client, message) => {
       });
   
   client.cooldowns.set(message.author.id, now + 2500)
-  try { 
-    message.channel.send(finalEmbeds)
-    // new rm.menu({
-    //   channel: message.channel,
-    //   userID: message.author.id,
-    //   pages: [
-    //       new MessageEmbed({ title:'test'  }),
-    //       new MessageEmbed({ title:'test2' }),
-    //       new MessageEmbed({ title:'test3' }),
-    //       new MessageEmbed({ title:'test4' }),
-    //       new MessageEmbed({ title:'test5' })
-    //   ]});
-    // new rm.menu({
-    // channel: message.channel,
-    // userID: message.author.id,
-    // pages: finalEmbeds,
-    // message: message
-    // });
-} catch(err) {
-  return console.log(err);
+    fs.writeFileSync("./OUTPUT.JSON", JSON.stringify(finalEmbeds))
+
+// new rm.menu({
+//     channel: message.channel,
+//     userID: message.author.id,
+//     pages: [
+//         new Discord.MessageEmbed({ title:'test'  }),
+//         new Discord.MessageEmbed({ title:'test2' })
+//     ]
+// })
+    new rm.menu({
+      channel: message.channel,
+      message: message,
+      userID: message.author.id,
+      pages: finalEmbeds
+    });
+
   
 }
-  
-
-}
-

@@ -14,7 +14,7 @@ module.exports = {
       .setDescription(
         `[Click here to invite me](https://discord.com/oauth2/authorize?client_id=779761768447737886&scope=bot&permissions=27712)`
       );
-    message.channel.send(inviteEmbed);
+    message.channel.send({embeds: [inviteEmbed]});
   }
 };
 

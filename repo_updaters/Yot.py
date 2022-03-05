@@ -10,7 +10,7 @@ import smtplib
 from subprocess import Popen
 import re
 import requests
-url = "https://yot360.github.io/Yot-Repo/"
+url = "https://repo.yot-dev.com"
 try:
     shutil.rmtree(f"./data")
     os.mkdir(f'./data')

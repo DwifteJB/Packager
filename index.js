@@ -3,9 +3,13 @@ const client = new Client({
   restTimeOffset: 250,
   ws: {
     properties: { $browser: 'Discord iOS' }
-  }
+  },intents: [
+      Intents.FLAGS.GUILDS, 
+      Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, 
+      Intents.FLAGS.GUILD_MESSAGES, 
+      Intents.FLAGS.GUILD_MESSAGE_REACTIONS]
 });
-const { token } = require("./src/config.json");
+const { token, skip } = require("./src/config.json");
 const fs = require("fs");
 const path = require("path");
 const shell = require('shelljs')
@@ -23,9 +27,12 @@ client.saves = new Collection()
 console.log("Updating repos...");
 shell.exec('mkdir ./repos');
 async function loadJSON() {
-  fs.readdirSync("./repo_updaters").forEach(file => {
-    shell.exec(`python3 "./repo_updaters/${file}"`);
-  });
+  if (skip == false) { 
+    fs.readdirSync("./repo_updaters").forEach(file => {
+      console.log(`[PARSING]: ${file}`)
+      shell.exec(`python3 "./repo_updaters/${file}"`);
+    });
+  }
 
   console.log("Reading jsons...");
   for (const file of fs.readdirSync("./repos")) {

@@ -27,7 +27,7 @@ module.exports = {
         `https://cdn.discordapp.com/avatars/779761768447737886/d77f492e2138703d571323fad9b5f194.webp?size=256`
       );
 
-    message.channel.send(inviteEmbed);
+    message.channel.send({embeds: [inviteEmbed]});
   }
 };
 

@@ -4,8 +4,9 @@
   "description": "Package finder bot for discord",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "github:discordjs/discord.js",
-    "discord.js-reaction-menu": "",
+    "@xenon-devs/discordjs-reaction-menu": "^1.0.4",
+    "discord.js": "13.0.1",
+    "discord.js-reaction-menu": "github:DwifteJB/discord.js-reaction-menu",
     "hastebin-gen": "^2.0.5",
     "ms": "^2.1.2",
     "shelljs": "^0.8.4"
