@@ -56,12 +56,17 @@ async function loadJSON() {
   client.jsons.forEach(repo => {  
     client.packageCount += repo.app.length
   })
-
+  console.log(
+    `Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`
+  );
+  client.user.setActivity(`${client.packageCount.toLocaleString()} packages`, {
+    type: "WATCHING"
+  });
   return new Promise(resolve => {
       resolve('resolved');
   });
 }
-loadJSON();
+await loadJSON();
 setInterval(() => {
   client.emit('addRepo', '')
 }, 60000 * 60)

@@ -88,8 +88,11 @@ module.exports = async (client, message) => {
             : "")
         ) {
           if (repo.app[index].Name=== 'Batchomatic') return message.channel.send("I prefer you to not break your device...");
-          if (repo.app[index].Icon.toLowerCase() == "file") {
+          if (repo.app[index].Icon == undefined || repo.app[index].Icon == null) {
             repo.app[index].Icon = "https://upload.wikimedia.org/wikipedia/commons/f/fb/Icon_Sileo.png"
+          }
+          if (repo.app[Index].Description == null || repo.app[Index].Description == undefined) {
+            repo.app[Index].Description = "No description was specified for this package :("
           }
           const lmao = new Discord.MessageEmbed()
             .setColor("#61b6f2")
