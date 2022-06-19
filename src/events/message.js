@@ -74,6 +74,8 @@ module.exports = async (client, message) => {
 
   try {
     client.jsons.forEach(repo => {
+      console.log(package)
+
       for (index in repo.app) {
         if (
           (repo.app[index].Name
@@ -142,6 +144,7 @@ module.exports = async (client, message) => {
       }
     });
   } catch (err) {
+    console.log(err);
     return message.reply(
       "I couldn't find anything matching that search query!",
       { allowedMentions: { repliedUser: false } }

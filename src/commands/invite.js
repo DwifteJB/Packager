@@ -12,7 +12,7 @@ module.exports = {
         "https://cdn.discordapp.com/avatars/779761768447737886/d77f492e2138703d571323fad9b5f194.webp?size=2048"
       )
       .setDescription(
-        `[Click here to invite me](https://discord.com/oauth2/authorize?client_id=779761768447737886&scope=bot&permissions=27712)`
+        `[Click here to invite me](https://discord.com/oauth2/authorize?client_id=952330092544131134&scope=bot&permissions=93249)`
       );
     message.channel.send({embeds: [inviteEmbed]});
   }

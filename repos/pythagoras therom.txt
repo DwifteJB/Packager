@@ -1,1 +1,0 @@
-a squared + b squared = c squared

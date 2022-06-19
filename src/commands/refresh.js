@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { owners } = require("../config.json");
 const shell = require('shelljs')
-
+const {RepoUpdater} = import("./../includes/repoUpdate.js");
 module.exports = {
     name: "refresh",
     description: "Refreshes packages/repos",
@@ -9,9 +9,11 @@ module.exports = {
     async execute(client, message, args) {
         if (!owners.includes(message.author.id)) return;
         const msg = await message.channel.send('**Refreshing Packages & Repos...**')
-        fs.readdirSync("repo_updaters").forEach(file => {
-            shell.exec(`python3 "./repo_updaters/${file}"`);
-        });
+        const repos = JSON.parse(fs.readFileSync("./src/repos.json"))
+        for (var repo in repos) {
+          console.log("Updating repo: " + repo)
+          await RepoUpdater(repo,repos[repo]);
+        }
         client.emit('addRepo', '')
         msg.edit("**Packages Refreshed!**")
     }

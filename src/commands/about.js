@@ -16,14 +16,14 @@ module.exports = {
       )
       .addField(
         "Invite",
-        "The invite link can be found [here](https://discord.com/oauth2/authorize?client_id=779761768447737886&scope=bot&permissions=19456) to add it to your server."
+        "The invite link can be found [here](https://discord.com/oauth2/authorize?client_id=952330092544131134&scope=bot&permissions=93249) to add it to your server."
       )
       .addField(
         "Usages",
         `\`\`\`diff\n+ [[Sileo]]\n+ [[org.coolstar.sileo]]\n+ Hey guys check out [[Sileo]]!\`\`\``
       )
       .setFooter(
-        `Made by ToastOnAStick and DwifteJB`,
+        `Made by Dwifte and Formally ToastOnAStick`,
         `https://cdn.discordapp.com/avatars/779761768447737886/d77f492e2138703d571323fad9b5f194.webp?size=256`
       );
 

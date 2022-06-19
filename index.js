@@ -1,4 +1,4 @@
-const { Client, Collection, Intents } = require("discord.js");
+import {Client, Collection, Intents} from 'discord.js';
 const client = new Client({
   restTimeOffset: 250,
   ws: {
@@ -9,13 +9,13 @@ const client = new Client({
       Intents.FLAGS.GUILD_MESSAGES, 
       Intents.FLAGS.GUILD_MESSAGE_REACTIONS]
 });
-const { token, skip } = require("./src/config.json");
-const fs = require("fs");
-const path = require("path");
-const shell = require('shelljs')
-const { exec } = require('child_process')
+import * as fs from 'fs';
+import {createRequire} from "module";
+const { token, skip } = JSON.parse(fs.readFileSync("./src/config.json"));
+import {exec} from 'child_process';
+import {RepoUpdater} from './src/includes/repoUpdate.js'
 exec('rm -rf repos')
-
+const require = createRequire(import.meta.url)
 
 client.login(token);
 client.commands = new Collection();
@@ -25,13 +25,24 @@ client.cooldowns = new Collection();
 client.saves = new Collection()
 
 console.log("Updating repos...");
-shell.exec('mkdir ./repos');
+try {
+  fs.rmSync(path,"./repos",{recursive:true,force:true});
+} catch(e){}
+try {
+  fs.mkdirSync("./repos");
+} catch(e){}
 async function loadJSON() {
   if (skip == false) { 
-    fs.readdirSync("./repo_updaters").forEach(file => {
-      console.log(`[PARSING]: ${file}`)
-      shell.exec(`python3 "./repo_updaters/${file}"`);
-    });
+    //
+    // fs.readdirSync("./repo_updaters").forEach(file => {
+    //   console.log(`[PARSING]: ${file}`)
+    //   shell.exec(`python3 "./repo_updaters/${file}"`);
+    // });
+    const repos = JSON.parse(fs.readFileSync("./src/repos.json"))
+    for (var repo in repos) {
+      console.log("Updating repo: " + repo)
+      await RepoUpdater(repo,repos[repo]);
+    }
   }
 
   console.log("Reading jsons...");
