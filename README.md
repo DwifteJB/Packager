@@ -15,6 +15,6 @@ The invite link to the bot can be found [here](https://discord.com/oauth2/author
 ```
 ## Examples
 
-![Example](https://i.imgur.com/WRyQbZA.png)
-![Example2](https://i.imgur.com/nLp7JYc.png)
-![Example3](https://i.imgur.com/irNJ4Hw.png)
+![image](https://user-images.githubusercontent.com/67983181/201767706-8d730e3f-7c3e-43a0-b272-f945c75f2f43.png)
+![image](https://user-images.githubusercontent.com/67983181/201767736-249d9f89-01fb-4f37-8ea8-074da006a6f6.png)
+![image](https://user-images.githubusercontent.com/67983181/201767743-ce94e99b-20cc-443a-8e99-9b0bfcbbede2.png)
