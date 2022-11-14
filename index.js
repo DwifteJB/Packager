@@ -11,6 +11,12 @@ global.rootFolder = __dirname
 import dotenv from 'dotenv'
 dotenv.config()
 
+import fetch from 'node-fetch';
+const result = await fetch("https://raw.githubusercontent.com/itsnebulalol/ios15-tweaks/main/data/tweaks.json")
+const data = result.json()
+
+fs.writeFileSync("./src/iOS15.json",JSON.stringify(data,null,4))
+
 const { clientSettings } = JSON.parse(fs.readFileSync("./src/config.json"));
 clientSettings.ws = {
     properties: { $browser: 'Discord iOS' }
@@ -27,8 +33,9 @@ Indt.add(IntentsBitField.Flags.GuildMessages,IntentsBitField.Flags.GuildPresence
 clientSettings.intents = Indt
 
 const client = new Client(clientSettings);
+await client.login(process.env.TOKEN);
 new Loader(client)
-client.login(process.env.TOKEN);
+
 
 console.log("Loading JSONs...")
 await LoadJSON(client)

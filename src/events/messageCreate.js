@@ -1,4 +1,4 @@
-const {MessageEmbed} = require("discord.js");
+const {EmbedBuilder,SelectMenuBuilder,ActionRowBuilder} = require("discord.js");
 const ms = require('ms')
 
 const rm = require('discord.js-reaction-menu')
@@ -19,20 +19,6 @@ module.exports = async (client, message) => {
       );
     if (command) {
       if (command.disabled == true) return;
-      if (!message.guild.me.permissions.has(command.botPermissions)) {
-        message.channel
-          .send(
-            `I require the \`${command.botPermissions.join(
-              "`, `"
-            )}\` permission(s) to execute this command.`
-          )
-          .then(m =>
-            m.delete({
-              timeout: 10000
-            })
-          );
-        return;
-      }
 
       try {
         await command
@@ -44,7 +30,9 @@ module.exports = async (client, message) => {
               }`
             )
           );
-      } catch { }
+      } catch(e) {
+        console.error(e)
+      }
     }
   }
 
@@ -70,7 +58,7 @@ module.exports = async (client, message) => {
   let sent = false;
 
   const foundPackages = [];
-  const finalEmbeds = [];
+  const Embeds = [];
 
   try {
     client.jsons.forEach(repo => {
@@ -90,17 +78,15 @@ module.exports = async (client, message) => {
         ) {
           Data.Icon = (!Data.Icon) ? "https://upload.wikimedia.org/wikipedia/commons/f/fb/Icon_Sileo.png" : Data.Icon
           Data.Description = (!Data.Description) ? "No description was specified for this package :(" : Data.Description
-          const lmao = new MessageEmbed()
+          const lmao = new EmbedBuilder()
             .setColor("#61b6f2")
             .setDescription(Data.Description.replace(/\|\|/g, ''))
             .setTimestamp()
             .setThumbnail(Data.Icon ? Data.Icon : "")
-            .setFooter(`${repo.name}`, repo.icon)
-            .setAuthor(
-              Data.Name
-                ? Data.Name.trim()
-                : Data.Package.trim()
-            );
+            .setFooter({text: repo.name, iconURL: repo.icon || null})
+            .setAuthor({name: Data.Name
+              ? Data.Name.trim()
+              : Data.Package.trim()});
             
           if (Data.Maintainer.includes("Hayden Seay")) {
             lmao.addFields({
@@ -135,7 +121,7 @@ module.exports = async (client, message) => {
           );
           sent = true;
           if (!foundPackages.includes(Data.Package)) {
-            finalEmbeds.push(lmao);
+            Embeds.push(lmao);
           }
           foundPackages.push(Data.Package);
         }
@@ -144,7 +130,7 @@ module.exports = async (client, message) => {
   } catch (err) {
     console.log(err);
     return message.reply(
-      "I got an error!",
+      "Error occured, report was sent to Dwifte.",
       { allowedMentions: { repliedUser: false } }
     )
       .then(msg => {
@@ -167,9 +153,15 @@ module.exports = async (client, message) => {
   const row = new ActionRowBuilder()
   .addComponents(
     new SelectMenuBuilder()
-      .setCustomId('select')
+      .setCustomId('_select')
       .setPlaceholder(Embeds[0].data.title)
   );
+  for (index in Embeds) {
+    row.components[0].addOptions({
+      
+    })
+  }
+  message.reply({embeds:[Embeds[0]],components:[row]})
 
   
 }

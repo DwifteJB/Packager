@@ -1,7 +1,6 @@
 
 import * as fs from 'fs';
 import * as path from 'path'
-import * as RepoUpdate from './repoUpdate.js'
 import {Collection} from 'discord.js';
 
 import {createRequire} from "module";
@@ -43,6 +42,9 @@ export class Loader {
             };
             console.log(`Loaded ${files.length} events`)
         })
+        console.log(
+            `Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`
+          );
 
     }
 }
