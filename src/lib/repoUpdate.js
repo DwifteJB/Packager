@@ -4,6 +4,7 @@ import * as util from 'util';
 import * as stream from 'stream';
 import * as Bunzip from 'seek-bzip';
 import * as debianCtrl from 'debian-control';
+import {ActivityType} from 'discord.js';
 const streamPipeline = util.promisify(stream.pipeline);
 const headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
@@ -19,10 +20,33 @@ async function logError(error) {
     });
 
 } 
+
+export async function LoadJSON(client) {
+        const repos = JSON.parse(fs.readFileSync("./src/repos.json"))
+        for (var repo in repos) {
+            console.log("Updating repo: " + repo)
+            await RepoUpdater(repo,repos[repo]);
+        }
+        
+        console.log("Reading jsons...");
+        for (const file of fs.readdirSync("./repos")) {
+            const json = JSON.parse(fs.readFileSync(`./repos/${file}`, "utf8"));
+            json.name = file.replace(".json", "").replace(/-/g, ' ').replace(/:/g, '/').replace(/\'/g, "'");
+            client.jsons.set(file, json);
+        }
+    
+        client.packageCount = 0
+        client.jsons.forEach(repo => {  
+            client.packageCount += repo.app.length
+        })
+    
+        client.user.setPresence({ activities: [{ name: `${client.packageCount.toLocaleString()} packages`, type: ActivityType.Watching}] });
+    
+}
 export async function RepoUpdater(repoName,repoURL) {
     let skip = false;
     try {
-        fs.rmdirSync("./data",{recursive:true,force:true});
+        fs.rmSync("./data",{recursive:true,force:true});
     } catch(e) {
         console.log("[ ERROR ] : Data directory didn't exist. Logged to errors.txt");
         logError(e);

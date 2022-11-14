@@ -1,9 +1,10 @@
-const Discord = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 const ms = require('ms')
-const fs = require("fs")
+
 const rm = require('discord.js-reaction-menu')
 const shitTweaks = ['batchomatic', 'noclutter'];
-const { blacklist, debug } = require("../config.json") 
+const { blacklist } = require("../config.json") 
+
 module.exports = async (client, message) => {
   if (message.content.startsWith(client.prefix)) {
     const args = message.content
@@ -51,7 +52,7 @@ module.exports = async (client, message) => {
 
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
-  if (blacklist.includes(message.author.id)) return message.channel.send("<a:flushSpin:783892030924783616> You are blacklisted <a:flushSpin:783892030924783616>")
+  if (blacklist.includes(message.author.id)) return message.channel.send("Yeah, you're uh. blacklisted.")
   const now = Date.now();
   const expiration = client.cooldowns.get(message.author.id)
   if (expiration) {
@@ -66,7 +67,6 @@ module.exports = async (client, message) => {
   
   const package = matches[1].toLowerCase();
   if (shitTweaks.includes(package)) return message.channel.send("I would rather you not try to break your device.")
-  if (package == 'cydown') return message.channel.send("Sorry, I don't provide info for pirate tweaks.")
   let sent = false;
 
   const foundPackages = [];
@@ -77,53 +77,48 @@ module.exports = async (client, message) => {
       console.log(package)
 
       for (index in repo.app) {
+        let Data = repo.app[index]
         if (
-          (repo.app[index].Name
-            ? repo.app[index].Name.toLowerCase()
+          (Data.Name
+            ? Data.Name.toLowerCase()
             : ""
           ).startsWith(package) ||
           package ===
-          (repo.app[index].Package
-            ? repo.app[index].Package.toLowerCase()
+          (Data.Package
+            ? Data.Package.toLowerCase()
             : "")
         ) {
-          if (repo.app[index].Name=== 'Batchomatic') return message.channel.send("I prefer you to not break your device...");
-          if (repo.app[index].Icon == undefined || repo.app[index].Icon == null) {
-            repo.app[index].Icon = "https://upload.wikimedia.org/wikipedia/commons/f/fb/Icon_Sileo.png"
-          }
-          if (repo.app[Index].Description == null || repo.app[Index].Description == undefined) {
-            repo.app[Index].Description = "No description was specified for this package :("
-          }
-          const lmao = new Discord.MessageEmbed()
+          Data.Icon = (!Data.Icon) ? "https://upload.wikimedia.org/wikipedia/commons/f/fb/Icon_Sileo.png" : Data.Icon
+          Data.Description = (!Data.Description) ? "No description was specified for this package :(" : Data.Description
+          const lmao = new MessageEmbed()
             .setColor("#61b6f2")
-            .setDescription(repo.app[index].Description.replace(/\|\|/g, ''))
+            .setDescription(Data.Description.replace(/\|\|/g, ''))
             .setTimestamp()
-            .setThumbnail(repo.app[index].Icon ? repo.app[index].Icon : "")
+            .setThumbnail(Data.Icon ? Data.Icon : "")
             .setFooter(`${repo.name}`, repo.icon)
             .setAuthor(
-              repo.app[index].Name
-                ? repo.app[index].Name.trim()
-                : repo.app[index].Package.trim()
+              Data.Name
+                ? Data.Name.trim()
+                : Data.Package.trim()
             );
             
-          if (repo.app[index].Maintainer.includes("Hayden Seay")) {
+          if (Data.Maintainer.includes("Hayden Seay")) {
             lmao.addFields({
               name: "Author",
-              value: repo.app[index].Maintainer.replace(/ <(.*?)>/g, ""),
+              value: Data.Maintainer.replace(/ <(.*?)>/g, ""),
               inline: true
             });
           } else {
             lmao.addFields({
               name: "Author",
-              value: repo.app[index].Author
-                ? repo.app[index].Author.replace(/ <(.*?)>/g, "")
-                : repo.app[index].Author,
+              value: Data.Author
+                ? Data.Author.replace(/ <(.*?)>/g, "")
+                : Data.Author,
               inline: true
             });
           }
           lmao.addFields(
-            { name: "Version", value: repo.app[index].Version, inline: true },
-
+            { name: "Version", value: Data.Version, inline: true },
             {
               name: "Repo",
               value: `[${repo.name}](http://dwifte.eu.org/repo.php?repo=${repo.url})`,
@@ -131,25 +126,25 @@ module.exports = async (client, message) => {
             },
             {
               name: "Bundle ID",
-              value: repo.app[index].Package
+              value: Data.Package
             },
             {
               name: "More info",
-              value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
+              value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Data.Package})`
             }
           );
           sent = true;
-          if (!foundPackages.includes(repo.app[index].Package)) {
+          if (!foundPackages.includes(Data.Package)) {
             finalEmbeds.push(lmao);
           }
-          foundPackages.push(repo.app[index].Package);
+          foundPackages.push(Data.Package);
         }
       }
     });
   } catch (err) {
     console.log(err);
     return message.reply(
-      "I couldn't find anything matching that search query!",
+      "I got an error!",
       { allowedMentions: { repliedUser: false } }
     )
       .then(msg => {
@@ -157,7 +152,7 @@ module.exports = async (client, message) => {
       });
     
   }
-  if (!sent)
+  if (!sent) {
     return message.reply(
       "I couldn't find anything matching that search query!",
       { allowedMentions: { repliedUser: false } }
@@ -165,24 +160,16 @@ module.exports = async (client, message) => {
       .then(msg => {
         setTimeout(() => msg.delete(), 5000)
       });
+  }
+
   
   client.cooldowns.set(message.author.id, now + 2500)
-    fs.writeFileSync("./OUTPUT.JSON", JSON.stringify(finalEmbeds))
-
-// new rm.menu({
-//     channel: message.channel,
-//     userID: message.author.id,
-//     pages: [
-//         new Discord.MessageEmbed({ title:'test'  }),
-//         new Discord.MessageEmbed({ title:'test2' })
-//     ]
-// })
-    new rm.menu({
-      channel: message.channel,
-      message: message,
-      userID: message.author.id,
-      pages: finalEmbeds
-    });
+  const row = new ActionRowBuilder()
+  .addComponents(
+    new SelectMenuBuilder()
+      .setCustomId('select')
+      .setPlaceholder(Embeds[0].data.title)
+  );
 
   
 }

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { owners } = require("../config.json");
 const shell = require('shelljs')
-const {RepoUpdater} = import("./../includes/repoUpdate.js");
+const {RepoUpdater} = import("./../lib/repoUpdate.js");
 module.exports = {
     name: "refresh",
     description: "Refreshes packages/repos",
