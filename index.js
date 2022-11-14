@@ -1,4 +1,5 @@
 /*
+    Packager Client
 */
 
 import { dirname } from 'path';
@@ -27,8 +28,13 @@ clientSettings.intents = Indt
 
 const client = new Client(clientSettings);
 new Loader(client)
+client.login(process.env.TOKEN);
 
 console.log("Loading JSONs...")
-LoadJSON(client)
+await LoadJSON(client)
 
-client.login(process.env.TOKEN);
+setInterval(() => {
+    client.emit('addRepo', '')
+  }, 60000 * 60)
+
+
