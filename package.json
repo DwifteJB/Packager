@@ -11,8 +11,9 @@
     "debian-control": "^1.0.0",
     "decompress": "^4.2.1",
     "decompress-bzip2": "^4.0.0",
-    "discord.js": "13.0.1",
+    "discord.js": "^14.6.0",
     "discord.js-reaction-menu": "github:DwifteJB/discord.js-reaction-menu",
+    "dotenv": "^16.0.3",
     "hastebin-gen": "^2.0.5",
     "ms": "^2.1.2",
     "seek-bzip": "^2.0.0",
@@ -20,7 +21,8 @@
     "winston": "^3.7.2"
   },
   "scripts": {
-    "start": "npx node@latest index.js"
+    "start": "npx node@latest index.js",
+    "test": "npm i && node ./.github/workflows/test.js"
   },
   "repository": {
     "type": "git",
@@ -34,5 +36,8 @@
   "bugs": {
     "url": "https://github.com/DwifteJB/PackageFinderJS/issues"
   },
-  "homepage": "https://github.com/DwifteJB/PackageFinderJS#readme"
+  "homepage": "https://github.com/DwifteJB/PackageFinderJS#readme",
+  "devDependencies": {
+    "eslint": "^8.27.0"
+  }
 }

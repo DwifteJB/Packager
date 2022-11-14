@@ -1,57 +1,49 @@
-const Discord = require("discord.js");
+const {EmbedBuilder,SelectMenuBuilder,ActionRowBuilder,ComponentType} = require("discord.js");
 const ms = require('ms')
-const fs = require("fs")
+
 const rm = require('discord.js-reaction-menu')
 const shitTweaks = ['batchomatic', 'noclutter'];
-const { blacklist, debug } = require("../config.json") 
-module.exports = async (client, message) => {
-  if (message.content.startsWith(client.prefix)) {
-    const args = message.content
-      .slice(client.prefix.length)
-      .trim()
-      .split(/ +/);
-    const commandName = args.shift().toLowerCase();
-    const command =
-      client.commands.get(commandName) ||
-      client.commands.find(
-        cmd => cmd.aliases && cmd.aliases.includes(commandName)
-      );
-    if (command) {
-      if (command.disabled == true) return;
-      if (!message.guild.me.permissions.has(command.botPermissions)) {
-        message.channel
-          .send(
-            `I require the \`${command.botPermissions.join(
-              "`, `"
-            )}\` permission(s) to execute this command.`
-          )
-          .then(m =>
-            m.delete({
-              timeout: 10000
-            })
-          );
-        return;
-      }
+const { blacklist } = require("../config.json") 
 
-      try {
-        await command
-          .execute(client, message, args)
-          .then(
-            console.log(
-              `[${command.name.charAt(0).toUpperCase() +
-              command.name.slice(1)}] Command has been run in ${message.guild.name
-              }`
-            )
-          );
-      } catch { }
-    }
-  }
+module.exports = async (client, message) => {
+
+  /* Switching to Slash Commands-Only */
+  
+  // if (message.content.startsWith(client.prefix)) {
+  //   const args = message.content
+  //     .slice(client.prefix.length)
+  //     .trim()
+  //     .split(/ +/);
+  //   const commandName = args.shift().toLowerCase();
+  //   const command =
+  //     client.commands.get(commandName) ||
+  //     client.commands.find(
+  //       cmd => cmd.aliases && cmd.aliases.includes(commandName)
+  //     );
+  //   if (command) {
+  //     if (command.disabled == true) return;
+
+  //     try {
+  //       await command
+  //         .execute(client, message, args)
+  //         .then(
+  //           console.log(
+  //             `[${command.name.charAt(0).toUpperCase() +
+  //             command.name.slice(1)}] Command has been run in ${message.guild.name
+  //             }`
+  //           )
+  //         );
+  //     } catch(e) {
+  //       console.error(e)
+  //     }
+  //   }
+  // }
 
  
 
   const matches = message.content.match(/\[\[([^\]\]]+)\]\]/);
   if (!matches) return;
-  if (blacklist.includes(message.author.id)) return message.channel.send("<a:flushSpin:783892030924783616> You are blacklisted <a:flushSpin:783892030924783616>")
+  if (blacklist.includes(message.author.id)) return message.channel.send("Yeah, you're uh. blacklisted.")
   const now = Date.now();
   const expiration = client.cooldowns.get(message.author.id)
   if (expiration) {
@@ -66,64 +58,56 @@ module.exports = async (client, message) => {
   
   const package = matches[1].toLowerCase();
   if (shitTweaks.includes(package)) return message.channel.send("I would rather you not try to break your device.")
-  if (package == 'cydown') return message.channel.send("Sorry, I don't provide info for pirate tweaks.")
   let sent = false;
 
   const foundPackages = [];
-  const finalEmbeds = [];
+  const Embeds = [];
 
   try {
     client.jsons.forEach(repo => {
       console.log(package)
 
       for (index in repo.app) {
+        let Data = repo.app[index]
         if (
-          (repo.app[index].Name
-            ? repo.app[index].Name.toLowerCase()
+          (Data.Name
+            ? Data.Name.toLowerCase()
             : ""
           ).startsWith(package) ||
           package ===
-          (repo.app[index].Package
-            ? repo.app[index].Package.toLowerCase()
+          (Data.Package
+            ? Data.Package.toLowerCase()
             : "")
         ) {
-          if (repo.app[index].Name=== 'Batchomatic') return message.channel.send("I prefer you to not break your device...");
-          if (repo.app[index].Icon == undefined || repo.app[index].Icon == null) {
-            repo.app[index].Icon = "https://upload.wikimedia.org/wikipedia/commons/f/fb/Icon_Sileo.png"
-          }
-          if (repo.app[Index].Description == null || repo.app[Index].Description == undefined) {
-            repo.app[Index].Description = "No description was specified for this package :("
-          }
-          const lmao = new Discord.MessageEmbed()
+          Data.Icon = (!Data.Icon) ? "https://upload.wikimedia.org/wikipedia/commons/f/fb/Icon_Sileo.png" : Data.Icon
+          Data.Description = (!Data.Description) ? "No description was specified for this package :(" : Data.Description
+          const lmao = new EmbedBuilder()
             .setColor("#61b6f2")
-            .setDescription(repo.app[index].Description.replace(/\|\|/g, ''))
+            .setDescription(Data.Description.replace(/\|\|/g, ''))
             .setTimestamp()
-            .setThumbnail(repo.app[index].Icon ? repo.app[index].Icon : "")
-            .setFooter(`${repo.name}`, repo.icon)
-            .setAuthor(
-              repo.app[index].Name
-                ? repo.app[index].Name.trim()
-                : repo.app[index].Package.trim()
-            );
+            .setThumbnail(Data.Icon ? Data.Icon : "")
+            .setFooter({text: repo.name, iconURL: repo.icon || null})
+            .setAuthor({name: Data.Name
+              ? Data.Name.trim()
+              : Data.Package.trim()});
             
-          if (repo.app[index].Maintainer.includes("Hayden Seay")) {
+          if (Data.Maintainer.includes("Hayden Seay")) {
             lmao.addFields({
               name: "Author",
-              value: repo.app[index].Maintainer.replace(/ <(.*?)>/g, ""),
+              value: Data.Maintainer.replace(/ <(.*?)>/g, ""),
               inline: true
             });
           } else {
             lmao.addFields({
               name: "Author",
-              value: repo.app[index].Author
-                ? repo.app[index].Author.replace(/ <(.*?)>/g, "")
-                : repo.app[index].Author,
+              value: Data.Author
+                ? Data.Author.replace(/ <(.*?)>/g, "")
+                : Data.Author,
               inline: true
             });
           }
           lmao.addFields(
-            { name: "Version", value: repo.app[index].Version, inline: true },
-
+            { name: "Version", value: Data.Version, inline: true },
             {
               name: "Repo",
               value: `[${repo.name}](http://dwifte.eu.org/repo.php?repo=${repo.url})`,
@@ -131,25 +115,25 @@ module.exports = async (client, message) => {
             },
             {
               name: "Bundle ID",
-              value: repo.app[index].Package
+              value: Data.Package
             },
             {
               name: "More info",
-              value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${repo.app[index].Package})`
+              value: `[Open in Sileo](http://dwifte.eu.org/open.php?package=${Data.Package})`
             }
           );
           sent = true;
-          if (!foundPackages.includes(repo.app[index].Package)) {
-            finalEmbeds.push(lmao);
+          if (!foundPackages.includes(Data.Package)) {
+            Embeds.push(lmao);
           }
-          foundPackages.push(repo.app[index].Package);
+          foundPackages.push(Data.Package);
         }
       }
     });
   } catch (err) {
     console.log(err);
     return message.reply(
-      "I couldn't find anything matching that search query!",
+      "Error occured, report was sent to Dwifte.",
       { allowedMentions: { repliedUser: false } }
     )
       .then(msg => {
@@ -157,7 +141,7 @@ module.exports = async (client, message) => {
       });
     
   }
-  if (!sent)
+  if (!sent) {
     return message.reply(
       "I couldn't find anything matching that search query!",
       { allowedMentions: { repliedUser: false } }
@@ -165,24 +149,37 @@ module.exports = async (client, message) => {
       .then(msg => {
         setTimeout(() => msg.delete(), 5000)
       });
+  }
+
   
   client.cooldowns.set(message.author.id, now + 2500)
-    fs.writeFileSync("./OUTPUT.JSON", JSON.stringify(finalEmbeds))
+  const row = new ActionRowBuilder()
+  .addComponents(
+    new SelectMenuBuilder()
+      .setCustomId('_select')
+      .setPlaceholder(Embeds[0].data.author.name)
+  );
+  for (index in Embeds) {
+    row.components[0].addOptions({
+      label: Embeds[index].data.author.name,
+      description: `${Embeds[index].data.fields[0].value} 🞄 ${Embeds[index].data.footer.text}`,
+      value: index
+    })
+  }
+  const EmbedMSG = await message.reply({embeds:[Embeds[0]],components:[row]})
+  const filter = i => {
+    i.deferUpdate();
 
-// new rm.menu({
-//     channel: message.channel,
-//     userID: message.author.id,
-//     pages: [
-//         new Discord.MessageEmbed({ title:'test'  }),
-//         new Discord.MessageEmbed({ title:'test2' })
-//     ]
-// })
-    new rm.menu({
-      channel: message.channel,
-      message: message,
-      userID: message.author.id,
-      pages: finalEmbeds
-    });
+    return i.user.id === message.author.id;
+  };
 
+  const collector = EmbedMSG.createMessageComponentCollector({ filter, componentType: ComponentType.StringSelect, time: 60000 })
+  collector.on("collect", interaction => {
+      row.components[0].setPlaceholder(Embeds[interaction.values[0]].data.author.name || "Not Found!")
+      EmbedMSG.edit({components: [row], embeds: [Embeds[interaction.values[0]]] })
+  });
+  collector.on("end", c => {
+    EmbedMSG.edit({components: []})
+  })
   
 }
