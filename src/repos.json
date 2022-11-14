@@ -1,6 +1,8 @@
 {
-    "Alfhaily-Apt":"https://apt.alfhaily.me/",
+    "Alfhaily-Apt": "https://apt.alfhaily.me/",
     "Procursus": "https://apt.procurs.us/dists/iphoneos-arm64/1800/main/binary-iphoneos-arm/",
     "Bigboss": "http://apt.thebigboss.org/repofiles/cydia/",
-    "Havoc":"https://havoc.app/"
+    "Havoc": "https://havoc.app/",
+    "Twickd": "https://repo.twickd.com/",
+    "Fouad": "https://apt.fouadraheb.com/"
 }

@@ -1,4 +1,4 @@
-const {EmbedBuilder,SelectMenuBuilder,ActionRowBuilder} = require("discord.js");
+const {EmbedBuilder,SelectMenuBuilder,ActionRowBuilder,ComponentType} = require("discord.js");
 const ms = require('ms')
 
 const rm = require('discord.js-reaction-menu')
@@ -6,35 +6,38 @@ const shitTweaks = ['batchomatic', 'noclutter'];
 const { blacklist } = require("../config.json") 
 
 module.exports = async (client, message) => {
-  if (message.content.startsWith(client.prefix)) {
-    const args = message.content
-      .slice(client.prefix.length)
-      .trim()
-      .split(/ +/);
-    const commandName = args.shift().toLowerCase();
-    const command =
-      client.commands.get(commandName) ||
-      client.commands.find(
-        cmd => cmd.aliases && cmd.aliases.includes(commandName)
-      );
-    if (command) {
-      if (command.disabled == true) return;
 
-      try {
-        await command
-          .execute(client, message, args)
-          .then(
-            console.log(
-              `[${command.name.charAt(0).toUpperCase() +
-              command.name.slice(1)}] Command has been run in ${message.guild.name
-              }`
-            )
-          );
-      } catch(e) {
-        console.error(e)
-      }
-    }
-  }
+  /* Switching to Slash Commands-Only */
+  
+  // if (message.content.startsWith(client.prefix)) {
+  //   const args = message.content
+  //     .slice(client.prefix.length)
+  //     .trim()
+  //     .split(/ +/);
+  //   const commandName = args.shift().toLowerCase();
+  //   const command =
+  //     client.commands.get(commandName) ||
+  //     client.commands.find(
+  //       cmd => cmd.aliases && cmd.aliases.includes(commandName)
+  //     );
+  //   if (command) {
+  //     if (command.disabled == true) return;
+
+  //     try {
+  //       await command
+  //         .execute(client, message, args)
+  //         .then(
+  //           console.log(
+  //             `[${command.name.charAt(0).toUpperCase() +
+  //             command.name.slice(1)}] Command has been run in ${message.guild.name
+  //             }`
+  //           )
+  //         );
+  //     } catch(e) {
+  //       console.error(e)
+  //     }
+  //   }
+  // }
 
  
 
@@ -154,14 +157,29 @@ module.exports = async (client, message) => {
   .addComponents(
     new SelectMenuBuilder()
       .setCustomId('_select')
-      .setPlaceholder(Embeds[0].data.title)
+      .setPlaceholder(Embeds[0].data.author.name)
   );
   for (index in Embeds) {
     row.components[0].addOptions({
-      
+      label: Embeds[index].data.author.name,
+      description: `${Embeds[index].data.fields[0].value} 🞄 ${Embeds[index].data.footer.text}`,
+      value: index
     })
   }
-  message.reply({embeds:[Embeds[0]],components:[row]})
+  const EmbedMSG = await message.reply({embeds:[Embeds[0]],components:[row]})
+  const filter = i => {
+    i.deferUpdate();
 
+    return i.user.id === message.author.id;
+  };
+
+  const collector = EmbedMSG.createMessageComponentCollector({ filter, componentType: ComponentType.StringSelect, time: 60000 })
+  collector.on("collect", interaction => {
+      row.components[0].setPlaceholder(Embeds[interaction.values[0]].data.author.name || "Not Found!")
+      EmbedMSG.edit({components: [row], embeds: [Embeds[interaction.values[0]]] })
+  });
+  collector.on("end", c => {
+    EmbedMSG.edit({components: []})
+  })
   
 }

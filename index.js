@@ -13,7 +13,7 @@ dotenv.config()
 
 import fetch from 'node-fetch';
 const result = await fetch("https://raw.githubusercontent.com/itsnebulalol/ios15-tweaks/main/data/tweaks.json")
-const data = result.json()
+const data = await result.json()
 
 fs.writeFileSync("./src/iOS15.json",JSON.stringify(data,null,4))
 
@@ -24,7 +24,7 @@ clientSettings.ws = {
 import * as fs from 'fs';
 
 import {LoadJSON} from './src/lib/repoUpdate.js';
-import {Loader} from './src/lib/Loader.js';
+import {Loader, SlashCommandLoader} from './src/lib/Loader.js';
 
 import {Client, IntentsBitField} from 'discord.js';
   
@@ -35,7 +35,7 @@ clientSettings.intents = Indt
 const client = new Client(clientSettings);
 await client.login(process.env.TOKEN);
 new Loader(client)
-
+await new SlashCommandLoader(client).Load()
 
 console.log("Loading JSONs...")
 await LoadJSON(client)

@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path'
-import {Collection} from 'discord.js';
+import Discord, {Collection} from 'discord.js';
 
 import {createRequire} from "module";
 const require = createRequire(import.meta.url)
@@ -20,10 +20,11 @@ export class Loader {
         for (const file of folder) {
             try {
             const command = require(path.join(global.rootFolder,"src","commands",file));
-            const boxCmdName = `${command.name}`.padEnd(20);
+            const commandData = command.Data.toJSON()
+            const boxCmdName = `${commandData.name}`.padEnd(20);
             console.log(`│${boxCmdName}│✅│`);
             console.log('├────────────────────┼──┤');
-            client.commands.set(command.name, command);
+            client.commands.set(commandData.name, command);
             } catch (error) {
             const boxCmdName = `${file}`.padEnd(20);
             console.log(`│${boxCmdName}│❌│`);
@@ -46,5 +47,34 @@ export class Loader {
             `Logged in as ${client.user.tag}\nIn ${client.guilds.cache.size} servers`
           );
 
+    }
+}
+
+export class SlashCommandLoader {
+    constructor(client) {
+        this.client = client
+        this.rest = new Discord.REST({ version: '10' }).setToken(this.client.token);
+        this.commands = []
+        const folder = fs.readdirSync(path.join(global.rootFolder,"src","commands")).filter(file => file.endsWith('.js'));
+        for (const file of folder) {
+            const command = require(path.join(global.rootFolder,"src","commands",file));
+            if (command.Data) {
+                this.commands.push(command.Data.toJSON());
+            }
+
+        }
+
+    }
+    async Load() {
+        try {
+            const data = await this.rest.put(
+                Discord.Routes.applicationCommands(this.client.user.id),
+                { body: this.commands },
+            );
+    
+            console.log(`Loaded ${data.length} slash commands`);
+        } catch (error) {
+            console.error(error);
+        }
     }
 }

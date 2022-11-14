@@ -1,12 +1,13 @@
 const { owners } = require("../config.json");
 const haste = require("hastebin-gen");
+const {SlashCommandBuilder} = require("discord.js")
 const fs = require("fs");
 const path = require("path")
 module.exports = {
-  name: "repos",
-  type: "private",
-  async execute(client, message, args) {
-    if (!owners.includes(message.author.id)) return;
+  Data: new SlashCommandBuilder()
+    .setName("repos")
+    .setDescription("Shows all the repos currently on Packager"),
+  async execute(client, message) {
     let repos = []
     const folder = fs.readdirSync(path.join(global.rootFolder,"repos")).filter(file => file.endsWith('.json'));
     for (const file of folder) {
