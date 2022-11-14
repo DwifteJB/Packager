@@ -21,7 +21,8 @@
     "winston": "^3.7.2"
   },
   "scripts": {
-    "start": "npx node@latest index.js"
+    "start": "npx node@latest index.js",
+    "test": "npm i && node ./.github/workflows/test.js"
   },
   "repository": {
     "type": "git",

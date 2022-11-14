@@ -116,3 +116,4 @@ export async function RepoUpdater(repoName,repoURL) {
     fs.writeFileSync("./repos/"+repoName+".json", JSON.stringify(final_data,null,2));
     return true;
 }
+
