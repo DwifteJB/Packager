@@ -17,17 +17,17 @@ module.exports = {
     const msg = await message.reply({content: `Running \`${Command}\``, fetchReply: true});
     exec(Command, (error, output, stderr) => {
       if (error) {
-        return msg.editReply(
+        return msg.edit(
           `Failed to execute command. Error: \`\`\`${error}\`\`\``
         );
       }
       if (output.length < 1)
-        return msg.editReply("Finished with no output.");
+        return msg.edit("Finished with no output.");
       if (output.length > 1994) {
         haste(output).then(haste =>
-          msg.editReply("Output was too big: " + haste)
+          msg.edit("Output was too big: " + haste)
         );
-      } else msg.editReply(`\`\`\`${output}\`\`\``);
+      } else msg.edit(`\`\`\`${output}\`\`\``);
     });
   }
 };
