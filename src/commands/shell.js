@@ -14,20 +14,20 @@ module.exports = {
   async execute(client, message) {
     if (!owners.includes(message.user.id)) return;
     const Command = message.options.getString("code")
-    message.reply(`Running \`${Command}\``);
+    const msg = await message.reply({content: `Running \`${Command}\``, fetchReply: true});
     exec(Command, (error, output, stderr) => {
       if (error) {
-        return message.reply(
+        return msg.editReply(
           `Failed to execute command. Error: \`\`\`${error}\`\`\``
         );
       }
       if (output.length < 1)
-        return message.reply("Finished with no output.");
+        return msg.editReply("Finished with no output.");
       if (output.length > 1994) {
         haste(output).then(haste =>
-          message.reply("Output was too big: " + haste)
+          msg.editReply("Output was too big: " + haste)
         );
-      } else message.reply(`\`\`\`${output}\`\`\``);
+      } else msg.editReply(`\`\`\`${output}\`\`\``);
     });
   }
 };
