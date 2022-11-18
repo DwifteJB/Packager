@@ -21,6 +21,13 @@
         "repo": "[Packix](https://repo.packix.com/)"
     },
     {
+        "name": "Cydia",
+        "compatible": "⭕",
+        "issue": "Finish button does not work after installing packages",
+        "description": "graphical iPhonr front-end for APT",
+        "repo": "[Download Deb](https://cdn.discordapp.com/attachments/688122301975363591/1024502035950874644/cydia_1.1.36-3_iphoneos-arm.deb)"
+    },
+    {
         "name": "Dodo",
         "compatible": "✔️",
         "issue": "-",
@@ -78,8 +85,8 @@
     },
     {
         "name": "SnowBoard",
-        "compatible": "⭕",
-        "issue": "Theming application icons are bugged",
+        "compatible": "✔️",
+        "issue": "-",
         "description": "Theming engine",
         "repo": "[SparkDev](https://sparkdev.me/)"
     },
@@ -120,15 +127,15 @@
     },
     {
         "name": "SwipeExtenderX",
-        "compatible": "⭕",
-        "issue": "User apps can't be injected without no-sandbox",
+        "compatible": "✔️",
+        "issue": "-",
         "description": "Reinvent your keyboard with this full remake of the legendary SwipeExpander tweak, designed to work on modern iOS",
         "repo": "[Chariz](https://repo.chariz.com/)"
     },
     {
         "name": "Tranzlo",
-        "compatible": "⭕",
-        "issue": "User apps can't be injected without no-sandbox",
+        "compatible": "✔️",
+        "issue": "-",
         "description": "A life savior translator tweak",
         "repo": "[MiRO92](https://miro92.com/repo)"
     },
@@ -183,15 +190,15 @@
     },
     {
         "name": "QuitAll",
-        "compatible": "✔️",
-        "issue": "-",
+        "compatible": "⭕",
+        "issue": "Device can't launch SpringBoard after respring",
         "description": "One tweak to quit them all",
         "repo": "[Chariz](https://repo.chariz.com/)"
     },
     {
         "name": "Laetus",
-        "compatible": "⭕",
-        "issue": "User apps can't be injected without no-sandbox",
+        "compatible": "✔️",
+        "issue": "-",
         "description": "Unparalleled keyboard customisation",
         "repo": "[SparkDev](https://sparkdev.me/)"
     },
@@ -225,8 +232,8 @@
     },
     {
         "name": "Amber",
-        "compatible": "⭕",
-        "issue": "Changing flashlight color doesn't work when enabled due to sandbox",
+        "compatible": "✔️",
+        "issue": "-",
         "description": "Amber-ify your LED torch",
         "repo": "[PoomSmart](https://poomsmart.github.io/repo)"
     },
@@ -246,8 +253,8 @@
     },
     {
         "name": "lockdown beta",
-        "compatible": "✔️",
-        "issue": "-",
+        "compatible": "❌",
+        "issue": "Device says wrong passcode after entering correct one",
         "description": "Re-enables passcode functionality on A10/A11 devices",
         "repo": "[krit's repo](https://repo.krit.me/)"
     },
@@ -260,10 +267,17 @@
     },
     {
         "name": "OTADisabler",
-        "compatible": "✔️",
+        "compatible": "⭕",
         "issue": "-",
-        "description": "Delete and disable OTA badge",
+        "description": "Breaks apt",
         "repo": "[ichitaso](https://ichitaso.com/apt)"
+    },
+    {
+        "name": "Sileo",
+        "compatible": "⭕",
+        "issue": "Canoot install local Debian packages",
+        "description": "A mordern APT package manager frontend",
+        "repo": "[procursus-local](https://mineek.online)"
     },
     {
         "name": "Filza File Manager 64-bit",
@@ -289,7 +303,7 @@
     {
         "name": "NewTerm 2",
         "compatible": "✔️",
-        "issue": "-",
+        "issue": "Need version [from the palera1n discord](https://cdn.discordapp.com/attachments/1028398976640229380/1041541973502345276/ws.hbang.newterm3_3.0b1_iphoneos-arm.deb)",
         "description": "A powerful terminal app for iOS",
         "repo": "[Chariz](https://havoc.app/)"
     },
@@ -432,5 +446,82 @@
         "issue": "-",
         "description": "Notification Badges. Reimagined.",
         "repo": "[Havoc](https://havoc.app/)"
+    },
+    {
+        "name": "Ventana",
+        "compatible": "❌",
+        "issue": "Loops at obtaining license then resprings, every respring.",
+        "description": "Modern lock screen inspired by desktop Windows 10",
+        "repo": "[Havoc](https://havoc.app/)"
+    },
+    {
+        "name": "Akara",
+        "compatible": "❌",
+        "issue": "Instant safe mode loop.",
+        "description": "Minimal design without compromise ",
+        "repo": "[Chariz](https://repo.chariz.com/)"
+    },
+    {
+        "name": "Pocket Translator",
+        "compatible": "✔️",
+        "issue": "-",
+        "description": "A super lightweight translator.",
+        "repo": "[Ginsu Tweaks](https://repo.ginsu.dev/)"
+    },
+    {
+        "name": "CCUptime",
+        "compatible": "✔️",
+        "issue": "-",
+        "description": "Check your device uptime from the Control Center (Needs CCSupport)",
+        "repo": "[Packix](https://repo.packix.com/)"
+    },
+    {
+        "name": "WiCarrier",
+        "compatible": "✔️",
+        "issue": "-",
+        "description": "Display WiFi network name in status bar",
+        "repo": "[rpetrich](https://rpetri.ch/repo/)"
+    },
+    {
+        "name": "BetterCCXI",
+        "compatible": "✔️",
+        "issue": "-",
+        "description": "Gives enhanced connectivity and Music Modules",
+        "repo": "[Packix](https://repo.packix.com/)"
+    },
+    {
+        "name": "CarrierModern",
+        "compatible": "✔️",
+        "issue": "-",
+        "description": "Change the carrier name in status bar",
+        "repo": "[Packix](https://repo.packix.com/)"
+    },
+    {
+        "name": "Cask 3",
+        "compatible": "✔️",
+        "issue": "-",
+        "description": "Animated table scrolling",
+        "repo": "[Packix](https://repo.packix.com/)"
+    },
+    {
+        "name": "Youtube Reborn",
+        "compatible": "✔️",
+        "issue": "-",
+        "description": "Youtube Customizer",
+        "repo": "[Lillie's Repo](https://lillieh001.github.io/repo/)"
+    },
+    {
+        "name": "Jellyfish",
+        "compatible": "✔️",
+        "issue": "-",
+        "description": "Modernize your lock screen",
+        "repo": "[Chariz](https://repo.chariz.com/)"
+    },
+    {
+        "name": "Enmity",
+        "compatible": "✔️",
+        "issue": "-",
+        "description": "The power of addons, all in your hand.",
+        "repo": "[Enmity](https://repo.enmity.app/)"
     }
 ]
