@@ -6,11 +6,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: npm ci
-    - name: Install eslint
-      run: npm i eslint -g
-    - name: Run ESLint
-      run: eslint . --ext .js,.jsx,.ts,.tsx,.json
+      run: npm i yarn prettier eslint -g
+    - name: Format
+      run: yarn format
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
