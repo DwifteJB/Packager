@@ -13,6 +13,7 @@ The invite link to the bot can be found [here](https://discord.com/oauth2/author
 + [[org.coolstar.sileo]]
 + Hey guys check out my new Package Manager [[Sileo]]!
 ```
+
 ## Examples
 
 ![image](https://user-images.githubusercontent.com/67983181/201767706-8d730e3f-7c3e-43a0-b272-f945c75f2f43.png)

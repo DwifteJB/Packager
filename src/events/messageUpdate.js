@@ -1,8 +1,7 @@
 const Discord = require("discord.js");
 const rm = require("discord.js-reaction-menu");
-const ms = require('ms')
+const ms = require("ms");
 
 module.exports = async (client, oldMessage, newMessage) => {
-  client.emit('messageCreate', newMessage)
-}
-
+  client.emit("messageCreate", newMessage);
+};
