@@ -1,15 +1,19 @@
-name: ESLint
-on: push
+name: prettifier
+on: [workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install modules
-      run: yarn
+    - name: Install dependencies
+      run: npm ci
+    - name: Install eslint
+      run: npm i eslint -g
     - name: Run ESLint
       run: eslint . --ext .js,.jsx,.ts,.tsx,.json
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: Lint files
+        commit_message: Lint ${{ github.event.head_commit.message }}
+
+

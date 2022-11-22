@@ -1,0 +1,22 @@
+name: Packager Repo Updater Test
+
+on: push
+
+jobs:
+  repoUpdater:
+    name: Test RepoUpdater
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 16
+          cache: npm
+      - name: Install dependencies
+        run: HUSKY=0 npm ci
+      - name: Check Lint
+        run: npm run test

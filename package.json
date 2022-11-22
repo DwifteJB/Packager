@@ -16,13 +16,15 @@
     "dotenv": "^16.0.3",
     "hastebin-gen": "^2.0.5",
     "ms": "^2.1.2",
+    "prettifier": "^0.4.0",
     "seek-bzip": "^2.0.0",
     "shelljs": "^0.8.4",
     "winston": "^3.7.2"
   },
   "scripts": {
     "start": "npx node@latest index.js",
-    "test": "npm i && node ./.github/workflows/test.js"
+    "test": "npm i && node ./.github/workflows/test.js",
+    "checklint": "prettier --check . && eslint"
   },
   "repository": {
     "type": "git",
@@ -38,6 +40,6 @@
   },
   "homepage": "https://github.com/DwifteJB/PackageFinderJS#readme",
   "devDependencies": {
-    "eslint": "^8.27.0"
+    "eslint": "^8.28.0"
   }
 }
