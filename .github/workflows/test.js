@@ -1,10 +1,10 @@
-import { RepoUpdater } from "../../src/lib/repoUpdate.js"
-import * as fs from 'fs'
-fs.mkdirSync("./repos")
-const Test = await RepoUpdater("Havoc","https://havoc.app/")
+import { RepoUpdater } from "../../src/lib/repoUpdate.js";
+import * as fs from "fs";
+fs.mkdirSync("./repos");
+const Test = await RepoUpdater("Havoc", "https://havoc.app/");
 if (Test == true) {
-    console.log("test past!")
+  console.log("test past!");
 } else {
-    console.error("error lol")
-    process.exit(1)
+  console.error("error lol");
+  process.exit(1);
 }
