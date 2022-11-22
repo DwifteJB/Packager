@@ -34,7 +34,7 @@ module.exports = {
       time: 60000,
       filter: i => i.user.id === interaction.user.id,
     }).catch(async error => {
-      await interaction.reply("You took too long...")
+      console.error(error)
       return null
     })
     if (submitted) {
