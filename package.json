@@ -24,7 +24,7 @@
   "scripts": {
     "start": "npx node@latest index.js",
     "test": "npm i && node ./.github/workflows/test.js",
-    "checklint": "prettier --check . && eslint"
+    "checklint": "prettier --check . && eslint ."
   },
   "repository": {
     "type": "git",
