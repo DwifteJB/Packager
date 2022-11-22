@@ -1,4 +1,4 @@
-name: Test lint
+name: Lint checker
 on: push
 
 jobs:
