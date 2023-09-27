@@ -85,7 +85,7 @@ module.exports = async (client, message) => {
             : Data.Icon;
           Data.Description = !Data.Description
             ? "No description was specified for this package :("
-            : Data.Description;
+            : Data.Description[0];
           const lmao = new EmbedBuilder()
             .setColor("#61b6f2")
             .setDescription(Data.Description.replace(/\|\|/g, ""))
@@ -107,7 +107,7 @@ module.exports = async (client, message) => {
               name: "Author",
               value: Data.Author
                 ? Data.Author.replace(/ <(.*?)>/g, "")
-                : Data.Author,
+                : "Unknown",
               inline: true,
             });
           }
